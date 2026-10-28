@@ -193,12 +193,12 @@ def info():
         + f'''<div class="cols2"><div>
 <h3>Vad vi har sett</h3>
 <ul class="chk neg"><li>blomsel.se syntes inte i någon av fem typiska kundsökningar vi testade, inte ens på företagsnamnet.</li>
-<li>Startsidan laddar {nf(o["kb"] / 1024, 1)} MB och {o["reqs"]} filer på mobilen. Det tar {nf(o["lcp"] / 1000, 1)} sekunder innan huvudinnehållet syns och {nf(o["load"] / 1000, 1)} sekunder innan sidan är färdig.</li>
+<li>Startsidan laddar {nf(o["kb"] / 1024, 1)} MB och {o["reqs"]} filer på mobilen. Det tar {nf(o["lcp"] / 1000, 1)} sekunder innan huvudinnehållet syns och {nf(o["load"] / 1000, 1)} sekunder innan sidan är färdigladdad.</li>
 <li>Sajten har {SO["pages"]} sidor och saknar egna sidor för de flesta tjänsterna. Google rankar lokala företag högre när varje tjänst har en egen sida.</li>
 <li>Filen som AI-tjänster läser presenterar företaget som "bloms2".</li></ul>
 <h3>Vad ni får</h3>
 <ul class="chk"><li>Ny webbplats med {SN["pages"]} sidor, en per tjänst och område, i Bloms färger och typsnitt.</li>
-<li>Nya startsidan i samma test: huvudinnehållet syns efter {nf(n["lcp"] / 1000, 1)} sekunder och sidan är färdig efter {nf(n["load"] / 1000, 1)}. Den väger {nf(n["kb"] / 1024, 1)} MB.</li>
+<li>Nya startsidan i samma test: huvudinnehållet syns efter {nf(n["lcp"] / 1000, 1)} sekunder och sidan är färdigladdad efter {nf(n["load"] / 1000, 1)} sekunder. Den väger {nf(n["kb"] / 1024, 1)} MB.</li>
 <li>Adminpanel där ni själva ändrar allt och publicerar direkt.</li>
 <li>Inkorg för förfrågningar och en AI som kan fixa ändringar åt er.</li>
 <li>SEO och AI-optimering inbyggt från start.</li></ul>
@@ -254,17 +254,16 @@ def info():
         f'<tr><td>{names[k]}</td><td>{sec(P[k]["old"]["lcp"])}</td><td><b>{sec(P[k]["new"]["lcp"])}</b></td>'
         f'<td>{sec(P[k]["old"]["load"])}</td><td><b>{sec(P[k]["new"]["load"])}</b></td><td>{nf(P[k]["old"]["kb"])} kB</td><td><b>{nf(P[k]["new"]["kb"])} kB</b></td></tr>'
         for k in names)
-    pages.append(sheet(head_block("Test 3: hastighet på mobilen", "Nya sajten är färdig på en bråkdel av tiden",
+    pages.append(sheet(head_block("Test 3: hastighet på mobilen", "Nya sajten laddar mycket snabbare än i dag",
         "Vi mätte tre sidor på nuvarande och nya sajten i samma test: en vanlig mobil med långsam 4G-uppkoppling, tre mätningar per sida. Diagrammen visar startsidan.")
         + '<div class="cols3">'
-        + f'<div><h3>Tid tills sidan är färdig</h3>{pair_bars([(lab[0], o["load"] / 1000), (lab[1], n["load"] / 1000)], fmt=lambda v: nf(v, 1) + " s")}</div>'
+        + f'<div><h3>Laddtid för hela sidan</h3>{pair_bars([(lab[0], o["load"] / 1000), (lab[1], n["load"] / 1000)], fmt=lambda v: nf(v, 1) + " s")}</div>'
         + f'<div><h3>Data som laddas</h3>{pair_bars([(lab[0], o["kb"] / 1024), (lab[1], n["kb"] / 1024)], fmt=lambda v: nf(v, 1) + " MB")}</div>'
         + f'<div><h3>Tid då mobilen inte svarar</h3>{pair_bars([(lab[0], o["tbt"] / 1000), (lab[1], n["tbt"] / 1000)], fmt=lambda v: nf(v, 1) + " s")}</div></div>'
         + '<div class="legend"><span><i style="background:' + OLD_C + '"></i>Nuvarande blomsel.se</span><span><i style="background:' + NEW_C + '"></i>Nya sajten</span></div>'
-        + f'<table class="t"><thead><tr><th>Sida</th><th>Innehållet syns, nu</th><th>Syns, ny</th><th>Färdig, nu</th><th>Färdig, ny</th><th>Data, nu</th><th>Data, ny</th></tr></thead><tbody>{perf_rows}</tbody></table>'
+        + f'<table class="t"><thead><tr><th>Sida</th><th>Innehållet syns, nu</th><th>Syns, ny</th><th>Laddad, nu</th><th>Laddad, ny</th><th>Data, nu</th><th>Data, ny</th></tr></thead><tbody>{perf_rows}</tbody></table>'
         + f'<p class="small">Ärligt sagt: på undersidorna visar Wix första texten något snabbare ({sec(P["elbilsladdare"]["old"]["lcp"])} mot {sec(P["elbilsladdare"]["new"]["lcp"])}), men sidan laddar sedan vidare i över 10 sekunder och mobilen svarar trögt under tiden. På startsidan syns innehållet {nf(o["lcp"] / n["lcp"], 0)} gånger snabbare på nya sajten.</p>'
-        + f'<p class="src">{T["method"]}. Nuvarande sajt mätt live på blomsel.se. Nya sajten mätt på en testserver utan komprimering med samma nätverksbegränsning, så på webbhotellet blir den något snabbare. "Innehållet syns" är Largest Contentful Paint, Googles mått, där under 2,5 s räknas som bra. "Mobilen svarar inte" är Total Blocking Time.</p>'
-        + '<div class="callout"><b>Varför det spelar roll:</b> när en mobilsajt blev 0,1 sekund snabbare ökade andelen som skickade in ett kontaktformulär med 21,6 %. <span class="src">Google och Deloitte, Milliseconds Make Millions (37 varumärken, 30 miljoner besök)</span></div>', num=5))
+        + f'<p class="src">{T["method"]}. Nuvarande sajt mätt live på blomsel.se. Nya sajten mätt på en testserver utan komprimering med samma nätverksbegränsning, så på webbhotellet blir den något snabbare. "Innehållet syns" är Largest Contentful Paint, Googles mått, där under 2,5 s räknas som bra. "Mobilen svarar inte" är Total Blocking Time.</p>', num=5))
 
     # 6. vad ni får
     pages.append(sheet(head_block("Det här ingår för 3 000 kr", "En komplett hemsida, inte bara en mall")
@@ -313,7 +312,6 @@ def info():
            ("Seer Interactive, AIO impact on Google CTR, november 2025", "seerinteractive.com/insights"),
            ("Google Företagsprofil hjälpcenter: lokal ranking", "support.google.com/business/answer/7091"),
            ("Whitespark, Local Search Ranking Factors 2026", "whitespark.ca/local-search-ranking-factors"),
-           ("Google/Deloitte, Milliseconds Make Millions", "web.dev/case-studies/milliseconds-make-millions"),
            ("Offerta, Vad kostar sökmotoroptimering (2025)", "offerta.se/guider/ovrigt/vad-kostar-sokmotoroptimering"),
            ("Offerta, Vad kostar det att installera en laddbox (2026)", "offerta.se"),
            ("Offerta, Byta el i ett gammalt hus (2026)", "offerta.se"),
