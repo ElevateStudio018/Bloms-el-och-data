@@ -17,7 +17,7 @@
   <div class="login-card">
     <div class="brand"><img src="../img/logo-white.png" alt=""><span>BLOMS EL &amp; DATA</span></div>
     <h1>Adminpanel</h1>
-    <p>Redigera texter, bilder, SEO, heron och kontaktuppgifter. Ändringar sparas som utkast tills du publicerar.</p>
+    <p>Redigera texter, bilder, SEO och kontaktuppgifter, och svara på förfrågningar. Ändringar sparas som utkast tills du publicerar.</p>
     <form id="login-form" class="stack" hidden>
       <label for="l-user">Användarnamn<input id="l-user" autocomplete="username" autocapitalize="none" spellcheck="false" required></label>
       <label for="l-pass">Lösenord<input id="l-pass" type="password" autocomplete="current-password" required></label>
@@ -43,8 +43,8 @@
     <div class="brand"><img src="../img/logo-white.png" alt=""><span>BLOMS ADMIN</span></div>
     <nav class="side-nav" id="side-nav">
       <a href="#oversikt" data-view="oversikt"><svg viewBox="0 0 24 24"><path d="M4 13h6V4H4zm0 7h6v-5H4zm10 0h6v-9h-6zm0-16v5h6V4z"/></svg>Översikt</a>
+      <a href="#inkorg" data-view="inkorg"><svg viewBox="0 0 24 24"><path d="M3 13l3-8h12l3 8v6H3z"/><path d="M3 13h5l1.5 2.5h5L16 13h5"/></svg>Förfrågningar<span class="badge" id="lead-badge" hidden></span></a>
       <a href="#innehall" data-view="innehall"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16zM13.5 6.5l4 4"/></svg>Sidor &amp; innehåll</a>
-      <a href="#hero" data-view="hero"><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3zM3 15l5-5 4 4 3-3 6 6"/></svg>Herokarusell</a>
       <a href="#seo" data-view="seo"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l5 5"/></svg>SEO</a>
       <a href="#media" data-view="media"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM8.5 10a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM20 15l-5-5L5 20"/></svg>Mediabibliotek</a>
       <a href="#ai" data-view="ai"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2 2.2.8-2.2.8L19 21l-.8-2.2-2.2-.8 2.2-.8z"/></svg>AI-assistent</a>
@@ -104,18 +104,21 @@
       </div>
     </section>
 
-    <!-- Hero -->
-    <section class="view" id="v-hero" hidden>
-      <div class="cols wide">
-        <div class="panel">
-          <div class="panel-h"><h2>Förslag i karusellen</h2><span class="muted">Dra för att ändra ordning</span></div>
-          <div class="hero-opts">
-            <label>Visning <select id="h-mode"><option value="carousel">Karusell (bläddra i sidled)</option><option value="single">Bara ett förslag</option></select></label>
-          </div>
-          <ol class="hero-list" id="hero-list"></ol>
-          <button class="btn ghost sm" id="h-reset" type="button">Återställ ordning</button>
+    <!-- Förfrågningar -->
+    <section class="view" id="v-inkorg" hidden>
+      <div class="kpis" id="l-kpis"></div>
+      <div class="ed-bar">
+        <div class="seg" id="l-filter" role="group" aria-label="Filtrera">
+          <button type="button" data-f="alla" aria-pressed="true">Alla</button><button type="button" data-f="ny" aria-pressed="false">Nya</button><button type="button" data-f="kontaktad" aria-pressed="false">Kontaktade</button><button type="button" data-f="offert" aria-pressed="false">Offert skickad</button><button type="button" data-f="vunnen" aria-pressed="false">Vunna</button><button type="button" data-f="forlorad" aria-pressed="false">Förlorade</button>
         </div>
-        <div class="panel"><div class="panel-h"><h2>Förhandsvisning</h2></div><div class="mini-frame"><iframe id="hero-frame" title="Förhandsvisning av startsidan"></iframe></div></div>
+        <input class="search" id="l-search" type="search" placeholder="Sök namn, telefon, ärende…">
+        <button class="btn ghost sm" id="l-refresh" type="button">Uppdatera</button>
+        <button class="btn ghost sm" id="l-csv" type="button">Exportera CSV</button>
+      </div>
+      <p class="intro" id="l-static" hidden>Inkorgen fungerar när sajten ligger på webbhotellet (mappen <code>api/</code> med PHP). Här i förhandsvisningen skickas formuläret som ett vanligt mejl istället.</p>
+      <div class="cols wide leads">
+        <div class="panel"><ul class="lead-list" id="l-list"></ul></div>
+        <div class="panel lead-detail" id="l-detail"><p class="empty">Välj en förfrågan för att se detaljer.</p></div>
       </div>
     </section>
 
@@ -166,7 +169,14 @@
           <div class="panel-h"><h2>Ändringar som inte är publicerade</h2><button class="link danger" id="p-discard" type="button">Släng utkast</button></div>
           <div id="p-diff"></div>
         </div>
-        <div class="panel stack">
+        <div class="panel stack" id="p-server" hidden>
+          <div class="panel-h"><h2>Publicera på sajten</h2></div>
+          <p class="muted">Ändringarna sparas direkt på blomsel.se och syns för alla besökare så fort du publicerar. Den gamla versionen sparas i Historik.</p>
+          <label for="ps-msg">Vad har du ändrat? <small>(valfritt)</small><input id="ps-msg" placeholder="Uppdaterade texter på startsidan"></label>
+          <button class="btn primary" id="ps-publish" type="button">Publicera nu</button>
+          <p class="muted" id="ps-status" role="status"></p>
+        </div>
+        <div class="panel stack" id="p-static">
           <div class="panel-h"><h2>Spara ändringarna på sajten</h2></div>
           <p class="muted">Ladda ner <code>content.json</code> och lägg den i mappen <code>site/</code> på sajten (ersätt den gamla). Då syns ändringarna för alla besökare.</p>
           <button class="btn primary" id="p-export" type="button">Ladda ner content.json</button>
@@ -195,8 +205,8 @@
         <div class="panel ai-chat">
           <div class="ai-msgs" id="ai-msgs" aria-live="polite">
             <div class="ai-hello" id="ai-hello">
-              <b>Fråga AI-assistenten</b>
-              <p>Den känner till Bloms El &amp; Data och sajtens sidor. Be den skriva texter, förbättra SEO, svara på kundfrågor eller förklara elregler.</p>
+              <b>Be AI:n fixa något på sajten</b>
+              <p>Den kan läsa alla sidor och ändra texter, SEO, länkar, bildtexter, kontaktuppgifter, färger och typsnitt. Ändringarna hamnar i utkastet så att du kan granska dem innan du publicerar. Den kan också skriva texter och svara på kundfrågor.</p>
               <div class="ai-chips" id="ai-chips"></div>
             </div>
           </div>
@@ -213,9 +223,14 @@
         </div>
         <aside class="panel stack ai-side">
           <div class="panel-h" style="margin:0"><h2>Inställningar</h2></div>
+          <label class="switch"><input type="checkbox" id="ai-agent" checked><span></span>Låt AI:n göra ändringar på sajten</label>
+          <p class="muted">Allt den ändrar syns under Publicera och kan ångras.</p>
+          <div class="stack" id="ai-keybox">
           <label for="ai-key">API-nyckel från Anthropic<input id="ai-key" type="password" autocomplete="off" placeholder="sk-ant-…"></label>
           <label class="check"><input id="ai-remember" type="checkbox"> Kom ihåg nyckeln på den här datorn</label>
           <p class="muted">Nyckeln skickas bara till Anthropic och sparas i den här webbläsaren. Skapa en på console.anthropic.com. Varje fråga kostar en liten summa.</p>
+          </div>
+          <p class="muted" id="ai-server-note" hidden>AI:n körs via sajtens server. Ingen nyckel behövs.</p>
           <label for="ai-tone">Ton<select id="ai-tone"><option value="vardaglig">Vardaglig och tydlig</option><option value="formell">Formell</option><option value="saljande">Säljande</option></select></label>
           <p class="muted" id="ai-status"></p>
         </aside>
@@ -276,7 +291,7 @@
     <!-- Historik -->
     <section class="view" id="v-historik" hidden>
       <div class="panel"><div class="panel-h"><h2>Publicerade versioner</h2><button class="btn ghost sm" id="hi-load" type="button">Hämta</button></div>
-        <p class="muted" id="hi-msg">Kräver GitHub-anslutning.</p><ol class="history" id="history"></ol></div>
+        <p class="muted" id="hi-msg">Tidigare publicerade versioner. Läs in en som utkast för att återställa den.</p><ol class="history" id="history"></ol></div>
     </section>
   </main>
 </div>

@@ -511,6 +511,7 @@ body += ('<section class="sec" id="formular"><div class="wrap split"><div class=
          '<label for="f-epost">E-post<input id="f-epost" name="epost" type="email" autocomplete="email"></label>'
          '<label for="f-arende">Ärende<select id="f-arende" name="arende"><option>Elservice / felsökning</option><option>Nyinstallation / ombyggnation</option><option>Elbilsladdare</option><option>Solceller</option><option>Smart teknik</option><option>Annat</option></select></label>'
          '<label for="f-medd">Meddelande<textarea id="f-medd" name="meddelande" required></textarea></label>'
+         '<label class="hp" aria-hidden="true">Lämna tomt<input name="website" tabindex="-1" autocomplete="off"></label>'
          '<button class="btn btn-red" type="submit">Skicka</button><p class="msg" role="status"></p></form></div></section>')
 body += ('<section class="sec gray" id="karta"><div class="wrap split"><div class="prose">' + head("Kontor och lager", "Blomstergatan 5, Göteborg")
          + ps("Härifrån åtar vi oss uppdrag från Falkenberg i söder till Uddevalla i norr; Ulricehamn, Göteborg, Borås och allt där emellan.")

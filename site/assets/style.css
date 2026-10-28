@@ -197,6 +197,7 @@ a.card:hover .img img{transform:scale(1.04)}
 .form .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .form .msg{font-size:14px;color:#1f6b3a;font-weight:500}
 .form .msg[data-err]{color:var(--red)}
+.form .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 
 /* text-sida (cookiepolicy) */
 .doc{max-width:760px}

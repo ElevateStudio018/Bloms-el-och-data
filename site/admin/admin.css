@@ -276,3 +276,39 @@ input[type=color]{width:48px;height:34px;border:1.5px solid var(--line);border-r
   .diff{grid-template-columns:1fr}
   .two{grid-template-columns:1fr}
 }
+
+/* förfrågningar */
+#l-filter{display:inline-flex;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:3px;gap:2px}
+#l-filter button{border:0;background:none;border-radius:6px;padding:6px 11px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer}
+#l-filter button[aria-pressed=true]{background:var(--ink);color:#fff}
+.leads{align-items:start}
+.lead-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.lead-list li{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:13px 12px;border-bottom:1px solid var(--line);cursor:pointer;border-radius:8px}
+.lead-list li:hover{background:var(--bg)}
+.lead-list li[aria-current=true]{background:var(--red-soft)}
+.lead-list li b{font-weight:600}
+.lead-list li small{color:var(--muted);font-size:12px}
+.lead-list li .when{text-align:right;color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
+.lead-list li.is-new b::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--red);margin-right:7px;vertical-align:2px}
+.lead-list .empty{cursor:default;display:block;color:var(--muted)}
+.st{display:inline-block;font-size:11px;font-weight:600;border-radius:999px;padding:2px 8px}
+.st-ny{background:var(--red-soft);color:var(--red)}
+.st-kontaktad{background:#e9f0fb;color:#1d4f91}
+.st-offert{background:var(--warn-soft);color:var(--warn)}
+.st-vunnen{background:var(--ok-soft);color:var(--ok)}
+.st-forlorad{background:var(--bg);color:var(--muted)}
+.lead-detail{position:sticky;top:84px;display:flex;flex-direction:column;gap:16px}
+.lead-detail h2{font-size:20px}
+.lead-detail .contact{display:flex;flex-wrap:wrap;gap:8px}
+.lead-detail .body{white-space:pre-wrap;background:var(--bg);border-radius:10px;padding:14px 16px;line-height:1.6}
+.lead-detail .notes{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.lead-detail .notes li{border-left:2px solid var(--line);padding-left:10px}
+.lead-detail .notes small{display:block;color:var(--muted);font-size:12px}
+.lead-detail dl{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0;font-size:13px}
+.lead-detail dt{color:var(--muted)}.lead-detail dd{margin:0}
+/* AI-ändringar i chatten */
+.msg .acts{list-style:none;margin:10px 0 0;padding:10px 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:4px;font-size:12.5px;white-space:normal}
+.msg .acts li::before{content:"✓ ";color:var(--ok);font-weight:700}
+.msg .acts li.bad::before{content:"✕ ";color:#b42318}
+.msg .tools .pri{background:var(--red);color:#fff;border-radius:7px;padding:5px 10px}
+.msg.step{font-size:12.5px;color:var(--muted);background:none;padding:2px 4px}

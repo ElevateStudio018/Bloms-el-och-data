@@ -12,12 +12,13 @@
     });
   }
 
-  // ---------------------------------------------------------------- kontaktformulär: bygger ett mejl
+  // ---------------------------------------------------------------- kontaktformulär
+  // Skickas till api/ (hamnar i adminpanelens inkorg). Saknas servern öppnas ett ifyllt mejl istället.
   var form = document.getElementById('kontaktform');
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var msg = form.querySelector('.msg');
+      var msg = form.querySelector('.msg'), btn = form.querySelector('button[type=submit]');
       var d = new FormData(form);
       if (!d.get('namn') || !d.get('meddelande') || (!d.get('epost') && !d.get('telefon'))) {
         msg.setAttribute('data-err', '');
@@ -26,9 +27,27 @@
       }
       msg.removeAttribute('data-err');
       var to = (BC.content.settings && BC.content.settings.email) || 'info@blomsel.se';
-      var body = 'Namn: ' + d.get('namn') + '\nE-post: ' + d.get('epost') + '\nTelefon: ' + d.get('telefon') + '\nÄrende: ' + d.get('arende') + '\n\n' + d.get('meddelande');
-      msg.textContent = 'Ditt e-postprogram öppnas med meddelandet ifyllt. Öppnas inget? Mejla ' + to + '.';
-      window.location.href = 'mailto:' + to + '?subject=' + encodeURIComponent('Förfrågan: ' + d.get('arende')) + '&body=' + encodeURIComponent(body);
+      var mailto = function () {
+        var body = 'Namn: ' + d.get('namn') + '\nE-post: ' + d.get('epost') + '\nTelefon: ' + d.get('telefon') + '\nÄrende: ' + d.get('arende') + '\n\n' + d.get('meddelande');
+        msg.textContent = 'Ditt e-postprogram öppnas med meddelandet ifyllt. Öppnas inget? Mejla ' + to + '.';
+        window.location.href = 'mailto:' + to + '?subject=' + encodeURIComponent('Förfrågan: ' + d.get('arende')) + '&body=' + encodeURIComponent(body);
+      };
+      var data = { sida: PAGE };
+      d.forEach(function (v, k) { data[k] = v; });
+      btn.disabled = true;
+      msg.textContent = 'Skickar…';
+      fetch('api/?action=lead', { method: 'POST', headers: { 'content-type': 'application/json', 'X-Bloms': '1' }, body: JSON.stringify(data) })
+        .then(function (r) {
+          var json = /json/.test(r.headers.get('content-type') || '');
+          if (!json) throw new Error('ingen server');
+          return r.json().then(function (j) {
+            if (!r.ok) { msg.setAttribute('data-err', ''); msg.textContent = j.error || 'Något gick fel. Ring oss gärna istället.'; return; }
+            form.reset();
+            msg.textContent = 'Tack! Vi har fått din förfrågan och återkommer normalt samma arbetsdag.';
+          });
+        })
+        .catch(mailto)
+        .then(function () { btn.disabled = false; });
     });
   }
 
