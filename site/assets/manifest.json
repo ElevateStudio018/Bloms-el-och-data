@@ -97,6 +97,111 @@
    "name": "Cookiepolicy",
    "title": "Cookiepolicy | Bloms El & Data",
    "description": "Sidan beskriver hur och varför Bloms El & Datas hemsida använder cookies."
+  },
+  {
+   "slug": "elservice-felsokning",
+   "file": "elservice-felsokning.html",
+   "name": "Elservice & felsökning",
+   "title": "Elservice och felsökning i Göteborg | Bloms El & Data",
+   "description": "Elservice, felsökning och reparationer i Göteborg. Säkringar som löser ut, jordfel, uttag och belysning som krånglar. Certifierade elektriker sedan 2008."
+  },
+  {
+   "slug": "belysning",
+   "file": "belysning.html",
+   "name": "Belysning",
+   "title": "Belysning och ljusplanering i Göteborg | Bloms El & Data",
+   "description": "Belysning för hem, butik, kontor och utemiljö. Ljusplanering, ljusberäkning, LED och styrning. Bloms El & Data i Göteborg."
+  },
+  {
+   "slug": "datanat",
+   "file": "datanat.html",
+   "name": "Datanät",
+   "title": "Datanät och nätverksinstallation i Göteborg | Bloms El & Data",
+   "description": "Installation av datanät för hem, kontor och fastigheter i Göteborg. Nätverksuttag, kablage, nätverksskåp och trådlöst nätverk."
+  },
+  {
+   "slug": "kraft",
+   "file": "kraft.html",
+   "name": "Kraft",
+   "title": "Kraftinstallationer i Göteborg | Bloms El & Data",
+   "description": "Kraftuttag, matning och kompletta elinstallationer för verkstad, industri, restaurang och hem i Göteborg."
+  },
+  {
+   "slug": "golvvarme",
+   "file": "golvvarme.html",
+   "name": "Golvvärme & värme",
+   "title": "Elektrisk golvvärme i Göteborg | Bloms El & Data",
+   "description": "Installation av elektrisk golvvärme i badrum, kök och bostäder. Behöriga elektriker i Göteborg med omnejd."
+  },
+  {
+   "slug": "elcentral",
+   "file": "elcentral.html",
+   "name": "Elcentral & elbyte",
+   "title": "Byte av elcentral och gamla elsystem i Göteborg | Bloms El & Data",
+   "description": "Byte av proppskåp till modern elcentral med automatsäkringar och jordfelsbrytare. Byte av gamla elsystem i villor och lägenheter."
+  },
+  {
+   "slug": "dokumentation",
+   "file": "dokumentation.html",
+   "name": "Dokumentation & elsäkerhetsintyg",
+   "title": "Elritningar, mätprotokoll och elsäkerhetsintyg | Bloms El & Data",
+   "description": "Dokumentation av elinstallationer i Göteborg: elritningar, mätprotokoll, belysningsberäkningar och elsäkerhetsintyg."
+  },
+  {
+   "slug": "industrielektriker",
+   "file": "industrielektriker.html",
+   "name": "Industrielektriker",
+   "title": "Industrielektriker i Göteborg | Bloms El & Data",
+   "description": "Industrielektriker i Göteborg: el och automation kring maskinparken, kraft, styrsystem och felsökning för att minimera driftstopp."
+  },
+  {
+   "slug": "kok-och-badrum",
+   "file": "kok-och-badrum.html",
+   "name": "Kök & badrum",
+   "title": "El i kök och badrum i Göteborg | Bloms El & Data",
+   "description": "El vid renovering av kök och badrum i Göteborg: uttag, belysning, golvvärme och vitvaror. Certifierade elektriker med ROT-avdrag."
+  },
+  {
+   "slug": "nybyggnation-renovering",
+   "file": "nybyggnation-renovering.html",
+   "name": "Nybyggnation & renovering",
+   "title": "El vid nybyggnation och renovering i Göteborg | Bloms El & Data",
+   "description": "Elinstallation vid nybyggnation, tillbyggnad och renovering av villor, lägenheter och lokaler i Göteborg. Från ritning till dokumentation."
+  },
+  {
+   "slug": "batterilager",
+   "file": "batterilager.html",
+   "name": "Batterilager",
+   "title": "Batterilager för solceller i Göteborg | Bloms El & Data",
+   "description": "Installation av batterilager för solcellsanläggningar i Göteborg. Lagra egen el, minska kostnaderna och få reservkraft vid strömavbrott."
+  },
+  {
+   "slug": "laddbox-brf",
+   "file": "laddbox-brf.html",
+   "name": "Laddboxar för BRF & företag",
+   "title": "Laddboxar för bostadsrättsföreningar och företag | Bloms El & Data",
+   "description": "Laddinfrastruktur för bostadsrättsföreningar, samfälligheter och företag i Göteborg. Lastbalansering, debitering per användare och underhållsfri drift."
+  },
+  {
+   "slug": "om-oss",
+   "file": "om-oss.html",
+   "name": "Om oss",
+   "title": "Om Bloms El & Data | Elektriker i Göteborg sedan 2008",
+   "description": "Bloms El & Data AB är en elfirma i Göteborg som sedan 2008 utfört elarbeten åt privatpersoner, fastighetsägare och företag. Läs om oss och hur vi arbetar."
+  },
+  {
+   "slug": "vanliga-fragor",
+   "file": "vanliga-fragor.html",
+   "name": "Vanliga frågor",
+   "title": "Vanliga frågor om el och elektriker | Bloms El & Data",
+   "description": "Svar på vanliga frågor om ROT-avdrag, grön teknik, elsäkerhet, laddboxar, solceller och vad du får göra själv. Bloms El & Data i Göteborg."
+  },
+  {
+   "slug": "elektriker-boras",
+   "file": "elektriker-boras.html",
+   "name": "Elektriker Borås",
+   "title": "Elektriker i Borås | Bloms El & Data",
+   "description": "Elektriker i Borås för privatpersoner, fastighetsägare och företag. Elservice, installation, laddboxar och solceller. Materialdepå i Borås."
   }
  ],
  "images": [

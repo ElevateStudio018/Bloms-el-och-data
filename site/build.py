@@ -5,6 +5,9 @@ Skriver en statisk HTML-fil per sida till site/ (samma URL-namn som originalet, 
 """
 from html import escape
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).parent))
+from pages_extra import PAGES as EXTRA, STEPS_STANDARD
 
 OUT = Path(__file__).parent
 PHONE = "0705-15 02 11"
@@ -72,7 +75,7 @@ def icon_card(icon, title, small, href):
 
 
 HOME_CARDS = [
-    img_card("dokumentation.jpg", "Elservice", "tjanster.html", "Elektriker mäter i ett elskåp"),
+    img_card("dokumentation.jpg", "Elservice", "elservice-felsokning.html", "Elektriker mäter i ett elskåp"),
     img_card("laddbox.jpg", "Elbilsladdare", "elbilsladdare.html", "Elbil som laddar vid en laddbox"),
     img_card("solceller.jpg", "Solceller", "solceller.html", "Montör installerar solpaneler"),
     img_card("smart-hem.jpg", "Smart Teknik", "smart-teknik.html", "Smart hem styrs från mobilen"),
@@ -116,15 +119,15 @@ def usp_section(title):
 
 
 SERVICES9 = [
-    ("kok.jpg", "Kök & Badrum", "tjanster.html#belysning"),
-    ("kabel.jpg", "Nybyggnation", "tjanster.html"),
-    ("servicebil-liseberg.jpg", "Elservice", "tjanster.html"),
-    ("kraft.jpg", "Kraft", "tjanster.html#kraft"),
-    ("datanat.jpg", "Datanät", "tjanster.html#datanat"),
-    ("dokumentation.jpg", "Dokumentation", "tjanster.html#dokumentation"),
+    ("kok.jpg", "Kök & Badrum", "kok-och-badrum.html"),
+    ("kabel.jpg", "Nybyggnation", "nybyggnation-renovering.html"),
+    ("servicebil-liseberg.jpg", "Elservice", "elservice-felsokning.html"),
+    ("kraft.jpg", "Kraft", "kraft.html"),
+    ("datanat.jpg", "Datanät", "datanat.html"),
+    ("dokumentation.jpg", "Dokumentation", "dokumentation.html"),
     ("laddbox.jpg", "Laddboxar", "elbilsladdare.html"),
     ("solceller.jpg", "Solceller", "solceller.html"),
-    ("varme.jpg", "Värme", "tjanster.html#varme"),
+    ("varme.jpg", "Värme", "golvvarme.html"),
 ]
 
 
@@ -155,8 +158,7 @@ TRYGG = [
 
 
 def trygg_section(paras=TRYGG, title="Trygg el"):
-    return (f'<div class="photo-strip"><img src="img/butik-servicebil.jpg" alt="Bloms El &amp; Datas servicebil utanför butiker" loading="lazy" style="object-position:center 60%"></div>'
-            f'<section class="sec dark" id="trygg-el"><div class="wrap split">'
+    return (f'<section class="sec dark" id="trygg-el"><div class="wrap split">'
             f'<div class="prose">{head("El och säkerhet", title)}{ps(*paras[:2])}{btns()}</div>'
             f'<div class="prose">{ps(*paras[2:])}<div class="usps" style="flex-direction:column;gap:12px;margin-top:8px">'
             + "".join(f'<span class="chk">{e(u)}</span>' for u in USPS) +
@@ -261,7 +263,8 @@ def page(slug, title, desc, body, active=None):
     menu = "".join(
         f'<li><a href="{h}"{" aria-current=\"page\"" if h == active else ""}>{e(t)}</a></li>' for h, t in NAV)
     areas = "".join(f'<li><a href="{h}">{e(t)}</a></li>' for h, t in AREAS)
-    pages = "".join(f'<li><a href="{h}">{e(t)}</a></li>' for h, t in NAV[1:])
+    pages = "".join(f'<li><a href="{h}">{e(t)}</a></li>' for h, t in NAV[1:] + [("om-oss.html", "Om oss"), ("vanliga-fragor.html", "Vanliga frågor")])
+    servs = "".join(f'<li><a href="{x["slug"]}.html">{e(x["name"])}</a></li>' for x in EXTRA if x.get("parent"))
     return f"""<!doctype html>
 <html lang="sv">
 <head>
@@ -293,7 +296,8 @@ def page(slug, title, desc, body, active=None):
 <p>Certifierad elektriker i Göteborg sedan 2008. Kontor och lager i Göteborg, materialdepåer i hela regionen.</p></div>
 <div><h4>Kontakt</h4><ul><li><a href="{TEL}" class="copy">{PHONE}</a></li><li><a href="mailto:{MAIL}" class="copy">{MAIL}</a></li><li>Blomstergatan 5</li><li>411 04 Göteborg</li></ul></div>
 <div><h4>Sidor</h4><ul>{pages}</ul></div>
-<div><h4>Göteborg med omnejd</h4><ul>{areas}<li>Borås</li></ul></div>
+<div><h4>Tjänster</h4><ul>{servs}</ul></div>
+<div><h4>Göteborg med omnejd</h4><ul>{areas}<li><a href="elektriker-boras.html">Borås</a></li></ul></div>
 </div>
 <div class="foot-bottom"><span>© 2026 Bloms El &amp; Data AB · Org.nr 556754-3656</span><a href="cookiepolicy.html">Cookiepolicy</a></div>
 </div></footer>
@@ -332,6 +336,13 @@ PAGES["index"] = page("index", "Elektriker Göteborg | Elfirma - Bloms El & Data
     + trust_section(),
     active="index.html")
 
+
+TJANSTER_OVERVIEW = ('<section class="sec"><div class="wrap"><div class="sec-head"><div class="prose">'
+                     + head("Alla tjänster", "Välj tjänst") + '<p>Varje tjänst har en egen sida med mer information, vanliga frågor och hur det går till.</p></div></div><div class="grid g4">'
+                     + "".join(img_card(x["hero"], x["name"], f'{x["slug"]}.html') for x in EXTRA if x.get("parent") == "tjanster")
+                     + img_card("solceller.jpg", "Solceller", "solceller.html") + img_card("laddbox.jpg", "Elbilsladdare", "elbilsladdare.html")
+                     + '</div></div></section>')
+
 # ================================================================ TJÄNSTER
 SV = [
     ("belysning", "belysning.jpg", "Belysning", "Belysning i ett skyltfönster",
@@ -355,8 +366,10 @@ SV = [
 body = hero("kanal.jpg", "Våra tjänster",
             "Installation, service, belysning, kraft, solceller, elbilsladdning, datanät och nybyggnation. Vi tar hand om hela kedjan från planering och ritning till installation och dokumentation.",
             [img_card(i, t, f"#{k}", a) for k, i, t, a, _ in SV[:4]], eyebrow="Elektriker Göteborg", pos="70% center")
+SV_PAGE = {"belysning": "belysning", "datanat": "datanat", "kraft": "kraft", "varme": "golvvarme", "dokumentation": "dokumentation", "industri": "industrielektriker"}
+body += TJANSTER_OVERVIEW
 for n, (k, i, t, a, txt) in enumerate(SV):
-    body += split(i, head("Tjänst", t) + ps(*txt) + (btns(ghost=False) if n in (1, 3, 5) else ""),
+    body += split(i, head("Tjänst", t) + ps(*txt) + f'<div class="btns"><a class="btn btn-line arrow" href="{SV_PAGE[k]}.html">Läs mer om {e(t.lower())} </a></div>',
                   rev=n % 2 == 1, bg="gray" if n % 2 == 1 else "", alt=a).replace('<section class="sec', f'<section id="{k}" class="sec', 1)
 body += trust_section()
 PAGES["tjanster"] = page("tjanster", "Elektriker Göteborg | Tjänster | Bloms El & Data",
@@ -406,7 +419,7 @@ body += ('<section class="sec gray" id="gron-teknik"><div class="wrap split"><di
 body += split("brf-laddare.jpg", head("BRF", "Bostadsrättsförening")
               + ps("Många bostadsrättsföreningar har allt fler innehavare som skaffar elbilar och elhybrider och installerar elbilsladdare just nu. Dessutom ökar det oftast föreningens attraktionskraft och därmed lägenheternas värde.",
                    "Vår lösning är underhållsfri och enkel för föreningen. Förbrukningen faktureras direkt till användaren månadsvis. Kontakta oss om du vill veta mer om hur du kan få elbilsladdning till din förening.")
-              + btns(ghost=False), alt="Laddstationer i ett garage")
+              + '<div class="btns"><a class="btn btn-red arrow" href="laddbox-brf.html">Laddboxar för BRF och företag </a></div>', alt="Laddstationer i ett garage")
 PAGES["elbilsladdare"] = page("elbilsladdare", "Elbilsladdare | Bloms El | Göteborg",
     "Vi monterar elbilsladdare till privatpersoner, bostadsrätts- och villaföreningar och företag. I Göteborg, Partille, Mölndal och alla andra kringliggande kommuner runt Göteborg", body, "elbilsladdare.html")
 
@@ -471,7 +484,7 @@ body += ('<section class="sec gray" id="installation"><div class="wrap"><div cla
          '<div class="statbox"><h3 class="h3">Installation</h3>' + ps("Alla projekt, alla solcellsinstallationer vi gör, planeras noga före installation. Och du får information om hela processen före start.",
                                                                        "Du får med dig vår kunskap som erfaret elinstallationsföretag in i varje projekt. Det ger dig en trygg och prisvärd installation över tid.") + '</div>'
          '<div class="statbox"><h3 class="h3">Solcellsenergi</h3>' + ps("När allt är på plats trimmar vi in och optimerar systemet och du börjar producera din egen gröna el. Överskott lagrar du i batterier eller säljer. Du kan även ladda batterierna med el från nätet när priset är lågt och spara till timmar när det är dyrare, och på så sätt sänka totalkostnaden för din elförbrukning ytterligare.",
-                                                                          "Du har full kontroll från systemets app och kan i realtid se hela anläggningens förbrukning och produktion. Solcellsteknik är idag en etablerad och standardiserad produkt, men utveckling sker fortfarande och vi uppdaterar oss löpande kring nya lösningar, nya regelverk och innovationer.") + '</div>'
+                                                                          "Du har full kontroll från systemets app och kan i realtid se hela anläggningens förbrukning och produktion. Solcellsteknik är idag en etablerad och standardiserad produkt, men utveckling sker fortfarande och vi uppdaterar oss löpande kring nya lösningar, nya regelverk och innovationer.") + '<div class="btns"><a class="btn btn-line arrow" href="batterilager.html">Läs om batterilager </a></div></div>'
          '</div></div></section>')
 body += '<div class="photo-strip"><img src="img/sol-hovas.jpg" alt="Solcellsanläggning i Hovås" loading="lazy"></div>'
 body += split("sol-jordbruk.png", head("Efter installationen", "Underhåll och service")
@@ -570,7 +583,7 @@ PAGES["elektriker-hisingen"] = big_area(
     extra=split("portratt.jpg", head("Felsökning", "Felsökning innan problemen växer")
                 + ps("Återkommande driftproblem bör undersökas istället för att tillfälligt återställas gång på gång. Säkringar som löser ut, utrustning som påverkar andra delar av anläggningen eller fel som bara uppstår under hög belastning kan kräva systematisk felsökning.",
                      "Vi går igenom installationen och försöker identifiera orsaken innan åtgärden bestäms. Samma arbetssätt är användbart när äldre elanläggningar ska byggas om. Då går det att bedöma vad som kan behållas och vilka delar som behöver förändras för den nya användningen.")
-                + ps(*TRYGG[2:]), bg="gray", alt="Rustan Blom, Bloms El & Data"))
+                + ps(*TRYGG[2:]), bg="gray", alt="Rustan Blom, Bloms El & Data").replace('<section class="sec', '<section id="trygg-el" class="sec', 1))
 
 PAGES["elektriker-kungsbacka"] = big_area(
     "elektriker-kungsbacka", "Kungsbacka", "Elektriker Kungsbacka | Elfirma - Bloms El & Data",
@@ -624,9 +637,9 @@ PAGES["elektriker-kungalv"] = big_area(
 
 
 # ================================================================ ORTSSIDOR (små: Partille, Mölndal, Västra Frölunda)
-SMALL_CARDS = [("varme.jpg", "Värme", "tjanster.html#varme"), ("servicebil-liseberg.jpg", "Elservice", "tjanster.html"),
-               ("kraft.jpg", "Kraft", "tjanster.html#kraft"), ("laddbox.jpg", "Elbilsladdare", "elbilsladdare.html"),
-               ("dokumentation.jpg", "Dokumentation", "tjanster.html#dokumentation"), ("solceller.jpg", "Solceller", "solceller.html")]
+SMALL_CARDS = [("varme.jpg", "Värme", "golvvarme.html"), ("servicebil-liseberg.jpg", "Elservice", "elservice-felsokning.html"),
+               ("kraft.jpg", "Kraft", "kraft.html"), ("laddbox.jpg", "Elbilsladdare", "elbilsladdare.html"),
+               ("dokumentation.jpg", "Dokumentation", "dokumentation.html"), ("solceller.jpg", "Solceller", "solceller.html")]
 
 
 def small_area(slug, place, title, desc, hero_img, intro, services, doing, also, pos="center"):
@@ -696,6 +709,63 @@ PAGES["cookiepolicy"] = page("cookiepolicy", "Cookiepolicy | Bloms El & Data", "
                              hero("team-bro.jpg", "Cookiepolicy", None, None, eyebrow="Bloms El & Data", buttons="")
                              + f'<section class="sec"><div class="wrap"><div class="prose doc">{d}</div></div></section>')
 
+
+# ================================================================ TJÄNSTESIDOR OCH INFOSIDOR (pages_extra.py)
+EXIST = {"tjanster": ("kanal.jpg", "Alla tjänster"), "smart-teknik": ("smart-hem.jpg", "Smart Teknik"), "solceller": ("solceller.jpg", "Solceller"),
+         "elbilsladdare": ("laddbox.jpg", "Elbilsladdare"), "skattereduktion": ("kabelrulle.jpg", "ROT och Grön teknik"),
+         "kontakt": ("utebelysning.jpg", "Kontakt"), "elektriker-hisingen": ("team-bro.jpg", "Elektriker Hisingen")}
+EXTRA_BY = {x["slug"]: x for x in EXTRA}
+
+
+def faq_html(items):
+    return '<div class="faq">' + "".join(f'<details><summary>{e(q)}</summary><p>{e(a)}</p></details>' for q, a in items) + '</div>'
+
+
+def service_page(d):
+    cards = [img_card(i, t, f"#{a}") for i, t, a in d["cards"]]
+    b = hero(d["hero"], d["h1"], d["lead"], cards, eyebrow=d["eyebrow"], pos=d.get("pos", "center"))
+    k = 0
+    for sec in d["sections"]:
+        bg = "gray" if k % 2 else ""
+        link = f'<div class="btns"><a class="btn btn-line arrow" href="{sec["link"][0]}">{e(sec["link"][1])} </a></div>' if sec.get("link") else ""
+        if sec["kind"] == "split":
+            html = split(sec["img"], head(sec["eyebrow"], sec["title"]) + ps(*sec["paras"]) + link, rev=k % 2 == 1, bg=bg,
+                         alt=sec["title"], media_cls=sec.get("media", ""))
+        elif sec["kind"] == "items":
+            html = (f'<section class="sec {bg}"><div class="wrap"><div class="sec-head"><div class="prose">{head(sec["eyebrow"], sec["title"])}</div></div>'
+                    '<div class="grid g3">' + "".join(f'<div class="feature"><h3>{e(t)}</h3><p>{e(x)}</p></div>' for t, x in sec["items"]) + '</div></div></section>')
+        else:
+            html = (f'<section class="sec {bg}"><div class="wrap split" style="align-items:start"><div class="prose">{head(sec["eyebrow"], sec["title"])}{btns(ghost=False)}</div>'
+                    '<ul class="checklist cols">' + "".join(f'<li class="chk">{e(x)}</li>' for x in sec["list"]) + '</ul></div></section>')
+        b += html.replace('<section class="sec', f'<section id="{sec["id"]}" class="sec', 1)
+        k += 1
+    if d.get("faq_groups"):
+        for gid, title, items in d["faq_groups"]:
+            b += (f'<section id="{gid}" class="sec {"gray" if k % 2 else ""}"><div class="wrap split" style="align-items:start">'
+                  f'<div class="prose">{head("Vanliga frågor", title)}</div>{faq_html(items)}</div></section>')
+            k += 1
+    elif d["sections"] and d["slug"] != "om-oss":
+        b += ('<section class="sec gray" id="sa-gar-det-till"><div class="wrap"><div class="sec-head"><div class="prose">' + head("Så går det till", "Från första kontakt till färdig installation") + '</div></div>'
+              '<ol class="steps">' + "".join(f'<li><b>{e(t)}</b><p>{e(x)}</p></li>' for t, x in STEPS_STANDARD) + '</ol></div></section>')
+    if d.get("faq"):
+        b += ('<section class="sec" id="fragor"><div class="wrap split" style="align-items:start"><div class="prose">' + head("Frågor och svar", "Vanliga frågor")
+              + ps("Hittar du inte svaret? Ring eller mejla oss.") + '<div class="btns"><a class="btn btn-line arrow" href="vanliga-fragor.html">Fler frågor och svar </a></div></div>'
+              + faq_html(d["faq"]) + '</div></section>')
+    rel = []
+    for r in d.get("related", []):
+        img, name = (EXTRA_BY[r]["hero"], EXTRA_BY[r]["name"]) if r in EXTRA_BY else EXIST[r]
+        rel.append(img_card(img, name, f"{r}.html"))
+    if rel:
+        b += ('<section class="sec gray"><div class="wrap"><div class="sec-head"><div class="prose">' + head("Mer från Bloms El & Data", "Relaterade tjänster") + '</div>'
+              '<a class="btn btn-line arrow" href="tjanster.html">Alla tjänster </a></div><div class="grid g4">' + "".join(rel) + '</div></div></section>')
+    b += contact_cta(*d["cta"]) + trust_section()
+    active = {"tjanster": "tjanster.html", "elbilsladdare": "elbilsladdare.html"}.get(d.get("parent"))
+    return page(d["slug"], d["title"], d["desc"], b, active)
+
+
+for d in EXTRA:
+    PAGES[d["slug"]] = service_page(d)
+
 for slug, html in PAGES.items():
     (OUT / f"{slug}.html").write_text(html, encoding="utf-8")
 
@@ -704,7 +774,7 @@ import json, re
 manifest = {
     "pages": [{"slug": slug, "file": f"{slug}.html",
                "name": {"index": "Startsida", "cookiepolicy": "Cookiepolicy", **{h[:-5]: t for h, t in NAV[1:]},
-                        **{h[:-5]: f"Elektriker {t}" for h, t in AREAS}}.get(slug, slug),
+                        **{h[:-5]: f"Elektriker {t}" for h, t in AREAS}, **{x["slug"]: x["name"] for x in EXTRA}}.get(slug, slug),
                "title": re.search(r"<title>(.*?)</title>", html).group(1).replace("&amp;", "&"),
                "description": re.search(r'<meta name="description" content="(.*?)">', html).group(1).replace("&amp;", "&")}
               for slug, html in PAGES.items()],
