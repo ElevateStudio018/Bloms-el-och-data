@@ -229,6 +229,8 @@ def gallery_parts():
     css += style[style.index("/* ---------- phone ---------- */"):]
     css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
     slides = re.findall(r'<section class="slide" id="(f\d+)" data-name="([^"]+)">(.*?)</section>', src, flags=re.S)
+    unit = re.compile(r'(?<![\w.#-])(\d*\.?\d+)(s?)v([wh])\b')
+    css = unit.sub(lambda m: f"calc(var(--v{m.group(3)},1{m.group(2)}v{m.group(3)})*{m.group(1)})", css)
     return prefix_css(css, ".heroes"), slides
 
 
@@ -268,6 +270,7 @@ def page(slug, title, desc, body, active=None):
 <title>{e(title)}</title>
 <meta name="description" content="{escape(desc)}">
 <meta name="claude:viewport-fit-sides" content="cover">
+<script>(function(){{var d=document.documentElement;function f(){{var w=innerWidth,h=innerHeight,z=w<1100?1:Math.max(1,Math.min(w/1440,h/900));d.style.zoom=z>1.001?z:'';d.style.setProperty('--vw',w/z/100+'px');d.style.setProperty('--vh',h/z/100+'px')}}f();addEventListener('resize',f)}})()</script>
 <link rel="icon" href="img/logo-symbol.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
