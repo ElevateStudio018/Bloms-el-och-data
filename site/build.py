@@ -157,22 +157,14 @@ TRYGG = [
 ]
 
 
-TRYGG_CARDS = [
-    ("ABL / BB1-behörighet", "Alla montörer är certifierade elektriker.", '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>'),
-    ("Registrerad hos Elsäkerhetsverket", "För lågspänningsarbeten i alla relevanta kategorier.", '<path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>'),
-    ("Garanti på alla arbeten", "Nyinstallationer och reparationer omfattas.", '<circle cx="12" cy="9" r="6"/><path d="M8.5 14l-1.5 8 5-3 5 3-1.5-8"/>'),
-    ("CE-märkt material", "Allt elmaterial håller högsta kvalité.", '<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M10 9.5a3 3 0 1 0 0 5M17 9.5h-3v5h3M14 12h2.5"/>'),
-]
-
-
-def trygg_section(paras=TRYGG, title="Trygg el, gjord av riktiga elektriker"):
-    cards = "".join(f'<div class="glass tcard"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">{svg}</svg></span>'
-                    f'<b>{e(t)}</b><small>{e(d)}</small></div>' for t, d, svg in TRYGG_CARDS)
-    return (f'<section class="trygg" id="trygg-el"><div class="bg" aria-hidden="true"></div><div class="wrap">'
-            f'<div class="top"><div class="prose">{head("El och säkerhet", title)}</div><div class="prose">{ps(paras[0])}</div></div>'
-            f'<div class="tcards">{cards}</div>'
-            f'<div class="bottom"><div class="glass"><p class="big">{e(paras[1])}</p></div>'
-            f'<div class="prose">{ps(*paras[2:])}{btns(ghost=False)}</div></div></div></section>')
+def trygg_section():
+    """Trygg el: kompakt ruta med porträtt (förslag 5 i design/trygg-el-forslag-2)."""
+    return ('<section class="trygg" id="trygg-el"><div class="wrap"><div class="trygg-box">'
+            '<img src="img/portratt.jpg" alt="Montör från Bloms El &amp; Data" loading="lazy">'
+            f'<div class="prose">{head("Trygg el", "Den bästa försäkringen mot elolyckor är att anlita en riktig elektriker.")}'
+            + ps("Alla våra montörer har ABL- eller BB1-behörighet. Arbetena omfattas av garanti, vi är ansvarsförsäkrade och använder bara CE-märkt material.")
+            + f'<div class="btns"><a class="btn btn-red" href="{TEL}">Ring oss</a><a class="btn btn-line arrow" href="kontakt.html">Boka bedömning </a></div>'
+            '</div></div></div></section>')
 
 
 def smart_band():
