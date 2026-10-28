@@ -155,7 +155,7 @@ TRYGG = [
 
 
 def trygg_section(paras=TRYGG, title="Trygg el"):
-    return (f'<div class="photo-strip"><img src="img/team-bro-2.jpg" alt="Tre montörer bär verktyg över en bro" loading="lazy"></div>'
+    return (f'<div class="photo-strip"><img src="img/butik-servicebil.jpg" alt="Bloms El &amp; Datas servicebil utanför butiker" loading="lazy" style="object-position:center 60%"></div>'
             f'<section class="sec dark" id="trygg-el"><div class="wrap split">'
             f'<div class="prose">{head("El och säkerhet", title)}{ps(*paras[:2])}{btns()}</div>'
             f'<div class="prose">{ps(*paras[2:])}<div class="usps" style="flex-direction:column;gap:12px;margin-top:8px">'
@@ -164,7 +164,7 @@ def trygg_section(paras=TRYGG, title="Trygg el"):
 
 
 def smart_band():
-    return ('<section class="band"><img src="img/smart-band.jpg" alt="" loading="lazy"><div class="wrap"><div class="prose">'
+    return ('<section class="band"><img src="img/team-bro-upscaled.jpg" alt="Tre montörer från Bloms El &amp; Data går med verktyg" loading="lazy" style="object-position:center 35%"><div class="wrap"><div class="prose">'
             f'{head("Smart Teknik", "Smarta lösningar för vardagen")}'
             + ps("Det finns massor av roliga, smarta lösningar som underlättar din vardag. Som gör ditt hem eller kontor säkrare, enklare och bekvämare. Som låter dig styra värmen i sommarstugan, musiken i hela huset utan att du lämnar soffan eller belysningen i verkstan fast du redan stämplat ut och åkt hem. Vi berättar mer om några smarta prylar på länken nedan.")
             + '<div class="btns"><a class="btn btn-white arrow" href="smart-teknik.html">Läs mer </a></div></div></div></section>')
@@ -274,7 +274,7 @@ def page(slug, title, desc, body, active=None):
 <link rel="stylesheet" href="assets/style.css">
 {'<link rel="stylesheet" href="assets/heroes.css">' if slug == "index" else ""}
 </head>
-<body>
+<body data-page="{slug}">
 <a class="skip" href="#innehall">Hoppa till innehållet</a>
 <header class="nav"><div class="wrap">
 <a class="logo" href="index.html"><img src="img/logo-white.png" alt="">BLOMS EL &amp; DATA</a>
@@ -695,4 +695,21 @@ PAGES["cookiepolicy"] = page("cookiepolicy", "Cookiepolicy | Bloms El & Data", "
 
 for slug, html in PAGES.items():
     (OUT / f"{slug}.html").write_text(html, encoding="utf-8")
+
+# Manifest och tomt innehåll för adminpanelen
+import json, re
+manifest = {
+    "pages": [{"slug": slug, "file": f"{slug}.html",
+               "name": {"index": "Startsida", "cookiepolicy": "Cookiepolicy", **{h[:-5]: t for h, t in NAV[1:]},
+                        **{h[:-5]: f"Elektriker {t}" for h, t in AREAS}}.get(slug, slug),
+               "title": re.search(r"<title>(.*?)</title>", html).group(1).replace("&amp;", "&"),
+               "description": re.search(r'<meta name="description" content="(.*?)">', html).group(1).replace("&amp;", "&")}
+              for slug, html in PAGES.items()],
+    "images": sorted(f"img/{p.relative_to(OUT / 'img').as_posix()}" for p in (OUT / "img").rglob("*") if p.is_file()),
+    "heroes": [{"id": sid, "name": name} for sid, name, _ in gallery_parts()[1]],
+}
+(OUT / "assets" / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=1), encoding="utf-8")
+if not (OUT / "content.json").exists():
+    (OUT / "content.json").write_text(json.dumps({"version": 1, "updated": None, "text": {}, "link": {}, "img": {}, "meta": {},
+                                                  "hero": {}, "settings": {}}, indent=1), encoding="utf-8")
 print(f"{len(PAGES)} sidor byggda i {OUT}")

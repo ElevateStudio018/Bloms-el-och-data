@@ -1,0 +1,211 @@
+{
+ "pages": [
+  {
+   "slug": "index",
+   "file": "index.html",
+   "name": "Startsida",
+   "title": "Elektriker Göteborg | Elfirma - Bloms El & Data",
+   "description": "Elservice i Göteborg. Nyinstallation, ombyggnation, service och rådgivning - kort sagt allt man förväntar sig av en elektriker och ofta lite till."
+  },
+  {
+   "slug": "tjanster",
+   "file": "tjanster.html",
+   "name": "Tjänster",
+   "title": "Elektriker Göteborg | Tjänster | Bloms El & Data",
+   "description": "Elektriker Göteborg, Installation, Service, Belysning, Kraft, Solceller, Elbilsladdning, Datanät, Nybyggnation"
+  },
+  {
+   "slug": "elbilsladdare",
+   "file": "elbilsladdare.html",
+   "name": "Elbilsladdare",
+   "title": "Elbilsladdare | Bloms El | Göteborg",
+   "description": "Vi monterar elbilsladdare till privatpersoner, bostadsrätts- och villaföreningar och företag. I Göteborg, Partille, Mölndal och alla andra kringliggande kommuner runt Göteborg"
+  },
+  {
+   "slug": "smart-teknik",
+   "file": "smart-teknik.html",
+   "name": "Smart Teknik",
+   "title": "Smart Teknik | Bloms El & Data",
+   "description": "Smarta lösningar för hem, kontor och jordbruk: självåterställande jordfelsbrytare, smart belysning och smart ljud från Bloms El & Data i Göteborg."
+  },
+  {
+   "slug": "solceller",
+   "file": "solceller.html",
+   "name": "Solceller",
+   "title": "Solceller | Solpaneler | Göteborg | Bloms El & Data",
+   "description": "Vi monterar och installerar solceller och solpaneler i och kring Göteborg. Kontakta oss för att veta mer om hur du kan sänka dina elkostnader och samtidigt göra ett klimatsmart val."
+  },
+  {
+   "slug": "skattereduktion",
+   "file": "skattereduktion.html",
+   "name": "Rot",
+   "title": "Rot och Grön Teknik | Bloms El & Data",
+   "description": "Rotavdrag och skattereduktion för grön teknik. Bloms El & Data sköter pappersarbetet och drar av beloppet direkt på fakturan."
+  },
+  {
+   "slug": "kontakt",
+   "file": "kontakt.html",
+   "name": "Kontakt",
+   "title": "Kontakt | Göteborg | Bloms El Och Data",
+   "description": "Kontakt Bloms El & Data, Elektriker Göteborg"
+  },
+  {
+   "slug": "elektriker-hisingen",
+   "file": "elektriker-hisingen.html",
+   "name": "Elektriker Hisingen",
+   "title": "Elektriker Hisingen | Elfirma - Bloms El & Data",
+   "description": "Elservice i Hisingen | Nyinstallation, ombyggnation, service och rådgivning - kort sagt allt man förväntar sig av en elektriker och ofta lite till."
+  },
+  {
+   "slug": "elektriker-kungsbacka",
+   "file": "elektriker-kungsbacka.html",
+   "name": "Elektriker Kungsbacka",
+   "title": "Elektriker Kungsbacka | Elfirma - Bloms El & Data",
+   "description": "Elservice i Kungsbacka | Nyinstallation, ombyggnation, service och rådgivning - kort sagt allt man förväntar sig av en elektriker och ofta lite till."
+  },
+  {
+   "slug": "elektriker-kungalv",
+   "file": "elektriker-kungalv.html",
+   "name": "Elektriker Kungälv",
+   "title": "Elektriker Kungälv | Elfirma - Bloms El & Data",
+   "description": "Elservice i Kungälv | Nyinstallation, ombyggnation, service och rådgivning - kort sagt allt man förväntar sig av en elektriker och ofta lite till."
+  },
+  {
+   "slug": "elektriker-i-partille",
+   "file": "elektriker-i-partille.html",
+   "name": "Elektriker Partille",
+   "title": "Elektriker i Partille | Bloms El & Data",
+   "description": "Elektriker och elinstallatör i Partille med lång och gedigen erfarenhet."
+  },
+  {
+   "slug": "elektriker-molndal",
+   "file": "elektriker-molndal.html",
+   "name": "Elektriker Mölndal",
+   "title": "Elektriker i Mölndal | Bloms El & Data",
+   "description": "Elektriker och elinstallatör i Mölndal med lång och gedigen erfarenhet."
+  },
+  {
+   "slug": "elektriker-vastra-frolunda",
+   "file": "elektriker-vastra-frolunda.html",
+   "name": "Elektriker Västra Frölunda",
+   "title": "Elektriker i Västra Frölunda | Bloms El & Data",
+   "description": "Erfaren elektriker och elinstallatör i Västra Frölunda. Lång erfarenhet och mycket goda referenser."
+  },
+  {
+   "slug": "cookiepolicy",
+   "file": "cookiepolicy.html",
+   "name": "Cookiepolicy",
+   "title": "Cookiepolicy | Bloms El & Data",
+   "description": "Sidan beskriver hur och varför Bloms El & Datas hemsida använder cookies."
+  }
+ ],
+ "images": [
+  "img/abb-terra.jpg",
+  "img/belysning.jpg",
+  "img/brf-laddare.jpg",
+  "img/butik-servicebil.jpg",
+  "img/chargeamps-1.jpg",
+  "img/chargeamps-2.jpg",
+  "img/chargeamps-montage.jpg",
+  "img/datanat.jpg",
+  "img/dokumentation.jpg",
+  "img/elbil-cover.jpg",
+  "img/elmaterial.jpg",
+  "img/elskap.jpg",
+  "img/garo.jpg",
+  "img/gata-servicebil.jpg",
+  "img/hero/alvsborg.jpg",
+  "img/hero/bridge.jpg",
+  "img/hero/cable.jpg",
+  "img/hero/canal.jpg",
+  "img/hero/doc.jpg",
+  "img/hero/laddbox.jpg",
+  "img/hero/portrait.jpg",
+  "img/hero/roof2.jpg",
+  "img/hero/smart.jpg",
+  "img/hero/solar.jpg",
+  "img/hero/store.jpg",
+  "img/hero/street.jpg",
+  "img/hero/team-wide.jpg",
+  "img/hero/vanwalk.jpg",
+  "img/hogtalare.png",
+  "img/jordfelsbrytare.png",
+  "img/kabel.jpg",
+  "img/kabelrulle.jpg",
+  "img/kanal.jpg",
+  "img/kok.jpg",
+  "img/kolla.png",
+  "img/kontakt-ikon.png",
+  "img/kraft-uttag.jpg",
+  "img/kraft.jpg",
+  "img/laddbox.jpg",
+  "img/logo-symbol.png",
+  "img/logo-white.png",
+  "img/matning.jpg",
+  "img/molndal.jpg",
+  "img/portratt.jpg",
+  "img/servicebil-alvsborg.jpg",
+  "img/servicebil-gang.jpg",
+  "img/servicebil-liseberg.jpg",
+  "img/smart-band.jpg",
+  "img/smart-hem.jpg",
+  "img/sol-hovas.jpg",
+  "img/sol-installation.jpg",
+  "img/sol-jordbruk.png",
+  "img/sol-kungalv.jpg",
+  "img/solceller-cover.jpg",
+  "img/solceller.jpg",
+  "img/solpaneler.jpg",
+  "img/team-bro-2.jpg",
+  "img/team-bro-upscaled.jpg",
+  "img/team-bro.jpg",
+  "img/termostat.jpg",
+  "img/uc.png",
+  "img/utebelysning.jpg",
+  "img/uttag-rott.jpg",
+  "img/varme.jpg",
+  "img/wifi-app.png"
+ ],
+ "heroes": [
+  {
+   "id": "f20",
+   "name": "Röd duotone"
+  },
+  {
+   "id": "f19",
+   "name": "Lokal elektriker + ROT"
+  },
+  {
+   "id": "f18",
+   "name": "Tre vägar in"
+  },
+  {
+   "id": "f16",
+   "name": "Personligt porträtt"
+  },
+  {
+   "id": "f15",
+   "name": "Tjänstekort"
+  },
+  {
+   "id": "f13",
+   "name": "Minimal helbild"
+  },
+  {
+   "id": "f8",
+   "name": "Solnedgång + siffror"
+  },
+  {
+   "id": "f7",
+   "name": "Kanal med diagonal"
+  },
+  {
+   "id": "f1",
+   "name": "Modernt original"
+  },
+  {
+   "id": "f6",
+   "name": "Glaskort"
+  }
+ ]
+}
