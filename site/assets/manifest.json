@@ -19,7 +19,7 @@
    "file": "elbilsladdare.html",
    "name": "Elbilsladdare",
    "title": "Elbilsladdare | Bloms El | Göteborg",
-   "description": "Vi monterar elbilsladdare till privatpersoner, bostadsrätts- och villaföreningar och företag. I Göteborg, Partille, Mölndal och alla andra kringliggande kommuner runt Göteborg"
+   "description": "Vi monterar elbilsladdare och laddboxar för villor, bostadsrättsföreningar och företag i Göteborg, Partille, Mölndal och kranskommunerna."
   },
   {
    "slug": "smart-teknik",
@@ -33,7 +33,7 @@
    "file": "solceller.html",
    "name": "Solceller",
    "title": "Solceller | Solpaneler | Göteborg | Bloms El & Data",
-   "description": "Vi monterar och installerar solceller och solpaneler i och kring Göteborg. Kontakta oss för att veta mer om hur du kan sänka dina elkostnader och samtidigt göra ett klimatsmart val."
+   "description": "Vi installerar solceller och solpaneler i och kring Göteborg. Sänk dina elkostnader med ett klimatsmart val, med grön teknik-avdrag direkt på fakturan."
   },
   {
    "slug": "skattereduktion",
@@ -47,7 +47,7 @@
    "file": "kontakt.html",
    "name": "Kontakt",
    "title": "Kontakt | Göteborg | Bloms El Och Data",
-   "description": "Kontakt Bloms El & Data, Elektriker Göteborg"
+   "description": "Kontakta Bloms El & Data, certifierad elektriker i Göteborg. Ring 0705-15 02 11 eller skicka en förfrågan, vi svarar normalt samma arbetsdag."
   },
   {
    "slug": "elektriker-hisingen",
@@ -116,7 +116,7 @@
    "slug": "datanat",
    "file": "datanat.html",
    "name": "Datanät",
-   "title": "Datanät och nätverksinstallation i Göteborg | Bloms El & Data",
+   "title": "Datanät och nätverk i Göteborg | Bloms El & Data",
    "description": "Installation av datanät för hem, kontor och fastigheter i Göteborg. Nätverksuttag, kablage, nätverksskåp och trådlöst nätverk."
   },
   {
@@ -137,14 +137,14 @@
    "slug": "elcentral",
    "file": "elcentral.html",
    "name": "Elcentral & elbyte",
-   "title": "Byte av elcentral och gamla elsystem i Göteborg | Bloms El & Data",
+   "title": "Byte av elcentral i Göteborg | Bloms El & Data",
    "description": "Byte av proppskåp till modern elcentral med automatsäkringar och jordfelsbrytare. Byte av gamla elsystem i villor och lägenheter."
   },
   {
    "slug": "dokumentation",
    "file": "dokumentation.html",
    "name": "Dokumentation & elsäkerhetsintyg",
-   "title": "Elritningar, mätprotokoll och elsäkerhetsintyg | Bloms El & Data",
+   "title": "Elritningar och elsäkerhetsintyg | Bloms El & Data",
    "description": "Dokumentation av elinstallationer i Göteborg: elritningar, mätprotokoll, belysningsberäkningar och elsäkerhetsintyg."
   },
   {
@@ -165,7 +165,7 @@
    "slug": "nybyggnation-renovering",
    "file": "nybyggnation-renovering.html",
    "name": "Nybyggnation & renovering",
-   "title": "El vid nybyggnation och renovering i Göteborg | Bloms El & Data",
+   "title": "El vid nybygge och renovering | Bloms El & Data",
    "description": "Elinstallation vid nybyggnation, tillbyggnad och renovering av villor, lägenheter och lokaler i Göteborg. Från ritning till dokumentation."
   },
   {
@@ -179,7 +179,7 @@
    "slug": "laddbox-brf",
    "file": "laddbox-brf.html",
    "name": "Laddboxar för BRF & företag",
-   "title": "Laddboxar för bostadsrättsföreningar och företag | Bloms El & Data",
+   "title": "Laddboxar för BRF och företag | Bloms El & Data",
    "description": "Laddinfrastruktur för bostadsrättsföreningar, samfälligheter och företag i Göteborg. Lastbalansering, debitering per användare och underhållsfri drift."
   },
   {
@@ -255,6 +255,69 @@
   "img/utebelysning.jpg",
   "img/uttag-rott.jpg",
   "img/varme.jpg",
+  "img/w/abb-terra-800.webp",
+  "img/w/belysning-800.webp",
+  "img/w/brf-laddare-800.webp",
+  "img/w/butik-servicebil-1600.webp",
+  "img/w/butik-servicebil-800.webp",
+  "img/w/chargeamps-1-800.webp",
+  "img/w/chargeamps-2-1600.webp",
+  "img/w/chargeamps-2-800.webp",
+  "img/w/chargeamps-montage-800.webp",
+  "img/w/datanat-800.webp",
+  "img/w/dokumentation-800.webp",
+  "img/w/elskap-1600.webp",
+  "img/w/elskap-800.webp",
+  "img/w/garo-800.webp",
+  "img/w/gata-servicebil-800.webp",
+  "img/w/hogtalare-800.webp",
+  "img/w/jordfelsbrytare-1600.webp",
+  "img/w/jordfelsbrytare-800.webp",
+  "img/w/kabel-1600.webp",
+  "img/w/kabel-800.webp",
+  "img/w/kabelrulle-1600.webp",
+  "img/w/kabelrulle-800.webp",
+  "img/w/kanal-1600.webp",
+  "img/w/kanal-800.webp",
+  "img/w/kok-800.webp",
+  "img/w/kolla-800.webp",
+  "img/w/kontakt-ikon-800.webp",
+  "img/w/kraft-800.webp",
+  "img/w/kraft-uttag-1600.webp",
+  "img/w/kraft-uttag-800.webp",
+  "img/w/laddbox-800.webp",
+  "img/w/logo-white-800.webp",
+  "img/w/matning-800.webp",
+  "img/w/molndal-1600.webp",
+  "img/w/molndal-800.webp",
+  "img/w/portratt-800.webp",
+  "img/w/servicebil-alvsborg-1600.webp",
+  "img/w/servicebil-alvsborg-800.webp",
+  "img/w/servicebil-gang-800.webp",
+  "img/w/servicebil-liseberg-800.webp",
+  "img/w/smart-hem-1600.webp",
+  "img/w/smart-hem-800.webp",
+  "img/w/sol-hovas-1600.webp",
+  "img/w/sol-hovas-800.webp",
+  "img/w/sol-installation-800.webp",
+  "img/w/sol-jordbruk-800.webp",
+  "img/w/sol-kungalv-800.webp",
+  "img/w/solceller-800.webp",
+  "img/w/solceller-cover-1600.webp",
+  "img/w/solceller-cover-800.webp",
+  "img/w/solpaneler-800.webp",
+  "img/w/team-bro-1600.webp",
+  "img/w/team-bro-800.webp",
+  "img/w/team-bro-upscaled-1600.webp",
+  "img/w/team-bro-upscaled-800.webp",
+  "img/w/termostat-1600.webp",
+  "img/w/termostat-800.webp",
+  "img/w/uc-800.webp",
+  "img/w/utebelysning-800.webp",
+  "img/w/uttag-rott-800.webp",
+  "img/w/varme-800.webp",
+  "img/w/wifi-app-1600.webp",
+  "img/w/wifi-app-800.webp",
   "img/wifi-app.png"
  ]
 }

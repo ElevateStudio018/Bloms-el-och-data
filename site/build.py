@@ -401,7 +401,7 @@ body += split("brf-laddare.jpg", head("BRF", "Bostadsrättsförening")
                    "Vår lösning är underhållsfri och enkel för föreningen. Förbrukningen faktureras direkt till användaren månadsvis. Kontakta oss om du vill veta mer om hur du kan få elbilsladdning till din förening.")
               + '<div class="btns"><a class="btn btn-red arrow" href="laddbox-brf.html">Laddboxar för BRF och företag </a></div>', alt="Laddstationer i ett garage")
 PAGES["elbilsladdare"] = page("elbilsladdare", "Elbilsladdare | Bloms El | Göteborg",
-    "Vi monterar elbilsladdare till privatpersoner, bostadsrätts- och villaföreningar och företag. I Göteborg, Partille, Mölndal och alla andra kringliggande kommuner runt Göteborg", body, "elbilsladdare.html")
+    "Vi monterar elbilsladdare och laddboxar för villor, bostadsrättsföreningar och företag i Göteborg, Partille, Mölndal och kranskommunerna.", body, "elbilsladdare.html")
 
 # ================================================================ SMART TEKNIK
 body = hero("smart-hem.jpg", "Smart teknik",
@@ -476,7 +476,7 @@ body += split("sol-jordbruk.png", head("Efter installationen", "Underhåll och s
               alt="Solpaneler på ett jordbruk").replace('<section class="sec', '<section id="underhall" class="sec', 1)
 body += contact_cta("Premium kvalité", "Det finns många tillverkare av solceller i världen. En installation är en stor investering som skall hålla i många år och vi rekommenderar verkligen alla att välja kvalité med omsorg. Det lönar sig.")
 PAGES["solceller"] = page("solceller", "Solceller | Solpaneler | Göteborg | Bloms El & Data",
-    "Vi monterar och installerar solceller och solpaneler i och kring Göteborg. Kontakta oss för att veta mer om hur du kan sänka dina elkostnader och samtidigt göra ett klimatsmart val.", body, "solceller.html")
+    "Vi installerar solceller och solpaneler i och kring Göteborg. Sänk dina elkostnader med ett klimatsmart val, med grön teknik-avdrag direkt på fakturan.", body, "solceller.html")
 
 # ================================================================ SKATTEREDUKTION
 body = hero("kabelrulle.jpg", "Rotavdrag och Grön Teknik",
@@ -517,7 +517,7 @@ body += ('<section class="sec gray" id="karta"><div class="wrap split"><div clas
          + ps("Härifrån åtar vi oss uppdrag från Falkenberg i söder till Uddevalla i norr; Ulricehamn, Göteborg, Borås och allt där emellan.")
          + '<div class="btns"><a class="btn btn-line arrow" href="https://www.google.com/maps/search/?api=1&amp;query=Blomstergatan+5+411+04+G%C3%B6teborg" target="_blank" rel="noopener">Öppna i Google Maps </a></div></div>'
          '<div class="media"><img src="img/servicebil-liseberg.jpg" alt="Bloms El &amp; Datas servicebil" loading="lazy"></div></div></section>')
-PAGES["kontakt"] = page("kontakt", "Kontakt | Göteborg | Bloms El Och Data", "Kontakt Bloms El & Data, Elektriker Göteborg", body, "kontakt.html")
+PAGES["kontakt"] = page("kontakt", "Kontakt | Göteborg | Bloms El Och Data", "Kontakta Bloms El & Data, certifierad elektriker i Göteborg. Ring 0705-15 02 11 eller skicka en förfrågan, vi svarar normalt samma arbetsdag.", body, "kontakt.html")
 
 
 # ================================================================ ORTSSIDOR (stora: Hisingen, Kungsbacka, Kungälv)
@@ -754,8 +754,52 @@ def service_page(d):
 for d in EXTRA:
     PAGES[d["slug"]] = service_page(d)
 
+# Responsiva bilder: WebP i 800 och 1600 px bredd i img/w/. src lämnas orört (adminpanelens nycklar bygger på det).
+def webp_variants(name):
+    from PIL import Image
+    src = OUT / "img" / name
+    if not src.is_file():
+        return []
+    outdir = OUT / "img" / "w"
+    outdir.mkdir(exist_ok=True)
+    stem = src.stem
+    with Image.open(src) as im:
+        w = im.width
+        done = []
+        for target in (800, 1600):
+            if target > w and target != 800:
+                break
+            dst = outdir / f"{stem}-{target}.webp"
+            tw = min(target, w)
+            if not dst.is_file() or dst.stat().st_mtime < src.stat().st_mtime:
+                x = im.convert("RGBA" if im.mode in ("RGBA", "LA", "P") else "RGB")
+                x = x.resize((tw, round(im.height * tw / w)), Image.LANCZOS) if tw < w else x
+                x.save(dst, "WEBP", quality=74, method=6)
+            done.append((f"img/w/{dst.name}", tw))
+        return done
+
+
+_variants = {}
+def responsive(html):
+    import re as _re
+    def rep(m):
+        tag, name = m.group(0), m.group(1)
+        if "srcset=" in tag:
+            return tag
+        if name not in _variants:
+            _variants[name] = webp_variants(name)
+        v = _variants[name]
+        if not v:
+            return tag
+        hero = 'fetchpriority="high"' in tag or "team-bro-upscaled" in name
+        sizes = "100vw" if hero else "(max-width: 760px) 100vw, 50vw"
+        srcset = ", ".join(f"{u} {w}w" for u, w in v)
+        return tag[:-1] + f' srcset="{srcset}" sizes="{sizes}">'
+    return _re.sub(r'<img [^>]*src="img/([\w\-]+\.(?:jpg|jpeg|png))"[^>]*>', rep, html)
+
+
 for slug, html in PAGES.items():
-    (OUT / f"{slug}.html").write_text(html, encoding="utf-8")
+    (OUT / f"{slug}.html").write_text(responsive(html), encoding="utf-8")
 
 # Manifest och tomt innehåll för adminpanelen
 import json, re
@@ -820,6 +864,7 @@ Header always set Referrer-Policy "strict-origin-when-cross-origin"
 ExpiresActive On
 ExpiresByType image/jpeg "access plus 1 year"
 ExpiresByType image/png "access plus 1 year"
+ExpiresByType image/webp "access plus 1 year"
 ExpiresByType text/css "access plus 1 week"
 ExpiresByType application/javascript "access plus 1 week"
 </IfModule>

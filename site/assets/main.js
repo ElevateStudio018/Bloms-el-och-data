@@ -102,6 +102,7 @@
     });
     [].slice.call(root.querySelectorAll('main img, footer img')).forEach(function (im) {
       im.dataset.bcSrc = im.getAttribute('src');
+      if (im.hasAttribute('srcset')) im.dataset.bcSrcset = im.getAttribute('srcset');
       im.dataset.bcAlt = im.getAttribute('alt') || '';
       im.dataset.bcIkey = scopeOf(im) + ':' + im.getAttribute('src');
       imgs.push(im);
@@ -140,6 +141,8 @@
       var v = I[im.dataset.bcIkey] || {};
       var src = v.src || im.dataset.bcSrc;
       if (c.uploads && c.uploads[src]) src = c.uploads[src];
+      // utbytt bild: ta bort srcset så att den nya bilden visas, annars återställ originalets varianter
+      if (src !== im.dataset.bcSrc) im.removeAttribute('srcset'); else if (im.dataset.bcSrcset) im.setAttribute('srcset', im.dataset.bcSrcset);
       if (im.getAttribute('src') !== src) im.setAttribute('src', src);
       im.setAttribute('alt', v.alt != null ? v.alt : im.dataset.bcAlt);
     });

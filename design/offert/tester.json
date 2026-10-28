@@ -1,0 +1,1093 @@
+{
+ "measured": "2026-10-28T16:56:04.793Z",
+ "method": "Chromium, mobil 412x823, nätverk 150 ms RTT / 1,6 Mbit/s, CPU 4x långsammare, cache av, median av 3 körningar",
+ "seo": {
+  "old": [
+   {
+    "url": "https://www.blomsel.se/",
+    "title": "Elektriker Göteborg | Elfirma - Bloms El & Data",
+    "desc": "Elservice i Göteborg. Nyinstallation, ombyggnation, service och rådgivning - kort sagt allt man förväntar sig av en elektriker och ofta lite till.",
+    "canonical": "https://www.blomsel.se/",
+    "h1": 1,
+    "ld": [
+     "WebSite",
+     "Electrician"
+    ],
+    "imgs": 20,
+    "alt": 17,
+    "words": 625,
+    "lang": "en",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "https://www.blomsel.se/tjanster",
+    "title": "Elektriker Göteborg | Tjänster | Bloms El & Data",
+    "desc": "Elektriker Göteborg, Installation, Service, Belysning, Kraft, Solceller, Elbilsladdning, Datanät, Nybyggnation",
+    "canonical": "https://www.blomsel.se/tjanster",
+    "h1": 1,
+    "ld": [],
+    "imgs": 7,
+    "alt": 7,
+    "words": 277,
+    "lang": "en",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "https://www.blomsel.se/elbilsladdare",
+    "title": "Elbilsladdare | Bloms El | Göteborg",
+    "desc": "Vi monterar elbilsladdare till privatpersoner, bostadsrätts- och villaföreningar och företag. I Göteborg, Partille, Mölndal och alla andra kringliggande kommuner runt Göteborg",
+    "canonical": "https://www.blomsel.se/elbilsladdare",
+    "h1": 1,
+    "ld": [],
+    "imgs": 8,
+    "alt": 8,
+    "words": 620,
+    "lang": "en",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "https://www.blomsel.se/smart-teknik",
+    "title": "Smart Teknik | bloms2",
+    "desc": "",
+    "canonical": "https://www.blomsel.se/smart-teknik",
+    "h1": 1,
+    "ld": [],
+    "imgs": 6,
+    "alt": 4,
+    "words": 698,
+    "lang": "en",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "https://www.blomsel.se/solceller",
+    "title": "Solceller | Solpaneler | Göteborg | Bloms El & Data",
+    "desc": "Vi monterar och installerar solceller och solpaneler i och kring Göteborg. Kontakta oss för att veta mer om hur du kan sänka dina elkostnader och samtidigt göra ett klimatsmart val.",
+    "canonical": "https://www.blomsel.se/solceller",
+    "h1": 1,
+    "ld": [],
+    "imgs": 6,
+    "alt": 6,
+    "words": 594,
+    "lang": "en",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "https://www.blomsel.se/skattereduktion",
+    "title": "Rot | bloms2",
+    "desc": "",
+    "canonical": "https://www.blomsel.se/skattereduktion",
+    "h1": 1,
+    "ld": [],
+    "imgs": 1,
+    "alt": 1,
+    "words": 262,
+    "lang": "en",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "https://www.blomsel.se/kontakt",
+    "title": "Kontakt | Göteborg | Bloms El Och Data",
+    "desc": "Kontakt Bloms El & Data, Elektriker Göteborg",
+    "canonical": "https://www.blomsel.se/kontakt",
+    "h1": 1,
+    "ld": [],
+    "imgs": 2,
+    "alt": 0,
+    "words": 42,
+    "lang": "en",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "https://www.blomsel.se/elektriker-hisingen",
+    "title": "Elektriker Hisingen | Elfirma - Bloms El & Data",
+    "desc": "Elservice i Hisingen| Nyinstallation, ombyggnation, service och rådgivning - kort sagt allt man förväntar sig av en elektriker och ofta lite till.",
+    "canonical": "https://www.blomsel.se/elektriker-hisingen",
+    "h1": 1,
+    "ld": [
+     "Electrician"
+    ],
+    "imgs": 25,
+    "alt": 22,
+    "words": 691,
+    "lang": "en",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "https://www.blomsel.se/elektriker-i-partille",
+    "title": "Elektriker i Partille | Bloms El & Data",
+    "desc": "Elektriker och elinstallatör i Partille med lång och gedigen erfaranhet.",
+    "canonical": "https://www.blomsel.se/elektriker-i-partille",
+    "h1": 1,
+    "ld": [],
+    "imgs": 7,
+    "alt": 7,
+    "words": 199,
+    "lang": "en",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "https://www.blomsel.se/elektriker-kungsbacka",
+    "title": "Elektriker Kungsbacka | Elfirma - Bloms El & Data",
+    "desc": "Elservice i Kungsbacka | Nyinstallation, ombyggnation, service och rådgivning - kort sagt allt man förväntar sig av en elektriker och ofta lite till.",
+    "canonical": "https://www.blomsel.se/elektriker-kungsbacka",
+    "h1": 1,
+    "ld": [
+     "Electrician"
+    ],
+    "imgs": 25,
+    "alt": 22,
+    "words": 711,
+    "lang": "en",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "https://www.blomsel.se/elektriker-kungalv",
+    "title": "Elektriker Kungälv | Elfirma - Bloms El & Data",
+    "desc": "Elservice i Kungälv | Nyinstallation, ombyggnation, service och rådgivning - kort sagt allt man förväntar sig av en elektriker och ofta lite till.",
+    "canonical": "https://www.blomsel.se/elektriker-kungalv",
+    "h1": 1,
+    "ld": [
+     "Electrician"
+    ],
+    "imgs": 25,
+    "alt": 22,
+    "words": 764,
+    "lang": "en",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "https://www.blomsel.se/elektriker-vastra-frolunda",
+    "title": "Elektriker i Västra Frölunda| Bloms El & Data",
+    "desc": "Erfaren elektriker och elinstallatör i Västra Frölunda. Lång erfarenhet och mycket goda referenser.",
+    "canonical": "https://www.blomsel.se/elektriker-vastra-frolunda",
+    "h1": 1,
+    "ld": [],
+    "imgs": 7,
+    "alt": 7,
+    "words": 269,
+    "lang": "en",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "https://www.blomsel.se/elektriker-molndal",
+    "title": "Elektriker i Mölndal | Bloms El & Data",
+    "desc": "Elektriker och elinstallatör i Mölndal med lång och gedigen erfaranhet. ",
+    "canonical": "https://www.blomsel.se/elektriker-molndal",
+    "h1": 1,
+    "ld": [],
+    "imgs": 7,
+    "alt": 7,
+    "words": 245,
+    "lang": "en",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "https://www.blomsel.se/cookiepolicy",
+    "title": "cookiepolicy | bloms2",
+    "desc": "Sidan beskriver hur och varför Bloms El & Datas hemsida använder cookies. ",
+    "canonical": "https://www.blomsel.se/cookiepolicy",
+    "h1": 0,
+    "ld": [],
+    "imgs": 0,
+    "alt": 0,
+    "words": 558,
+    "lang": "en",
+    "og": true,
+    "faq": false,
+    "tel": true
+   }
+  ],
+  "new": [
+   {
+    "url": "http://127.0.0.1:8793/batterilager.html",
+    "title": "Batterilager för solceller i Göteborg | Bloms El & Data",
+    "desc": "Installation av batterilager för solcellsanläggningar i Göteborg. Lagra egen el, minska kostnaderna och få reservkraft vid strömavbrott.",
+    "canonical": "https://www.blomsel.se/batterilager.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList",
+     "Service",
+     "FAQPage"
+    ],
+    "imgs": 13,
+    "alt": 12,
+    "words": 372,
+    "lang": "sv",
+    "og": true,
+    "faq": true,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/belysning.html",
+    "title": "Belysning och ljusplanering i Göteborg | Bloms El & Data",
+    "desc": "Belysning för hem, butik, kontor och utemiljö. Ljusplanering, ljusberäkning, LED och styrning. Bloms El & Data i Göteborg.",
+    "canonical": "https://www.blomsel.se/belysning.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList",
+     "Service",
+     "FAQPage"
+    ],
+    "imgs": 13,
+    "alt": 12,
+    "words": 554,
+    "lang": "sv",
+    "og": true,
+    "faq": true,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/cookiepolicy.html",
+    "title": "Cookiepolicy | Bloms El & Data",
+    "desc": "Sidan beskriver hur och varför Bloms El & Datas hemsida använder cookies.",
+    "canonical": "https://www.blomsel.se/cookiepolicy.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList"
+    ],
+    "imgs": 1,
+    "alt": 0,
+    "words": 563,
+    "lang": "sv",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/datanat.html",
+    "title": "Datanät och nätverk i Göteborg | Bloms El & Data",
+    "desc": "Installation av datanät för hem, kontor och fastigheter i Göteborg. Nätverksuttag, kablage, nätverksskåp och trådlöst nätverk.",
+    "canonical": "https://www.blomsel.se/datanat.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList",
+     "Service",
+     "FAQPage"
+    ],
+    "imgs": 13,
+    "alt": 12,
+    "words": 488,
+    "lang": "sv",
+    "og": true,
+    "faq": true,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/dokumentation.html",
+    "title": "Elritningar och elsäkerhetsintyg | Bloms El & Data",
+    "desc": "Dokumentation av elinstallationer i Göteborg: elritningar, mätprotokoll, belysningsberäkningar och elsäkerhetsintyg.",
+    "canonical": "https://www.blomsel.se/dokumentation.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList",
+     "Service",
+     "FAQPage"
+    ],
+    "imgs": 12,
+    "alt": 11,
+    "words": 401,
+    "lang": "sv",
+    "og": true,
+    "faq": true,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/elbilsladdare.html",
+    "title": "Elbilsladdare | Bloms El | Göteborg",
+    "desc": "Vi monterar elbilsladdare och laddboxar för villor, bostadsrättsföreningar och företag i Göteborg, Partille, Mölndal och kranskommunerna.",
+    "canonical": "https://www.blomsel.se/elbilsladdare.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList"
+    ],
+    "imgs": 10,
+    "alt": 9,
+    "words": 687,
+    "lang": "sv",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/elcentral.html",
+    "title": "Byte av elcentral i Göteborg | Bloms El & Data",
+    "desc": "Byte av proppskåp till modern elcentral med automatsäkringar och jordfelsbrytare. Byte av gamla elsystem i villor och lägenheter.",
+    "canonical": "https://www.blomsel.se/elcentral.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList",
+     "Service",
+     "FAQPage"
+    ],
+    "imgs": 12,
+    "alt": 11,
+    "words": 455,
+    "lang": "sv",
+    "og": true,
+    "faq": true,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/elektriker-boras.html",
+    "title": "Elektriker i Borås | Bloms El & Data",
+    "desc": "Elektriker i Borås för privatpersoner, fastighetsägare och företag. Elservice, installation, laddboxar och solceller. Materialdepå i Borås.",
+    "canonical": "https://www.blomsel.se/elektriker-boras.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList",
+     "FAQPage"
+    ],
+    "imgs": 11,
+    "alt": 10,
+    "words": 346,
+    "lang": "sv",
+    "og": true,
+    "faq": true,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/elektriker-hisingen.html",
+    "title": "Elektriker Hisingen | Elfirma - Bloms El & Data",
+    "desc": "Elservice i Hisingen | Nyinstallation, ombyggnation, service och rådgivning - kort sagt allt man förväntar sig av en elektriker och ofta lite till.",
+    "canonical": "https://www.blomsel.se/elektriker-hisingen.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList"
+    ],
+    "imgs": 24,
+    "alt": 23,
+    "words": 793,
+    "lang": "sv",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/elektriker-i-partille.html",
+    "title": "Elektriker i Partille | Bloms El & Data",
+    "desc": "Elektriker och elinstallatör i Partille med lång och gedigen erfarenhet.",
+    "canonical": "https://www.blomsel.se/elektriker-i-partille.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList"
+    ],
+    "imgs": 12,
+    "alt": 11,
+    "words": 212,
+    "lang": "sv",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/elektriker-kungalv.html",
+    "title": "Elektriker Kungälv | Elfirma - Bloms El & Data",
+    "desc": "Elservice i Kungälv | Nyinstallation, ombyggnation, service och rådgivning - kort sagt allt man förväntar sig av en elektriker och ofta lite till.",
+    "canonical": "https://www.blomsel.se/elektriker-kungalv.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList"
+    ],
+    "imgs": 25,
+    "alt": 24,
+    "words": 753,
+    "lang": "sv",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/elektriker-kungsbacka.html",
+    "title": "Elektriker Kungsbacka | Elfirma - Bloms El & Data",
+    "desc": "Elservice i Kungsbacka | Nyinstallation, ombyggnation, service och rådgivning - kort sagt allt man förväntar sig av en elektriker och ofta lite till.",
+    "canonical": "https://www.blomsel.se/elektriker-kungsbacka.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList"
+    ],
+    "imgs": 24,
+    "alt": 23,
+    "words": 635,
+    "lang": "sv",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/elektriker-molndal.html",
+    "title": "Elektriker i Mölndal | Bloms El & Data",
+    "desc": "Elektriker och elinstallatör i Mölndal med lång och gedigen erfarenhet.",
+    "canonical": "https://www.blomsel.se/elektriker-molndal.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList"
+    ],
+    "imgs": 12,
+    "alt": 11,
+    "words": 245,
+    "lang": "sv",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/elektriker-vastra-frolunda.html",
+    "title": "Elektriker i Västra Frölunda | Bloms El & Data",
+    "desc": "Erfaren elektriker och elinstallatör i Västra Frölunda. Lång erfarenhet och mycket goda referenser.",
+    "canonical": "https://www.blomsel.se/elektriker-vastra-frolunda.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList"
+    ],
+    "imgs": 12,
+    "alt": 11,
+    "words": 224,
+    "lang": "sv",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/elservice-felsokning.html",
+    "title": "Elservice och felsökning i Göteborg | Bloms El & Data",
+    "desc": "Elservice, felsökning och reparationer i Göteborg. Säkringar som löser ut, jordfel, uttag och belysning som krånglar. Certifierade elektriker sedan 2008.",
+    "canonical": "https://www.blomsel.se/elservice-felsokning.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList",
+     "Service",
+     "FAQPage"
+    ],
+    "imgs": 13,
+    "alt": 12,
+    "words": 622,
+    "lang": "sv",
+    "og": true,
+    "faq": true,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/golvvarme.html",
+    "title": "Elektrisk golvvärme i Göteborg | Bloms El & Data",
+    "desc": "Installation av elektrisk golvvärme i badrum, kök och bostäder. Behöriga elektriker i Göteborg med omnejd.",
+    "canonical": "https://www.blomsel.se/golvvarme.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList",
+     "Service",
+     "FAQPage"
+    ],
+    "imgs": 12,
+    "alt": 11,
+    "words": 389,
+    "lang": "sv",
+    "og": true,
+    "faq": true,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/",
+    "title": "Elektriker Göteborg | Elfirma - Bloms El & Data",
+    "desc": "Elservice i Göteborg. Nyinstallation, ombyggnation, service och rådgivning - kort sagt allt man förväntar sig av en elektriker och ofta lite till.",
+    "canonical": "https://www.blomsel.se/",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList"
+    ],
+    "imgs": 23,
+    "alt": 22,
+    "words": 506,
+    "lang": "sv",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/industrielektriker.html",
+    "title": "Industrielektriker i Göteborg | Bloms El & Data",
+    "desc": "Industrielektriker i Göteborg: el och automation kring maskinparken, kraft, styrsystem och felsökning för att minimera driftstopp.",
+    "canonical": "https://www.blomsel.se/industrielektriker.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList",
+     "Service",
+     "FAQPage"
+    ],
+    "imgs": 12,
+    "alt": 11,
+    "words": 384,
+    "lang": "sv",
+    "og": true,
+    "faq": true,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/kok-och-badrum.html",
+    "title": "El i kök och badrum i Göteborg | Bloms El & Data",
+    "desc": "El vid renovering av kök och badrum i Göteborg: uttag, belysning, golvvärme och vitvaror. Certifierade elektriker med ROT-avdrag.",
+    "canonical": "https://www.blomsel.se/kok-och-badrum.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList",
+     "Service",
+     "FAQPage"
+    ],
+    "imgs": 12,
+    "alt": 11,
+    "words": 375,
+    "lang": "sv",
+    "og": true,
+    "faq": true,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/kontakt.html",
+    "title": "Kontakt | Göteborg | Bloms El Och Data",
+    "desc": "Kontakta Bloms El & Data, certifierad elektriker i Göteborg. Ring 0705-15 02 11 eller skicka en förfrågan, vi svarar normalt samma arbetsdag.",
+    "canonical": "https://www.blomsel.se/kontakt.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList"
+    ],
+    "imgs": 2,
+    "alt": 1,
+    "words": 122,
+    "lang": "sv",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/kraft.html",
+    "title": "Kraftinstallationer i Göteborg | Bloms El & Data",
+    "desc": "Kraftuttag, matning och kompletta elinstallationer för verkstad, industri, restaurang och hem i Göteborg.",
+    "canonical": "https://www.blomsel.se/kraft.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList",
+     "Service",
+     "FAQPage"
+    ],
+    "imgs": 12,
+    "alt": 11,
+    "words": 392,
+    "lang": "sv",
+    "og": true,
+    "faq": true,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/laddbox-brf.html",
+    "title": "Laddboxar för BRF och företag | Bloms El & Data",
+    "desc": "Laddinfrastruktur för bostadsrättsföreningar, samfälligheter och företag i Göteborg. Lastbalansering, debitering per användare och underhållsfri drift.",
+    "canonical": "https://www.blomsel.se/laddbox-brf.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList",
+     "Service",
+     "FAQPage"
+    ],
+    "imgs": 12,
+    "alt": 11,
+    "words": 357,
+    "lang": "sv",
+    "og": true,
+    "faq": true,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/nybyggnation-renovering.html",
+    "title": "El vid nybygge och renovering | Bloms El & Data",
+    "desc": "Elinstallation vid nybyggnation, tillbyggnad och renovering av villor, lägenheter och lokaler i Göteborg. Från ritning till dokumentation.",
+    "canonical": "https://www.blomsel.se/nybyggnation-renovering.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList",
+     "Service",
+     "FAQPage"
+    ],
+    "imgs": 12,
+    "alt": 11,
+    "words": 385,
+    "lang": "sv",
+    "og": true,
+    "faq": true,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/om-oss.html",
+    "title": "Om Bloms El & Data | Elektriker i Göteborg sedan 2008",
+    "desc": "Bloms El & Data AB är en elfirma i Göteborg som sedan 2008 utfört elarbeten åt privatpersoner, fastighetsägare och företag. Läs om oss och hur vi arbetar.",
+    "canonical": "https://www.blomsel.se/om-oss.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList"
+    ],
+    "imgs": 11,
+    "alt": 10,
+    "words": 311,
+    "lang": "sv",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/skattereduktion.html",
+    "title": "Rot och Grön Teknik | Bloms El & Data",
+    "desc": "Rotavdrag och skattereduktion för grön teknik. Bloms El & Data sköter pappersarbetet och drar av beloppet direkt på fakturan.",
+    "canonical": "https://www.blomsel.se/skattereduktion.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList"
+    ],
+    "imgs": 3,
+    "alt": 2,
+    "words": 333,
+    "lang": "sv",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/smart-teknik.html",
+    "title": "Smart Teknik | Bloms El & Data",
+    "desc": "Smarta lösningar för hem, kontor och jordbruk: självåterställande jordfelsbrytare, smart belysning och smart ljud från Bloms El & Data i Göteborg.",
+    "canonical": "https://www.blomsel.se/smart-teknik.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList"
+    ],
+    "imgs": 10,
+    "alt": 9,
+    "words": 708,
+    "lang": "sv",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/solceller.html",
+    "title": "Solceller | Solpaneler | Göteborg | Bloms El & Data",
+    "desc": "Vi installerar solceller och solpaneler i och kring Göteborg. Sänk dina elkostnader med ett klimatsmart val, med grön teknik-avdrag direkt på fakturan.",
+    "canonical": "https://www.blomsel.se/solceller.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList"
+    ],
+    "imgs": 9,
+    "alt": 8,
+    "words": 626,
+    "lang": "sv",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/tjanster.html",
+    "title": "Elektriker Göteborg | Tjänster | Bloms El & Data",
+    "desc": "Elektriker Göteborg, Installation, Service, Belysning, Kraft, Solceller, Elbilsladdning, Datanät, Nybyggnation",
+    "canonical": "https://www.blomsel.se/tjanster.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList"
+    ],
+    "imgs": 24,
+    "alt": 23,
+    "words": 379,
+    "lang": "sv",
+    "og": true,
+    "faq": false,
+    "tel": true
+   },
+   {
+    "url": "http://127.0.0.1:8793/vanliga-fragor.html",
+    "title": "Vanliga frågor om el och elektriker | Bloms El & Data",
+    "desc": "Svar på vanliga frågor om ROT-avdrag, grön teknik, elsäkerhet, laddboxar, solceller och vad du får göra själv. Bloms El & Data i Göteborg.",
+    "canonical": "https://www.blomsel.se/vanliga-fragor.html",
+    "h1": 1,
+    "ld": [
+     "Electrician",
+     "WebPage",
+     "BreadcrumbList",
+     "FAQPage"
+    ],
+    "imgs": 9,
+    "alt": 8,
+    "words": 190,
+    "lang": "sv",
+    "og": true,
+    "faq": true,
+    "tel": true
+   }
+  ]
+ },
+ "perf": [
+  {
+   "page": "start",
+   "old": {
+    "load": 12361,
+    "lcp": 8548,
+    "fcp": 872,
+    "cls": 0.112,
+    "tbt": 2048,
+    "reqs": 161,
+    "kb": 1922,
+    "jsKb": 1182
+   },
+   "new": {
+    "load": 4209,
+    "lcp": 1072,
+    "fcp": 1012,
+    "cls": 0.002,
+    "tbt": 202,
+    "reqs": 23,
+    "kb": 747,
+    "jsKb": 17
+   },
+   "runs": {
+    "old": [
+     {
+      "url": "https://www.blomsel.se/",
+      "load": 10375,
+      "lcp": 6964,
+      "fcp": 780,
+      "cls": 0.127,
+      "tbt": 1979,
+      "reqs": 157,
+      "kb": 1920,
+      "jsKb": 1183
+     },
+     {
+      "url": "https://www.blomsel.se/",
+      "load": 12361,
+      "lcp": 8712,
+      "fcp": 872,
+      "cls": 0.112,
+      "tbt": 2348,
+      "reqs": 161,
+      "kb": 1922,
+      "jsKb": 1182
+     },
+     {
+      "url": "https://www.blomsel.se/",
+      "load": 12459,
+      "lcp": 8548,
+      "fcp": 896,
+      "cls": 0.112,
+      "tbt": 2048,
+      "reqs": 161,
+      "kb": 1922,
+      "jsKb": 1182
+     }
+    ],
+    "new": [
+     {
+      "url": "http://127.0.0.1:8793/",
+      "load": 4184,
+      "lcp": 1048,
+      "fcp": 988,
+      "cls": 0.002,
+      "tbt": 202,
+      "reqs": 23,
+      "kb": 747,
+      "jsKb": 17
+     },
+     {
+      "url": "http://127.0.0.1:8793/",
+      "load": 4253,
+      "lcp": 1072,
+      "fcp": 1012,
+      "cls": 0.001,
+      "tbt": 194,
+      "reqs": 23,
+      "kb": 747,
+      "jsKb": 17
+     },
+     {
+      "url": "http://127.0.0.1:8793/",
+      "load": 4209,
+      "lcp": 1116,
+      "fcp": 1052,
+      "cls": 0.002,
+      "tbt": 222,
+      "reqs": 23,
+      "kb": 747,
+      "jsKb": 17
+     }
+    ]
+   }
+  },
+  {
+   "page": "elbilsladdare",
+   "old": {
+    "load": 10866,
+    "lcp": 728,
+    "fcp": 728,
+    "cls": 0.057,
+    "tbt": 1805,
+    "reqs": 132,
+    "kb": 1549,
+    "jsKb": 1008
+   },
+   "new": {
+    "load": 1457,
+    "lcp": 1048,
+    "fcp": 988,
+    "cls": 0.002,
+    "tbt": 176,
+    "reqs": 18,
+    "kb": 186,
+    "jsKb": 17
+   },
+   "runs": {
+    "old": [
+     {
+      "url": "https://www.blomsel.se/elbilsladdare",
+      "load": 10707,
+      "lcp": 772,
+      "fcp": 772,
+      "cls": 0.057,
+      "tbt": 1612,
+      "reqs": 132,
+      "kb": 1550,
+      "jsKb": 1008
+     },
+     {
+      "url": "https://www.blomsel.se/elbilsladdare",
+      "load": 10866,
+      "lcp": 716,
+      "fcp": 716,
+      "cls": 0.057,
+      "tbt": 1805,
+      "reqs": 131,
+      "kb": 1549,
+      "jsKb": 1009
+     },
+     {
+      "url": "https://www.blomsel.se/elbilsladdare",
+      "load": 11094,
+      "lcp": 728,
+      "fcp": 728,
+      "cls": 0.057,
+      "tbt": 2007,
+      "reqs": 132,
+      "kb": 1549,
+      "jsKb": 1008
+     }
+    ],
+    "new": [
+     {
+      "url": "http://127.0.0.1:8793/elbilsladdare.html",
+      "load": 1449,
+      "lcp": 1048,
+      "fcp": 988,
+      "cls": 0.002,
+      "tbt": 176,
+      "reqs": 18,
+      "kb": 186,
+      "jsKb": 17
+     },
+     {
+      "url": "http://127.0.0.1:8793/elbilsladdare.html",
+      "load": 1507,
+      "lcp": 1176,
+      "fcp": 1060,
+      "cls": 0.001,
+      "tbt": 256,
+      "reqs": 18,
+      "kb": 186,
+      "jsKb": 17
+     },
+     {
+      "url": "http://127.0.0.1:8793/elbilsladdare.html",
+      "load": 1457,
+      "lcp": 1044,
+      "fcp": 980,
+      "cls": 0.002,
+      "tbt": 167,
+      "reqs": 18,
+      "kb": 186,
+      "jsKb": 17
+     }
+    ]
+   }
+  },
+  {
+   "page": "kontakt",
+   "old": {
+    "load": 10433,
+    "lcp": 748,
+    "fcp": 748,
+    "cls": 0.047,
+    "tbt": 2180,
+    "reqs": 134,
+    "kb": 1502,
+    "jsKb": 1046
+   },
+   "new": {
+    "load": 1153,
+    "lcp": 1044,
+    "fcp": 972,
+    "cls": 0.001,
+    "tbt": 177,
+    "reqs": 14,
+    "kb": 126,
+    "jsKb": 17
+   },
+   "runs": {
+    "old": [
+     {
+      "url": "https://www.blomsel.se/kontakt",
+      "load": 11298,
+      "lcp": 708,
+      "fcp": 708,
+      "cls": 0.065,
+      "tbt": 3033,
+      "reqs": 134,
+      "kb": 1503,
+      "jsKb": 1047
+     },
+     {
+      "url": "https://www.blomsel.se/kontakt",
+      "load": 7849,
+      "lcp": 748,
+      "fcp": 748,
+      "cls": 0.046,
+      "tbt": 1690,
+      "reqs": 129,
+      "kb": 1500,
+      "jsKb": 1046
+     },
+     {
+      "url": "https://www.blomsel.se/kontakt",
+      "load": 10433,
+      "lcp": 792,
+      "fcp": 792,
+      "cls": 0.047,
+      "tbt": 2180,
+      "reqs": 134,
+      "kb": 1502,
+      "jsKb": 1046
+     }
+    ],
+    "new": [
+     {
+      "url": "http://127.0.0.1:8793/kontakt.html",
+      "load": 1149,
+      "lcp": 1020,
+      "fcp": 960,
+      "cls": 0.001,
+      "tbt": 147,
+      "reqs": 14,
+      "kb": 126,
+      "jsKb": 17
+     },
+     {
+      "url": "http://127.0.0.1:8793/kontakt.html",
+      "load": 1153,
+      "lcp": 1044,
+      "fcp": 972,
+      "cls": 0.001,
+      "tbt": 177,
+      "reqs": 14,
+      "kb": 126,
+      "jsKb": 17
+     },
+     {
+      "url": "http://127.0.0.1:8793/kontakt.html",
+      "load": 1233,
+      "lcp": 1096,
+      "fcp": 996,
+      "cls": 0.001,
+      "tbt": 183,
+      "reqs": 14,
+      "kb": 126,
+      "jsKb": 17
+     }
+    ]
+   }
+  }
+ ]
+}

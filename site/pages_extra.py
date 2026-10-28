@@ -93,7 +93,7 @@ PAGES = [
     # ------------------------------------------------------------------ DATANÄT
     {
         "slug": "datanat", "name": "Datanät", "parent": "tjanster",
-        "title": "Datanät och nätverksinstallation i Göteborg | Bloms El & Data",
+        "title": "Datanät och nätverk i Göteborg | Bloms El & Data",
         "desc": "Installation av datanät för hem, kontor och fastigheter i Göteborg. Nätverksuttag, kablage, nätverksskåp och trådlöst nätverk.",
         "hero": "datanat.jpg", "pos": "center",
         "eyebrow": "El och data", "h1": "Datanät för hem och företag",
@@ -197,7 +197,7 @@ PAGES = [
     # ------------------------------------------------------------------ ELCENTRAL
     {
         "slug": "elcentral", "name": "Elcentral & elbyte", "parent": "tjanster",
-        "title": "Byte av elcentral och gamla elsystem i Göteborg | Bloms El & Data",
+        "title": "Byte av elcentral i Göteborg | Bloms El & Data",
         "desc": "Byte av proppskåp till modern elcentral med automatsäkringar och jordfelsbrytare. Byte av gamla elsystem i villor och lägenheter.",
         "hero": "elskap.jpg", "pos": "center",
         "eyebrow": "Elcentral", "h1": "Byte av elcentral och gamla elsystem",
@@ -232,7 +232,7 @@ PAGES = [
     # ------------------------------------------------------------------ DOKUMENTATION
     {
         "slug": "dokumentation", "name": "Dokumentation & elsäkerhetsintyg", "parent": "tjanster",
-        "title": "Elritningar, mätprotokoll och elsäkerhetsintyg | Bloms El & Data",
+        "title": "Elritningar och elsäkerhetsintyg | Bloms El & Data",
         "desc": "Dokumentation av elinstallationer i Göteborg: elritningar, mätprotokoll, belysningsberäkningar och elsäkerhetsintyg.",
         "hero": "matning.jpg", "pos": "center",
         "eyebrow": "Dokumentation", "h1": "Dokumentation och elsäkerhetsintyg",
@@ -330,7 +330,7 @@ PAGES = [
     # ------------------------------------------------------------------ NYBYGGNATION
     {
         "slug": "nybyggnation-renovering", "name": "Nybyggnation & renovering", "parent": "tjanster",
-        "title": "El vid nybyggnation och renovering i Göteborg | Bloms El & Data",
+        "title": "El vid nybygge och renovering | Bloms El & Data",
         "desc": "Elinstallation vid nybyggnation, tillbyggnad och renovering av villor, lägenheter och lokaler i Göteborg. Från ritning till dokumentation.",
         "hero": "kabel.jpg", "pos": "center",
         "eyebrow": "Bygg och renovering", "h1": "Nybyggnation och renovering",
@@ -389,7 +389,7 @@ PAGES = [
     # ------------------------------------------------------------------ LADDBOX BRF
     {
         "slug": "laddbox-brf", "name": "Laddboxar för BRF & företag", "parent": "elbilsladdare",
-        "title": "Laddboxar för bostadsrättsföreningar och företag | Bloms El & Data",
+        "title": "Laddboxar för BRF och företag | Bloms El & Data",
         "desc": "Laddinfrastruktur för bostadsrättsföreningar, samfälligheter och företag i Göteborg. Lastbalansering, debitering per användare och underhållsfri drift.",
         "hero": "brf-laddare.jpg", "pos": "center",
         "eyebrow": "Elbilsladdning", "h1": "Laddboxar för BRF och företag",

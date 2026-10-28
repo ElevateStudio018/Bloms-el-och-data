@@ -27,6 +27,7 @@ Header always set Referrer-Policy "strict-origin-when-cross-origin"
 ExpiresActive On
 ExpiresByType image/jpeg "access plus 1 year"
 ExpiresByType image/png "access plus 1 year"
+ExpiresByType image/webp "access plus 1 year"
 ExpiresByType text/css "access plus 1 week"
 ExpiresByType application/javascript "access plus 1 week"
 </IfModule>

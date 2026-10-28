@@ -1,0 +1,223 @@
+<!doctype html><html lang="sv"><head><meta charset="utf-8"><title>Bloms El & Data – förslag från Elevate Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Hanken+Grotesk:wght@400;500;600;700&family=Mrs+Saint+Delafield&display=swap">
+<style>@page{size:A4;margin:0}
+:root{--accent:#1d3b2a;--accent-2:#2f6f4a;--cream:#fdfbf5;--cream-2:#f6f1e4;--mint:#e7efe9;--ink:#1f2622;--muted:#5f6b64;--line:#dfe6e1;
+  --sans:"Hanken Grotesk",system-ui,sans-serif;--serif:"Fraunces",Georgia,serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:#fff;color:var(--ink);font:10.2pt/1.55 var(--sans);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+p{margin:0 0 8px}
+h1,h2,h3{margin:0;font-weight:600}
+.page{width:210mm;height:297mm;padding:20mm 18mm 18mm;position:relative;overflow:hidden;break-after:page;background:#fff;display:flex;flex-direction:column;gap:12px}
+.page:last-child{break-after:auto}
+.pfoot{position:absolute;left:18mm;right:18mm;bottom:9mm;display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:7px;font-size:7.5pt;color:#6f7d74;letter-spacing:.02em}
+.eyebrow{font-size:7.8pt;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2);margin:0 0 6px}
+.eyebrow.light{color:#b9d3c2}
+.ph h1{font-family:var(--serif);font-size:23pt;line-height:1.12;color:var(--accent);letter-spacing:-.01em;max-width:150mm}
+.ph .lead{font-size:11pt;color:var(--muted);margin-top:8px;max-width:160mm}
+h3{font-size:11pt;color:var(--accent);margin:6px 0 6px}
+.src{font-size:7.4pt;color:#7b867f;margin-top:4px}
+.small{font-size:8pt;color:var(--muted)}
+.cap{font-size:8.5pt;color:var(--muted);margin-bottom:4px}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:10mm}
+.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:6mm}
+
+/* omslag */
+.cover{background:var(--accent);color:#fff;padding:18mm;gap:0}
+.cv-top{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.04em;font-size:11pt}
+.cv-top .mark{width:30px;color:#fff}
+.cv-main{margin-top:20mm}
+.cover h1{font-family:var(--serif);font-size:30pt;line-height:1.08;letter-spacing:-.015em;max-width:165mm}
+.cover .lead{font-size:12pt;color:#cfe0d5;margin-top:12px;max-width:140mm}
+.cv-price{display:flex;align-items:baseline;gap:12px;margin-top:14px}
+.cv-price b{font-family:var(--serif);font-size:34pt;color:#fff}
+.cv-price span{color:#cfe0d5;font-size:10.5pt}
+.cv-shots{position:relative;margin-top:12mm;height:92mm}
+.cv-shots .d{position:absolute;left:0;top:0;width:150mm;border-radius:8px;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.cv-shots .m{position:absolute;right:0;top:12mm;width:42mm;border-radius:14px;border:3px solid #0c1a12;box-shadow:0 18px 40px rgba(0,0,0,.4)}
+.cv-foot{margin-top:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:6mm;border-top:1px solid rgba(255,255,255,.2);padding-top:6mm;font-size:9pt}
+.cv-foot small{display:block;color:#9fbfab;font-size:7.5pt;text-transform:uppercase;letter-spacing:.12em;margin-bottom:2px}
+
+/* listor */
+ul.chk{list-style:none;margin:0 0 10px;padding:0}
+ul.chk li{position:relative;padding-left:20px;margin-bottom:6px}
+ul.chk li::before{content:"✓";position:absolute;left:0;top:0;color:var(--accent-2);font-weight:700}
+ul.chk.neg li::before{content:"!";color:#a4452a;font-weight:800;left:4px}
+.pricebox{background:var(--mint);border-radius:10px;padding:8mm 7mm;display:flex;flex-direction:column;gap:10px}
+.pb-row{display:grid;grid-template-columns:36mm 1fr;gap:8px;align-items:baseline;border-bottom:1px solid #cfdcd3;padding-bottom:9px}
+.pb-row b{font-family:var(--serif);font-size:14pt;color:var(--accent);white-space:nowrap}
+.pb-row span{font-size:9pt}
+.pb-note{font-size:8.6pt;color:var(--muted)}
+.pb-big{font-family:var(--serif);font-size:13pt;line-height:1.3;color:var(--accent);margin-top:auto}
+
+/* statistik */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:4mm}
+.stat{background:var(--cream-2);border-radius:10px;padding:5mm 4.5mm;display:flex;flex-direction:column}
+.stat b{font-family:var(--serif);font-size:24pt;color:var(--accent);line-height:1}
+.stat p{font-size:8.6pt;margin:6px 0}
+.stat small{font-size:7pt;color:#7b867f;margin-top:auto}
+.callout{background:var(--mint);border-left:4px solid var(--accent);padding:4mm 5mm;border-radius:0 8px 8px 0;font-size:9.4pt}
+.callout .src{display:block}
+.callout.big{font-size:11pt}
+.callout.big b{font-family:var(--serif);font-size:13pt;color:var(--accent);margin-right:4px}
+.box{background:var(--cream-2);border-radius:10px;padding:5mm}
+.legend{display:flex;gap:16px;font-size:8.5pt;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+
+/* diagram */
+.chart{width:100%;height:auto;display:block;font-family:var(--sans)}
+.chart .lab{font-size:12px;fill:var(--ink)}
+.chart .lab.b{font-weight:700}
+.chart .val{font-size:12px;font-weight:700;fill:var(--ink)}
+.chart .tick{font-size:10px;fill:#7b867f}
+.chart .mid{text-anchor:middle}
+.chart .track{fill:#f0f3f1}
+.chart .axis{stroke:#c9d6cd;stroke-width:1}
+.chart .grid{stroke:#e8ede9;stroke-width:1}
+
+/* tabeller */
+table.t{width:100%;border-collapse:collapse;font-size:8.8pt}
+table.t th{text-align:left;background:var(--mint);color:var(--accent);font-weight:700;padding:6px 8px}
+table.t td{padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+table.t td.no{color:#a4452a;font-weight:700}
+table.t.cmp td:nth-child(2){color:var(--muted)}
+table.t.pk th:not(:first-child),table.t.pk td:not(:first-child){text-align:center;width:28mm}
+table.t.pk th b{font-family:var(--serif);font-size:13pt}
+table.t td.y{color:var(--accent-2);font-weight:800}
+table.t td.n{color:#b6bdb8}
+
+/* funktioner */
+.feat{display:grid;grid-template-columns:78mm 1fr;gap:6mm;align-items:center}
+.feat img{width:100%;border-radius:8px;border:1px solid var(--line);box-shadow:0 6px 18px rgba(20,40,30,.1)}
+.feat p{font-size:9.2pt}
+
+/* rangordning */
+ol.rank{margin:0;padding:0;list-style:none;counter-reset:r}
+ol.rank li{counter-increment:r;position:relative;padding:0 0 7px 30px;font-size:9pt;color:var(--muted)}
+ol.rank li b{display:block;color:var(--ink);font-size:9.6pt}
+ol.rank li::before{content:counter(r);position:absolute;left:0;top:1px;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-size:8.5pt;font-weight:700;display:grid;place-items:center}
+
+/* källor och avslut */
+ol.sources{margin:0;padding-left:18px;font-size:9pt}
+ol.sources li{margin-bottom:5px}
+ol.sources small{display:block;color:#7b867f;font-size:7.6pt}
+.end{margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:10mm;align-items:end;border-top:1px solid var(--line);padding-top:8mm}
+.end>p{font-family:var(--serif);font-size:13pt;color:var(--accent);line-height:1.35}
+.sign p{margin:0 0 4px}
+.script{font-family:"Mrs Saint Delafield",cursive;font-size:34pt;line-height:1;color:var(--accent);margin:4px 0!important}
+
+/* offert (samma mall som elevatestudio.nu/avtal, cqw = % av bladets bredd) */
+.agr__sheet{width:210mm;height:297mm;container-type:inline-size;display:flex;flex-direction:column;break-after:page;background:#fff;overflow:hidden}
+.offer .agr__sheet:last-child{break-after:auto}
+body>.offer:not(:last-child) .agr__sheet:last-child{break-after:page}
+.agr__sheet *{letter-spacing:0}
+.agr__top{display:flex;align-items:center;gap:2.6cqw;padding:7.6cqw 9.4cqw 6.4cqw;background:var(--accent);color:#fff}
+.agr__top .mark{width:6.4cqw;flex:none;color:#fff}
+.agr__brand{margin:0;font-size:3.5cqw;font-weight:700;line-height:1;letter-spacing:.02em}
+.agr__sub{margin:1.4cqw 0 0;font-size:1.55cqw;letter-spacing:.02em}
+.agr__body{flex:1;padding:4.2cqw 9.4cqw 0;font-size:1.52cqw;line-height:1.52}
+.agr__body p{margin:0 0 .9cqw}
+.agr__meta{display:flex;gap:6cqw;align-items:baseline;margin-bottom:2.4cqw}
+.agr__meta p{margin:0;font-size:1.6cqw}
+.agr__body .agr__no{font-size:2cqw;font-weight:700;color:var(--accent)}
+.agr__body h2{margin:2.6cqw 0 1.1cqw;font-size:2.1cqw;font-weight:700;line-height:1.3;color:var(--accent)}
+.agr__body .agr__lead{margin-top:1.3cqw;margin-bottom:.6cqw;font-weight:700}
+.agr__body ul{margin:0;padding:0 0 0 1.4cqw;list-style:none}
+.agr__body li{margin-bottom:.6cqw;padding-left:1.6cqw;text-indent:-1.6cqw}
+.agr__body li::before{content:"•";display:inline-block;width:1.6cqw;text-indent:0}
+.agr__body table{width:100%;margin:0 0 3.4cqw;border-collapse:collapse;font-size:1.6cqw}
+.agr__body th,.agr__body td{padding:2.4cqw 2cqw;text-align:left;border-bottom:1px solid #dfe6e1}
+.agr__body th:last-child,.agr__body td:last-child{width:28%}
+.agr__body thead th{background:var(--mint);font-weight:700;color:var(--accent)}
+.agr__body tfoot td{background:var(--mint);font-weight:700;color:var(--accent);border-bottom:0}
+.agr__body blockquote{margin:2.2cqw 0 3.2cqw;padding:2.4cqw 2.6cqw;border-left:.6cqw solid var(--accent);background:var(--mint)}
+.agr__sig{display:grid;grid-template-columns:1fr 1fr;gap:6cqw;margin-top:5cqw;align-items:end}
+.agr__sig .script{font-size:5.4cqw}
+.agr__sig .line{border-bottom:1px solid #9aa79f;height:5.4cqw;margin-bottom:1.2cqw!important}
+.agr__sig p{font-size:1.5cqw}
+.agr__foot{display:flex;justify-content:space-between;margin:0 9.4cqw;padding:2cqw 0 5.6cqw;border-top:1px solid #c9d6cd;font-size:1.3cqw;color:#6f7d74}
+
+ol.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:4mm;counter-reset:s}
+ol.steps li{counter-increment:s;background:var(--cream-2);border-radius:10px;padding:4mm;font-size:8.6pt;color:var(--muted)}
+ol.steps li::before{content:counter(s);display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:9pt;margin-bottom:6px}
+ol.steps b{display:block;color:var(--ink);font-size:9.4pt;margin-bottom:2px}
+</style></head><body><section class="page cover">
+<div class="cv-top"><svg class="mark" viewBox="0 0 1884.3 1353.9" aria-hidden="true"><path d="M0.0 1353.9 L1218.7 0.0 L1218.7 329.1 L479.7 1136.4 L786.7 1132.4 L1215.5 687.4 L1884.3 1349.9 L1590.1 1349.9 L1218.6 994.7 L865.4 1349.9Z" fill="currentColor"/></svg><span>ELEVATE STUDIO</span></div>
+<div class="cv-main"><p class="eyebrow light">Förslag till Bloms El &amp; Data AB</p>
+<h1>En ny hemsida som syns på Google och i AI-svar, och som får fler att höra av sig.</h1>
+<p class="lead">29 sidor, egen adminpanel, förfrågningsinkorg och AI-assistent. Byggd för sökmotorer och AI från grunden.</p>
+<div class="cv-price"><b>3 000 kr</b><span>allt ovan, fast pris exkl. moms</span></div></div>
+<div class="cv-shots"><img class="d" src="img/ny-desktop.png" alt=""><img class="m" src="img/ny-mobil.png" alt=""></div>
+<div class="cv-foot"><div><small>Till</small>Rustan Blom, Bloms El &amp; Data AB</div><div><small>Från</small>Isak Mattsson, Elevate Studio</div><div><small>Datum</small>28 oktober 2026</div><div><small>Giltigt till</small>10 december 2026</div></div>
+</section><section class="page "><header class="ph"><p class="eyebrow">Sammanfattning</p><h1>Det här är förslaget på en sida</h1></header><div class="cols2"><div>
+<h3>Vad vi har sett</h3>
+<ul class="chk neg"><li>blomsel.se syntes inte i någon av fem typiska kundsökningar vi testade, inte ens på företagsnamnet.</li>
+<li>Startsidan laddar 1,9 MB och 161 filer på mobilen. Det tar 8,5 sekunder innan huvudinnehållet syns och 12,4 sekunder innan sidan är färdig.</li>
+<li>Sajten har 14 sidor och saknar egna sidor för de flesta tjänsterna. Google rankar lokala företag högre när varje tjänst har en egen sida.</li>
+<li>Filen som AI-tjänster läser presenterar företaget som "bloms2".</li></ul>
+<h3>Vad ni får</h3>
+<ul class="chk"><li>Ny webbplats med 29 sidor, en per tjänst och område, i Bloms färger och typsnitt.</li>
+<li>Nya startsidan i samma test: huvudinnehållet syns efter 1,1 sekunder och sidan är färdig efter 4,2. Den väger 0,7 MB.</li>
+<li>Adminpanel där ni själva ändrar allt och publicerar direkt.</li>
+<li>Inkorg för förfrågningar och en AI som kan fixa ändringar åt er.</li>
+<li>SEO och AI-optimering inbyggt från start.</li></ul>
+</div><div class="pricebox">
+<p class="eyebrow">Pris, exkl. moms</p>
+<div class="pb-row"><b>3 000 kr</b><span>Ny webbplats, adminpanel, inkorg, AI-assistent, grundläggande SEO och enkel AIO</span></div>
+<div class="pb-row"><b>+4 000 kr</b><span>Tillval: avancerad SEO och AIO (7 000 kr totalt)</span></div>
+<div class="pb-row"><b>99 kr/mån</b><span>Tillval: löpande underhåll, nya sektioner och ombyggnationer</span></div>
+<p class="pb-note">Ni behåller domänen och webbhotellet. Vi driftsätter före 7 december, när bindningstiden för nuvarande abonnemang går ut. Erbjudandet gäller till 10 december 2026.</p>
+<p class="pb-big">En enda extra laddbox- eller elcentralsorder betalar hela paketet, ofta flera gånger om.</p>
+</div></div>
+<h3>Så går bytet till</h3><ol class="steps"><li><b>Ni godkänner offerten</b>senast 10 december 2026, genom att svara på mejlet</li><li><b>Vi får åtkomst</b>till webbhotellet och domänen</li><li><b>Vi driftsätter</b>och kopplar om. Gamla adresser vidarekopplas så att Google-länkar fungerar</li><li><b>Ni säger upp Wix</b>innan bindningstiden går ut 7 december</li></ol><footer class="pfoot"><span>BLOMS EL &amp; DATA  |  FÖRSLAG FRÅN ELEVATE STUDIO</span><span>2</span></footer></section><section class="page "><header class="ph"><p class="eyebrow">Hur kunderna letar 2026</p><h1>Kunderna frågar Google, och allt oftare en AI</h1><p class=lead>Den som behöver en elektriker googlar, läser omdömen och frågar i allt högre grad ChatGPT eller Googles AI-översikt. Siffrorna nedan är från de senaste mätningarna.</p></header><div class="stats"><div class="stat"><b>62 %</b><p>av svenska internetanvändare använder AI-tjänster. 52 % använder ChatGPT.</p><small>Internetstiftelsen, Svenskarna och internet 2026</small></div><div class="stat"><b>71 %</b><p>använder Googles AI-översikter, alltså de AI-svar som visas överst i Google.</p><small>Internetstiftelsen, Svenskarna och internet 2026</small></div><div class="stat"><b>97 %</b><p>läser omdömen innan de väljer ett lokalt företag. 68 % väljer bara företag med minst 4 stjärnor.</p><small>BrightLocal, Local Consumer Review Survey 2026</small></div><div class="stat"><b>57 %</b><p>av trafiken på svenska webbplatser kommer från mobilen.</p><small>StatCounter, september 2026</small></div></div><div class="cols2"><div><h3>Bara toppen får klicken</h3><p class="cap">Andel av klicken i Googles sökresultat</p><svg class="chart" viewBox="0 0 420 102" role="img"><text x="0" y="21.0" class="lab">Plats 1</text><rect x="150" y="7" width="200" height="20" rx="4" class="track"/><rect x="150" y="7" width="92.0" height="20" rx="4" fill="#2f6f4a"/><text x="250.0" y="21.0" class="val">27,6 %</text><text x="0" y="55.0" class="lab">Plats 1–3 tillsammans</text><rect x="150" y="41" width="200" height="20" rx="4" class="track"/><rect x="150" y="41" width="181.3" height="20" rx="4" fill="#2f6f4a"/><text x="339.3" y="55.0" class="val">54,4 %</text><text x="0" y="89.0" class="lab">Hela sida 2</text><rect x="150" y="75" width="200" height="20" rx="4" class="track"/><rect x="150" y="75" width="2.1" height="20" rx="4" fill="#2f6f4a"/><text x="160.1" y="89.0" class="val">0,6 %</text></svg><p class="src">Backlinko, 4 miljoner sökresultat (uppdaterad 2025)</p></div><div><h3>AI-svaret blir nya förstaplatsen</h3><p>När Google visar en AI-översikt klickar folk på ett vanligt resultat i 8 % av fallen, mot 15 % utan. Företag som nämns i AI-svaret får 35 % fler klick.</p><p>Det betyder att det inte räcker att finnas med. Man måste vara det svar Google och AI-tjänsterna väljer att visa.</p><p class="src">Pew Research Center 2025 · Seer Interactive 2025</p></div></div><div class="callout"><b>Google om lokal ranking:</b> resultaten bygger på relevans, avstånd och hur framträdande företaget är. "Fler omdömen och positiva betyg kan hjälpa företagets lokala ranking." <span class="src">Google Företagsprofil, hjälpcenter</span></div><footer class="pfoot"><span>BLOMS EL &amp; DATA  |  FÖRSLAG FRÅN ELEVATE STUDIO</span><span>3</span></footer></section><section class="page "><header class="ph"><p class="eyebrow">Test 1 och 2: synlighet och SEO</p><h1>Så syns blomsel.se i dag</h1><p class=lead>Vi testade fem sökningar som kunder gör och gick igenom alla sidor på nuvarande och nya sajten med samma verktyg.</p></header><h3>Syns blomsel.se när kunden söker?</h3><table class="t"><thead><tr><th>Sökning</th><th>Syns</th><th>Vad som syns i stället</th></tr></thead><tbody><tr><td>elektriker Göteborg</td><td class='no'>Nej</td><td>Reco, Eniro, jobbannonser</td></tr><tr><td>installera laddbox villa Göteborg</td><td class='no'>Nej</td><td>Göteborg Laddbox (258 omdömen), El-Fast (435 omdömen)</td></tr><tr><td>byta elcentral Göteborg pris</td><td class='no'>Nej</td><td>Byggahus forum, Offerta</td></tr><tr><td>elektriker Mölndal</td><td class='no'>Nej</td><td>Trustpilot, Reco, Fässbergs El</td></tr><tr><td>Bloms El &amp; Data Göteborg</td><td class='no'>Nej</td><td>Andra företag med liknande namn</td></tr></tbody></table>
+<p class="src">Test 28 oktober 2026 i ett webbsökindex (inte Google.se, så det är en indikation). Sajterna som syns har gemensamt många omdömen och en egen sida per tjänst.</p>
+<h3>Teknisk SEO, sida för sida</h3><table class="t cmp"><thead><tr><th>Mått</th><th>Nuvarande</th><th>Nya sajten</th></tr></thead><tbody><tr><td>Antal sidor</td><td>14</td><td><b>29</b></td></tr><tr><td>Egna sidor per tjänst</td><td>3</td><td><b>15</b></td></tr><tr><td>Egna sidor per område</td><td>6</td><td><b>7</b></td></tr><tr><td>Sidor med strukturerad data (schema)</td><td>4 av 14</td><td><b>29 av 29</b></td></tr><tr><td>Sidor med vanliga frågor som Google kan läsa</td><td>0 av 14</td><td><b>14 av 29</b></td></tr><tr><td>Rätt längd på titel och beskrivning</td><td>9 av 14</td><td><b>29 av 29</b></td></tr><tr><td>Bilder med alt-text</td><td>89 %</td><td><b>92 %</b></td></tr><tr><td>Ord text totalt (det Google och AI läser)</td><td>6 555</td><td><b>12 807</b></td></tr><tr><td>llms.txt för AI-tjänster</td><td>"bloms2", 1 länk</td><td><b>Bloms El &amp; Data, alla sidor</b></td></tr></tbody></table>
+<p class="src">Uppmätt med Chromium på alla 14 sidor på blomsel.se och alla 29 sidor på nya sajten, 28 oktober 2026. Wix sköter en del teknisk SEO bra, till exempel kanoniska adresser. Den stora skillnaden är innehållet: dubbelt så mycket text, en sida per tjänst och vanliga frågor.</p><footer class="pfoot"><span>BLOMS EL &amp; DATA  |  FÖRSLAG FRÅN ELEVATE STUDIO</span><span>4</span></footer></section><section class="page "><header class="ph"><p class="eyebrow">Test 3: hastighet på mobilen</p><h1>Nya sajten är färdig på en bråkdel av tiden</h1><p class=lead>Vi mätte tre sidor på nuvarande och nya sajten i samma test: en vanlig mobil med långsam 4G-uppkoppling, tre mätningar per sida. Diagrammen visar startsidan.</p></header><div class="cols3"><div><h3>Tid tills sidan är färdig</h3><svg class="chart" viewBox="0 0 300 170" role="img"><line x1="20" x2="280" y1="144" y2="144" class="axis"/><path d="M50,144 V29.999999999999986 q0,-4 4,-4 h66 q4,0 4,4 V144 Z" fill="#b3aa9c"/><text x="87.0" y="17.999999999999986" class="val mid">12,4 s</text><text x="87.0" y="164" class="lab mid">Nuvarande</text><path d="M170,144 V107.8202410808187 q0,-4 4,-4 h66 q4,0 4,4 V144 Z" fill="#2f6f4a"/><text x="207.0" y="95.8202410808187" class="val mid">4,2 s</text><text x="207.0" y="164" class="lab mid">Nya</text></svg></div><div><h3>Data som laddas</h3><svg class="chart" viewBox="0 0 300 170" role="img"><line x1="20" x2="280" y1="144" y2="144" class="axis"/><path d="M50,144 V30.0 q0,-4 4,-4 h66 q4,0 4,4 V144 Z" fill="#b3aa9c"/><text x="87.0" y="18.0" class="val mid">1,9 MB</text><text x="87.0" y="164" class="lab mid">Nuvarande</text><path d="M170,144 V102.13839750260146 q0,-4 4,-4 h66 q4,0 4,4 V144 Z" fill="#2f6f4a"/><text x="207.0" y="90.13839750260146" class="val mid">0,7 MB</text><text x="207.0" y="164" class="lab mid">Nya</text></svg></div><div><h3>Tid då mobilen inte svarar</h3><svg class="chart" viewBox="0 0 300 170" role="img"><line x1="20" x2="280" y1="144" y2="144" class="axis"/><path d="M50,144 V30.0 q0,-4 4,-4 h66 q4,0 4,4 V144 Z" fill="#b3aa9c"/><text x="87.0" y="18.0" class="val mid">2,0 s</text><text x="87.0" y="164" class="lab mid">Nuvarande</text><path d="M170,144 V136.361328125 q0,-4 4,-4 h66 q4,0 4,4 V144 Z" fill="#2f6f4a"/><text x="207.0" y="124.361328125" class="val mid">0,2 s</text><text x="207.0" y="164" class="lab mid">Nya</text></svg></div></div><div class="legend"><span><i style="background:#b3aa9c"></i>Nuvarande blomsel.se</span><span><i style="background:#2f6f4a"></i>Nya sajten</span></div><table class="t"><thead><tr><th>Sida</th><th>Innehållet syns, nu</th><th>Syns, ny</th><th>Färdig, nu</th><th>Färdig, ny</th><th>Data, nu</th><th>Data, ny</th></tr></thead><tbody><tr><td>Startsida</td><td>8,5 s</td><td><b>1,1 s</b></td><td>12,4 s</td><td><b>4,2 s</b></td><td>1 922 kB</td><td><b>747 kB</b></td></tr><tr><td>Elbilsladdare</td><td>0,7 s</td><td><b>1,0 s</b></td><td>10,9 s</td><td><b>1,5 s</b></td><td>1 549 kB</td><td><b>186 kB</b></td></tr><tr><td>Kontakt</td><td>0,7 s</td><td><b>1,0 s</b></td><td>10,4 s</td><td><b>1,2 s</b></td><td>1 502 kB</td><td><b>126 kB</b></td></tr></tbody></table><p class="small">Ärligt sagt: på undersidorna visar Wix första texten något snabbare (0,7 s mot 1,0 s), men sidan laddar sedan vidare i över 10 sekunder och mobilen svarar trögt under tiden. På startsidan syns innehållet 8 gånger snabbare på nya sajten.</p><p class="src">Chromium, mobil 412x823, nätverk 150 ms RTT / 1,6 Mbit/s, CPU 4x långsammare, cache av, median av 3 körningar. Nuvarande sajt mätt live på blomsel.se. Nya sajten mätt på en testserver utan komprimering med samma nätverksbegränsning, så på webbhotellet blir den något snabbare. "Innehållet syns" är Largest Contentful Paint, Googles mått, där under 2,5 s räknas som bra. "Mobilen svarar inte" är Total Blocking Time.</p><div class="callout"><b>Varför det spelar roll:</b> när en mobilsajt blev 0,1 sekund snabbare ökade andelen som skickade in ett kontaktformulär med 21,6 %. <span class="src">Google och Deloitte, Milliseconds Make Millions (37 varumärken, 30 miljoner besök)</span></div><footer class="pfoot"><span>BLOMS EL &amp; DATA  |  FÖRSLAG FRÅN ELEVATE STUDIO</span><span>5</span></footer></section><section class="page "><header class="ph"><p class="eyebrow">Det här ingår för 3 000 kr</p><h1>En komplett hemsida, inte bara en mall</h1></header><div class="feat"><img src="img/ny-desktop.png" alt=""><div><h3>Ny webbplats med 29 sidor</h3><p>Startsida, en egen sida för varje tjänst (laddbox, solceller, elcentral, belysning, datanät, kraft, golvvärme, kök och badrum, batterilager med flera), sidor för varje område från Mölndal till Borås, om oss, vanliga frågor och kontakt. Samma röda färg och Poppins som i dag, i en modernare form.</p></div></div>
+<div class="feat"><img src="img/admin-inkorg.png" alt=""><div><h3>Förfrågningsinkorg</h3><p>Allt som kommer in via kontaktformuläret hamnar i adminpanelen och mejlas till er. Markera som kontaktad, offert skickad, vunnen eller förlorad, skriv anteckningar och se ordervärdet. Ring eller svara med ett klick.</p></div></div>
+<div class="feat"><img src="img/admin-ai.png" alt=""><div><h3>AI som fixar saker</h3><p>Skriv "byt telefonnummer på hela sajten" eller "gör texten om laddboxar mer säljande". AI:n läser sidorna, gör ändringen och visar vad den gjort. Ni granskar och publicerar med ett klick, eller ångrar.</p></div></div>
+<div class="feat"><img src="img/admin-publicera.png" alt=""><div><h3>Adminpanel som sparar direkt</h3><p>Klicka på en text på sajten och skriv. Byt bilder, SEO-texter, telefonnummer, färger och typsnitt. Publicera direkt, utan filer att ladda upp. Alla tidigare versioner sparas och kan återställas.</p></div></div><footer class="pfoot"><span>BLOMS EL &amp; DATA  |  FÖRSLAG FRÅN ELEVATE STUDIO</span><span>6</span></footer></section><section class="page "><header class="ph"><p class="eyebrow">Paketen</p><h1>Välj nivå</h1><p class=lead>Grundpaketet ger en sajt som är tekniskt rätt byggd för Google och AI. Det avancerade paketet gör jobbet utanför sajten som avgör den lokala rankingen.</p></header><table class="t pk"><thead><tr><th></th><th>Grund<br><b>3 000 kr</b></th><th>Avancerad<br><b>7 000 kr</b></th></tr></thead><tbody><tr><td>Ny webbplats, 29 sidor, mobilanpassad</td><td class="y">✓</td><td class="y">✓</td></tr><tr><td>Adminpanel, förfrågningsinkorg och AI-assistent</td><td class="y">✓</td><td class="y">✓</td></tr><tr><td>Titlar, beskrivningar, sitemap och alt-texter</td><td class="y">✓</td><td class="y">✓</td></tr><tr><td>Strukturerad data: företag, tjänster, vanliga frågor</td><td class="y">✓</td><td class="y">✓</td></tr><tr><td>Vidarekoppling från gamla adresser, så att Google-länkar fungerar</td><td class="y">✓</td><td class="y">✓</td></tr><tr><td>llms.txt och faktasidor för AI-tjänster</td><td class="y">✓</td><td class="y">✓</td></tr><tr><td>Sökordsanalys och finjustering av varje sida</td><td class="n">–</td><td class="y">✓</td></tr><tr><td>Google Företagsprofil: kategori, tjänster, bilder och områden</td><td class="n">–</td><td class="y">✓</td></tr><tr><td>Samma uppgifter i Hitta, Eniro, Reco, Bing och Apple Kartor</td><td class="n">–</td><td class="y">✓</td></tr><tr><td>Enkelt flöde för att be kunder om omdömen</td><td class="n">–</td><td class="y">✓</td></tr><tr><td>Google Search Console och Bing Webmaster</td><td class="n">–</td><td class="y">✓</td></tr><tr><td>AI-synlighetstest före och efter, rapport efter tre månader</td><td class="n">–</td><td class="y">✓</td></tr></tbody></table>
+<div class="cols2"><div class="box"><h3>Löpande underhåll, 99 kr/mån</h3><p>Uppdateringar av hemsidan, nya sektioner och omfattande ombyggnationer när ni behöver dem. Tillval till båda paketen.</p></div>
+<div class="box"><h3>Jämfört med marknaden</h3><p>Grundläggande SEO kostar normalt 3 000–5 000 kr i månaden och löpande optimering 5 000–15 000 kr i månaden. Det avancerade paketet är en engångskostnad på 4 000 kr.</p><p class="src">Offerta, Vad kostar sökmotoroptimering, 2025</p></div></div>
+<p class="small">Alla priser exklusive moms.</p><footer class="pfoot"><span>BLOMS EL &amp; DATA  |  FÖRSLAG FRÅN ELEVATE STUDIO</span><span>7</span></footer></section><section class="page "><header class="ph"><p class="eyebrow">Ärligt svar</p><h1>Är avancerat värt 4 000 kr?</h1><p class=lead>Ja, för ett lokalt elföretag är det de här åtgärderna som påverkar rankingen mest, och priset motsvarar ungefär en månads billigaste SEO-abonnemang. Men det finns saker ingen kan lova.</p></header><div class="cols2"><div><h3>Det som påverkar lokal ranking mest</h3><ol class="rank"><li><b>Google Företagsprofil</b>rätt kategori, komplett, bilder</li><li><b>Kundomdömen</b>antal, hur nya de är och att ni svarar</li><li><b>En sida per tjänst och område</b>den viktigaste faktorn på själva sajten</li><li><b>Samma uppgifter i alla kataloger</b>namn, adress, telefon</li><li><b>Snabb mobilsajt</b>finns redan i grundpaketet</li></ol><p class="src">Google Företagsprofil hjälpcenter · Whitespark, Local Search Ranking Factors 2026</p></div>
+<div><h3>Det vi inte lovar</h3><ul class="chk neg"><li>En viss placering. Ingen kan garantera plats 1 hos Google.</li><li>Ett visst antal förfrågningar.</li><li>Att ChatGPT eller Google nämner er. Det går att påverka men inte styra.</li></ul>
+<h3>När det märks</h3><p>Google Företagsprofil och omdömen brukar ge effekt inom några veckor. Placeringen i vanliga sökresultat tar normalt 3–6 månader.</p></div></div>
+<h3>Räkneexempel: vad fler förfrågningar kan vara värda per år</h3><p class="cap">Extra omsättning per år med 30–50 % av förfrågningarna till order och ett snittjobb på 15 000 kr</p><svg class="chart" viewBox="0 0 640 162" role="img"><line x1="170.0" x2="170.0" y1="0" y2="140" class="grid"/><text x="170.0" y="156" class="tick mid">0</text><line x1="250.4" x2="250.4" y1="0" y2="140" class="grid"/><text x="250.4" y="156" class="tick mid">250 tkr</text><line x1="330.7" x2="330.7" y1="0" y2="140" class="grid"/><text x="330.7" y="156" class="tick mid">500 tkr</text><line x1="411.1" x2="411.1" y1="0" y2="140" class="grid"/><text x="411.1" y="156" class="tick mid">750 tkr</text><line x1="491.4" x2="491.4" y1="0" y2="140" class="grid"/><text x="491.4" y="156" class="tick mid">1 000 tkr</text><line x1="571.8" x2="571.8" y1="0" y2="140" class="grid"/><text x="571.8" y="156" class="tick mid">1 250 tkr</text><text x="0" y="20" class="lab b">Försiktigt</text><text x="0" y="36" class="tick">+1–2 förfrågningar/mån</text><rect x="189.3" y="12" width="38.6" height="16" rx="4" fill="#2f6f4a"/><text x="235.9" y="25" class="val" text-anchor="start">60–180 tkr</text><text x="0" y="66" class="lab b">Medel</text><text x="0" y="82" class="tick">+3–6 förfrågningar/mån</text><rect x="221.4" y="58" width="122.1" height="16" rx="4" fill="#2f6f4a"/><text x="351.6" y="71" class="val" text-anchor="start">160–540 tkr</text><text x="0" y="112" class="lab b">Bra</text><text x="0" y="128" class="tick">+8–15 förfrågningar/mån</text><rect x="308.2" y="104" width="295.7" height="16" rx="4" fill="#2f6f4a"/><text x="300.2" y="117" class="val" text-anchor="end">430–1 350 tkr</text></svg><p class="src">Exempel, inte prognos. Omsättning, inte vinst. Effekten kommer från nya sajten och SEO tillsammans. Jobbvärden: laddbox 10 000–20 000 kr, byte av elcentral 8 000–20 000 kr (Offerta 2026).</p>
+<div class="callout big"><b>En order räcker.</b> En enda extra laddbox eller elcentral är värd 10 000–20 000 kr, alltså 2,5–5 gånger uppgraderingen och 1,4–2,9 gånger hela paketet på 7 000 kr.</div><footer class="pfoot"><span>BLOMS EL &amp; DATA  |  FÖRSLAG FRÅN ELEVATE STUDIO</span><span>8</span></footer></section><div class="offer"><section class="agr__sheet"><header class="agr__top"><svg class="mark" viewBox="0 0 1884.3 1353.9" aria-hidden="true"><path d="M0.0 1353.9 L1218.7 0.0 L1218.7 329.1 L479.7 1136.4 L786.7 1132.4 L1215.5 687.4 L1884.3 1349.9 L1590.1 1349.9 L1218.6 994.7 L865.4 1349.9Z" fill="currentColor"/></svg><div><p class="agr__brand">ELEVATE STUDIO</p><p class="agr__sub">WEBBUTVECKLING / OFFERT</p></div></header><div class="agr__body">
+<div class="agr__meta"><p class="agr__no">OFFERT NR 2026-1028-BLOMS</p><p>Datum: 28 oktober 2026&nbsp; | &nbsp;Giltig till: 10 december 2026</p></div>
+<h2>1. Parter</h2>
+<p>Producent: Elevate Studio (PJM Projekteffektivitet AB, org.nr 556969-4358)</p>
+<p>Producentens företrädare: Isak Mattsson</p>
+<p>Beställare: Bloms El &amp; Data AB, org.nr 556754-3656, Blomstergatan 5, 411 04 Göteborg</p>
+<p>Beställarens företrädare: Rustan Blom</p>
+<h2>2. Uppdragets omfattning (specifikation)</h2>
+<p>Utveckling och leverans av en ny, modern och mobilanpassad webbplats för Beställaren på blomsel.se.</p>
+<p class="agr__lead">Grundpaket, i uppdraget ingår:</p>
+<ul><li>Webbplats med 29 sidor: startsida, en egen sida per tjänst, områdessidor, om oss, vanliga frågor och kontakt, enligt den design som visats.</li>
+<li>Adminpanel med inloggning där Beställaren själv ändrar texter, bilder, SEO, kontaktuppgifter, färger och typsnitt och publicerar direkt.</li>
+<li>Förfrågningsinkorg: kontaktformulärets förfrågningar samlas i adminpanelen med status, ordervärde och anteckningar, och aviseras via e-post.</li>
+<li>AI-assistent i adminpanelen som kan göra ändringar på sajten och skriva texter och kundsvar.</li>
+<li>Grundläggande sökmotoroptimering (SEO): titlar och beskrivningar, strukturerad data, sitemap, alt-texter och vidarekoppling från de gamla adresserna.</li>
+<li>Enkel AI-optimering (AIO): llms.txt, faktasidor och vanliga frågor som AI-tjänster kan läsa.</li>
+<li>Två korrekturvändor före leverans.</li></ul>
+<p class="agr__lead">Tillval A: Avancerad SEO och AIO</p>
+<ul><li>Sökordsanalys och finjustering av alla sidor, Google-företagsprofil, enhetliga uppgifter i kataloger (Hitta, Eniro, Reco, Bing, Apple), flöde för kundomdömen, Search Console, AI-synlighetstest före och efter samt rapport efter tre månader.</li></ul>
+<p class="agr__lead">Tillval B: Löpande underhåll</p>
+<ul><li>Uppdateringar av webbplatsen, nya sektioner och omfattande ombyggnationer av webbplatsen.</li></ul>
+<h2>3. Driftmiljö</h2>
+<p>Beställaren äger sin domän och sitt webbhotell, och betalar webbhotellets avgifter. Elevate Studio driftsätter webbplatsen där. Adminpanelen och inkorgen kräver PHP, som ingår hos de flesta webbhotell. AI-assistenten använder en API-nyckel från Anthropic, och användningen debiteras av Anthropic.</p>
+<h2>4. Leverans</h2>
+<p>Webbplatsen driftsätts efter godkännande och när åtkomst till webbhotellet finns, så att bytet hinner ske innan bindningstiden för det nuvarande abonnemanget löper ut 7 december 2026.</p>
+</div><footer class="agr__foot"><span>ELEVATE STUDIO&nbsp; | &nbsp;OFFERT</span><span>Sida 1 av 2</span></footer></section><section class="agr__sheet"><header class="agr__top"><svg class="mark" viewBox="0 0 1884.3 1353.9" aria-hidden="true"><path d="M0.0 1353.9 L1218.7 0.0 L1218.7 329.1 L479.7 1136.4 L786.7 1132.4 L1215.5 687.4 L1884.3 1349.9 L1590.1 1349.9 L1218.6 994.7 L865.4 1349.9Z" fill="currentColor"/></svg><div><p class="agr__brand">ELEVATE STUDIO</p><p class="agr__sub">OFFERT / VILLKOR OCH GODKÄNNANDE</p></div></header><div class="agr__body">
+<h2>5. Fast pris och betalning</h2>
+<table><thead><tr><th>Post</th><th>Pris (exkl. moms)</th></tr></thead><tbody>
+<tr><td>Grundpaket: webbplats med adminpanel, förfrågningsinkorg, AI-assistent, grundläggande SEO och enkel AIO – fast pris</td><td>3 000 kr</td></tr>
+<tr><td>Tillval A: Avancerad SEO och AIO</td><td>+ 4 000 kr</td></tr>
+<tr><td>Tillval B: Löpande underhåll</td><td>99 kr/mån</td></tr>
+</tbody><tfoot><tr><td>Totalt grundpaket med Tillval A</td><td>7 000 kr</td></tr></tfoot></table>
+<p>Grundpaketet och Tillval A är engångsbelopp. Tillval B gäller uppdateringar av webbplatsen, nya sektioner och omfattande ombyggnationer av webbplatsen, och löper per månad tills det sägs upp.</p>
+<p>Fast pris och tillval faktureras vid driftsättning. Löpande underhåll faktureras från och med driftsättningen. Betalningsvillkor: 30 dagar. Samtliga priser anges exklusive moms.</p>
+<h2>6. Godkännande av offert</h2>
+<p>Beställaren kan acceptera denna offert genom att svara på mejlet med följande text och stryka det som inte ska ingå:</p>
+<blockquote>Jag godkänner offert nr 2026-1028-BLOMS och beställer grundpaketet / grundpaketet med Tillval A, med / utan Tillval B, enligt offertens villkor.</blockquote>
+<p>Genom godkännandet accepterar Beställaren uppdragets omfattning, priser, betalningsvillkor och övriga villkor i denna offert.</p>
+<div class="agr__sig"><div><p class="script">Isak Mattsson</p><p>Isak Mattsson, Elevate Studio<br>Uppsala, 28 oktober 2026</p></div><div><p class="line"></p><p>Rustan Blom, Bloms El &amp; Data AB<br>Ort och datum</p></div></div>
+</div><footer class="agr__foot"><span>ELEVATE STUDIO&nbsp; | &nbsp;OFFERT</span><span>Sida 2 av 2</span></footer></section></div><section class="page "><header class="ph"><p class="eyebrow">Källor</p><h1>Varifrån siffrorna kommer</h1></header><ol class="sources"><li>Internetstiftelsen, Svenskarna och internet 2026: AI<small>svenskarnaochinternet.se/rapporter/svenskarna-och-internet-2026</small></li><li>BrightLocal, Local Consumer Review Survey 2026<small>brightlocal.com/research/local-consumer-review-survey</small></li><li>StatCounter, Desktop vs Mobile vs Tablet, Sverige, september 2026<small>gs.statcounter.com/platform-market-share/desktop-mobile-tablet/sweden</small></li><li>Backlinko, Google CTR stats<small>backlinko.com/google-ctr-stats</small></li><li>Pew Research Center, 22 juli 2025: klick när AI-sammanfattning visas<small>pewresearch.org</small></li><li>Seer Interactive, AIO impact on Google CTR, november 2025<small>seerinteractive.com/insights</small></li><li>Google Företagsprofil hjälpcenter: lokal ranking<small>support.google.com/business/answer/7091</small></li><li>Whitespark, Local Search Ranking Factors 2026<small>whitespark.ca/local-search-ranking-factors</small></li><li>Google/Deloitte, Milliseconds Make Millions<small>web.dev/case-studies/milliseconds-make-millions</small></li><li>Offerta, Vad kostar sökmotoroptimering (2025)<small>offerta.se/guider/ovrigt/vad-kostar-sokmotoroptimering</small></li><li>Offerta, Vad kostar det att installera en laddbox (2026)<small>offerta.se</small></li><li>Offerta, Byta el i ett gammalt hus (2026)<small>offerta.se</small></li><li>Egna tester av blomsel.se och nya sajten, 28 oktober 2026<small>Mätdata finns hos Elevate Studio</small></li></ol><p class="small">Där källorna är amerikanska har vi angett det i underlaget. Svenska siffror är från Internetstiftelsen och StatCounter.</p><div class="end"><p>Tack för att ni tar er tid. Hör av er om något är oklart, så går vi igenom förslaget tillsammans.</p><div class="sign"><p>Med vänliga hälsningar</p><p class="script">Isak Mattsson</p><p><b>Isak Mattsson</b><br>Elevate Studio<br>info@elevatestudio.nu · elevatestudio.nu</p></div></div><footer class="pfoot"><span>BLOMS EL &amp; DATA  |  FÖRSLAG FRÅN ELEVATE STUDIO</span><span>11</span></footer></section></body></html>
