@@ -15,7 +15,7 @@
   var DEFAULTS = { phone: '0705-15 02 11', email: 'info@blomsel.se', address: 'Blomstergatan 5', city: '411 04 Göteborg', orgnr: '556754-3656' };
   var THEME = { red: '#8B0000', yellow: '#F9CD19', ink: '#303030' };
   var GH_DEFAULT = { owner: 'ElevateStudio018', repo: 'Bloms-el-och-data', branch: 'claude/dazzling-fermi-wmmmt5', path: 'site' };
-  var VIEWS = { oversikt: 'Översikt', innehall: 'Sidor & innehåll', hero: 'Herokarusell', seo: 'SEO', media: 'Mediabibliotek', installningar: 'Företag & tema', publicera: 'Publicera', historik: 'Historik' };
+  var VIEWS = { oversikt: 'Översikt', innehall: 'Sidor & innehåll', hero: 'Herokarusell', seo: 'SEO', media: 'Mediabibliotek', installningar: 'Företag & tema', publicera: 'Publicera', historik: 'Historik', anvandare: 'Användare' };
 
   var S = { manifest: null, published: null, draft: null, log: [], undo: [], gh: {}, token: '', page: 'index', frameWin: null, heroWin: null, sel: null, picking: null };
 
@@ -303,7 +303,7 @@
     $('#view-title').textContent = VIEWS[v];
     $('#app').classList.remove('nav-open');
     if (v !== 'media') S.picking = null;
-    ({ oversikt: renderOverview, innehall: renderEditor, hero: renderHero, seo: renderSeo, media: renderMedia, installningar: renderSettings, publicera: renderPublish, historik: function () {} })[v]();
+    ({ oversikt: renderOverview, innehall: renderEditor, hero: renderHero, seo: renderSeo, media: renderMedia, installningar: renderSettings, publicera: renderPublish, historik: function () {}, anvandare: renderUsers })[v]();
   }
 
   function seoIssues() {
@@ -331,7 +331,7 @@
       return '<li><time>' + esc(new Date(l.t).toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })) + '</time><span class="what">' + esc(l.what) + '<small>' + esc(pageName(l.page || 'alla')) + '</small></span></li>';
     }).join('') : '<li class="empty">Inga ändringar ännu. Börja under Sidor &amp; innehåll.</li>';
     var todo = [];
-    if (!S.token) todo.push('<li><span class="what">Ingen GitHub-token. Ändringar kan bara exporteras, inte publiceras.</span><a href="#publicera">Anslut</a></li>');
+    if (!S.token) todo.push('<li><span class="what">Ditt konto saknar GitHub-token. Ändringar kan bara exporteras, inte publiceras.</span><a href="#anvandare">Lägg till</a></li>');
     if (ch.length) todo.push('<li><span class="what">' + ch.length + ' ändringar väntar på publicering.</span><a href="#publicera">Publicera</a></li>');
     issues.slice(0, 6).forEach(function (i) { todo.push('<li><span class="what">' + esc(pageName(i.page)) + ': ' + esc(i.msg) + '</span><a href="#seo">Åtgärda</a></li>'); });
     if (issues.length > 6) todo.push('<li><span class="what">…och ' + (issues.length - 6) + ' till.</span><a href="#seo">Visa</a></li>');
@@ -551,7 +551,8 @@
   function renderPublish() {
     var ch = changes(), box = $('#p-diff');
     var g = S.gh;
-    $('#g-owner').value = g.owner; $('#g-repo').value = g.repo; $('#g-branch').value = g.branch; $('#g-token').value = S.token;
+    $('#g-owner').value = g.owner; $('#g-repo').value = g.repo; $('#g-branch').value = g.branch;
+    $('#g-tokinfo').textContent = S.token ? 'Token: krypterad för ditt konto. Byt den under Användare.' : 'Ditt konto saknar GitHub-token. Lägg till en under Användare.';
     if (!ch.length) { box.innerHTML = '<p class="empty">Inga ändringar. Allt är publicerat.</p>'; return; }
     var groups = {};
     ch.forEach(function (c) { (groups[c.page] = groups[c.page] || []).push(c); });
@@ -575,14 +576,10 @@
   // ---------------------------------------------------------------- GitHub
   function readGh() {
     S.gh = { owner: $('#g-owner').value.trim() || GH_DEFAULT.owner, repo: $('#g-repo').value.trim() || GH_DEFAULT.repo, branch: $('#g-branch').value.trim() || GH_DEFAULT.branch, path: GH_DEFAULT.path };
-    var t = $('#g-token').value.trim();
-    if (t !== S.token) setToken(t, !!store.get('bloms-admin-token'));
     store.set('bloms-admin-gh', S.gh);
   }
-  function setToken(t, remember) {
+  function setToken(t) {
     S.token = t;
-    store.del('bloms-admin-token'); store.del('bloms-admin-token', sessionStorage);
-    if (t) store.set('bloms-admin-token', t, remember ? localStorage : sessionStorage);
     var c = $('#conn');
     c.textContent = t ? 'GitHub ansluten' : 'Inte ansluten';
     c.classList.toggle('on', !!t);
@@ -613,7 +610,7 @@
   }
   function publish() {
     readGh();
-    if (!S.token) { toast('Lägg in en GitHub-token först, eller exportera JSON.', true); return; }
+    if (!S.token) { toast('Ditt konto saknar GitHub-token. Lägg till en under Användare.', true); return; }
     var ch = changes();
     if (!ch.length) { toast('Inget att publicera.'); return; }
     var msg = $('#p-msg').value.trim() || 'Uppdaterade innehåll via adminpanelen';
@@ -709,28 +706,20 @@
   function boot() {
     Promise.all([
       fetch('../assets/manifest.json', { cache: 'no-store' }).then(function (r) { return r.json(); }),
-      fetch('../content.json', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; })
+      fetch(rawUrl('content.json'), { cache: 'no-store' }).then(function (r) { if (!r.ok) throw 0; return r.json(); })
+        .catch(function () { return fetch('../content.json', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : {}; }); }).catch(function () { return {}; })
     ]).then(function (res) {
       S.manifest = res[0];
       S.published = normal(res[1]);
       var saved = store.get('bloms-admin-draft');
       S.draft = normal(saved && saved.draft ? saved.draft : clone(S.published));
       S.log = (saved && saved.log) || [];
-      S.gh = Object.assign({}, GH_DEFAULT, store.get('bloms-admin-gh') || {});
-      setToken(store.get('bloms-admin-token') || store.get('bloms-admin-token', sessionStorage) || '', !!store.get('bloms-admin-token'));
       wire();
       status();
       render(current());
     }).catch(function (e) {
       document.body.innerHTML = '<p style="padding:40px">Kunde inte läsa sajtens manifest (' + esc(e.message) + '). Kör <code>python3 site/build.py</code>.</p>';
     });
-  }
-  function enter(token, remember) {
-    if (token) setToken(token, remember);
-    store.set('bloms-admin-session', 1, sessionStorage);
-    $('#login').hidden = true;
-    $('#app').hidden = false;
-    boot();
   }
   function wire() {
     window.addEventListener('hashchange', function () { render(current()); });
@@ -741,10 +730,17 @@
       if ((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey && !e.target.closest('input,textarea,[contenteditable]')) { e.preventDefault(); undo(); }
     });
     $('#logout').addEventListener('click', function () {
-      setToken('', false);
-      store.del('bloms-admin-session', sessionStorage);
+      endSession();
       location.hash = '';
       location.reload();
+    });
+    $('#u-add').addEventListener('submit', addUser);
+    $('#u-pw').addEventListener('submit', changePassword);
+    $('#u-tok').addEventListener('submit', changeToken);
+    $('#u-gen').addEventListener('click', function () {
+      var pw = genPassword();
+      $('#u-pass').value = pw; $('#u-pass2').value = pw;
+      $('#u-msg').innerHTML = 'Förslag: <code style="user-select:all">' + esc(pw) + '</code> (skicka det säkert till personen)';
     });
     $('#ed-page').addEventListener('change', function () { loadPage(this.value); });
     $$('#ed-device button').forEach(function (b) {
@@ -774,7 +770,7 @@
     $('#t-reset').addEventListener('click', function () { ['red', 'yellow', 'ink'].forEach(function (k) { $('#t-' + k).value = THEME[k]; }); themePreview(); saveSettings('Återställde tema'); });
     $('#p-publish').addEventListener('click', publish);
     $('#g-test').addEventListener('click', testGh);
-    ['#g-owner', '#g-repo', '#g-branch', '#g-token'].forEach(function (s) { $(s).addEventListener('change', readGh); });
+    ['#g-owner', '#g-repo', '#g-branch'].forEach(function (s) { $(s).addEventListener('change', readGh); });
     $('#p-export').addEventListener('click', exportJson);
     $('#p-import').addEventListener('change', function () { if (this.files[0]) importJson(this.files[0]); this.value = ''; });
     $('#p-discard').addEventListener('click', function () {
@@ -789,12 +785,251 @@
     $('#hi-load').addEventListener('click', loadHistory);
   }
 
+  // ---------------------------------------------------------------- inloggning
+  // Användare sparas i site/admin/users.json. Lösenord lagras aldrig, bara en PBKDF2-härledning.
+  // Samma härledning ger en AES-nyckel som krypterar användarens GitHub-token.
+  var AUTH = { users: [], me: null };
+  var ITER = 210000, MIN_PW = 12;
+  var te = new TextEncoder();
+  var hex = function (buf) { return [].map.call(new Uint8Array(buf), function (b) { return ('0' + b.toString(16)).slice(-2); }).join(''); };
+  var unhex = function (h) { return new Uint8Array(h.match(/../g).map(function (x) { return parseInt(x, 16); })); };
+  var b64e = function (buf) { var s = ''; new Uint8Array(buf).forEach(function (b) { s += String.fromCharCode(b); }); return btoa(s); };
+  var b64d = function (str) { var s = atob(str), a = new Uint8Array(s.length); for (var i = 0; i < s.length; i++) a[i] = s.charCodeAt(i); return a; };
+  var rand = function (n) { var a = new Uint8Array(n); crypto.getRandomValues(a); return a; };
+
+  function rawUrl(path) {
+    var g = S.gh.owner ? S.gh : GH_DEFAULT;
+    return 'https://raw.githubusercontent.com/' + g.owner + '/' + g.repo + '/' + g.branch + '/' + g.path + '/' + path + '?t=' + Date.now();
+  }
+  function derive(pass, saltHex, iter) {
+    return crypto.subtle.importKey('raw', te.encode(pass), 'PBKDF2', false, ['deriveBits'])
+      .then(function (k) { return crypto.subtle.deriveBits({ name: 'PBKDF2', salt: unhex(saltHex), iterations: iter, hash: 'SHA-256' }, k, 512); })
+      .then(function (bits) {
+        return crypto.subtle.importKey('raw', bits.slice(32), 'AES-GCM', false, ['encrypt', 'decrypt'])
+          .then(function (key) { return { verifier: hex(bits.slice(0, 32)), key: key }; });
+      });
+  }
+  function makeUser(name, pass, role, token, created) {
+    var salt = hex(rand(16));
+    return derive(pass, salt, ITER).then(function (d) {
+      var iv = rand(12);
+      var done = function (ct) {
+        return { username: name, role: role, salt: salt, iterations: ITER, verifier: d.verifier,
+          token: ct ? { iv: b64e(iv), data: b64e(ct) } : null, created: created || new Date().toISOString() };
+      };
+      return token ? crypto.subtle.encrypt({ name: 'AES-GCM', iv: iv }, d.key, te.encode(token)).then(done) : done(null);
+    });
+  }
+  function unlock(u, pass) {
+    return derive(pass, u.salt, u.iterations || ITER).then(function (d) {
+      if (d.verifier !== u.verifier) throw new Error('auth');
+      if (!u.token) return '';
+      return crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64d(u.token.iv) }, d.key, b64d(u.token.data))
+        .then(function (pt) { return new TextDecoder().decode(pt); });
+    });
+  }
+  function findUser(name) {
+    name = (name || '').trim().toLowerCase();
+    return AUTH.users.filter(function (u) { return u.username.toLowerCase() === name; })[0];
+  }
+  function loadUsers() {
+    return fetch(rawUrl('admin/users.json'), { cache: 'no-store' }).then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .catch(function () { return fetch('users.json', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : {}; }); })
+      .catch(function () { return {}; })
+      .then(function (j) { AUTH.users = (j && j.users) || []; return AUTH.users; });
+  }
+  function saveUsers(msg) {
+    readGhSafe();
+    var body = JSON.stringify({ version: 1, users: AUTH.users }, null, 1);
+    return putFile('admin/users.json', b64(body), 'Admin: ' + msg);
+  }
+  function readGhSafe() { if ($('#g-owner') && $('#g-owner').value) readGh(); }
+  function tokenCanPush(token) {
+    var old = S.token;
+    S.token = token;
+    return gh('').then(function (r) {
+      S.token = old;
+      if (r.permissions && r.permissions.push === false) throw new Error('Token saknar skrivrätt till ' + r.full_name);
+      return r;
+    }, function (e) { S.token = old; throw new Error('Token fungerar inte: ' + e.message); });
+  }
+
+  // session
+  var SESSION = 'bloms-admin-session';
+  function startSession(u, token, remember) {
+    var s = { user: u.username, role: u.role, token: token, exp: Date.now() + (remember ? 14 * 864e5 : 12 * 36e5) };
+    store.del(SESSION); store.del(SESSION, sessionStorage);
+    store.set(SESSION, s, remember ? localStorage : sessionStorage);
+  }
+  function getSession() {
+    var s = store.get(SESSION, sessionStorage) || store.get(SESSION);
+    if (!s || !s.exp || s.exp < Date.now()) { endSession(); return null; }
+    return s;
+  }
+  function endSession() { store.del(SESSION); store.del(SESSION, sessionStorage); }
+  function updateSessionToken(token) {
+    var s = getSession(); if (!s) return;
+    s.token = token;
+    var remember = !!store.get(SESSION);
+    store.set(SESSION, s, remember ? localStorage : sessionStorage);
+  }
+
+  // spärr efter för många felaktiga försök
+  var FAILS = 'bloms-admin-fails';
+  function lockedFor() { var f = store.get(FAILS) || {}; return f.until && f.until > Date.now() ? Math.ceil((f.until - Date.now()) / 1000) : 0; }
+  function failed() {
+    var f = store.get(FAILS) || { n: 0 };
+    f.n = (f.n || 0) + 1;
+    if (f.n >= 5) { f.until = Date.now() + Math.min(15 * 60, 30 * Math.pow(2, f.n - 5)) * 1000; }
+    store.set(FAILS, f);
+  }
+
+  function enterApp(sess) {
+    AUTH.me = findUser(sess.user);
+    setToken(sess.token || '');
+    $('#login').hidden = true;
+    $('#app').hidden = false;
+    $('#who').textContent = 'Inloggad som ' + sess.user;
+    $('#side-nav a[data-view=anvandare]').hidden = false;
+    boot();
+  }
+  function showLogin() {
+    $('#login-loading').hidden = true;
+    var setup = !AUTH.users.length;
+    $('#setup-form').hidden = !setup;
+    $('#login-form').hidden = setup;
+    (setup ? $('#su-user') : $('#l-user')).focus();
+  }
+
   $('#login-form').addEventListener('submit', function (e) {
     e.preventDefault();
-    var t = $('#l-token').value.trim();
-    if (!t) { $('#l-err').textContent = 'Klistra in en token, eller fortsätt utan.'; return; }
-    enter(t, $('#l-remember').checked);
+    var err = $('#l-err'), btn = $('#l-submit');
+    var wait = lockedFor();
+    if (wait) { err.textContent = 'För många försök. Vänta ' + wait + ' sekunder.'; return; }
+    var u = findUser($('#l-user').value), pass = $('#l-pass').value;
+    btn.disabled = true; btn.textContent = 'Loggar in…'; err.textContent = '';
+    (u ? unlock(u, pass) : Promise.reject(new Error('auth'))).then(function (token) {
+      store.del(FAILS);
+      startSession(u, token, $('#l-remember').checked);
+      enterApp(getSession());
+    }).catch(function () {
+      failed();
+      $('#l-pass').value = '';
+      err.textContent = 'Fel användarnamn eller lösenord.';
+    }).then(function () { btn.disabled = false; btn.textContent = 'Logga in'; });
   });
-  $('#l-demo').addEventListener('click', function () { enter('', false); });
-  if (store.get('bloms-admin-session', sessionStorage) || store.get('bloms-admin-token')) enter('', false);
+
+  $('#setup-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var err = $('#su-err'), btn = $('#su-submit');
+    var name = $('#su-user').value.trim(), pass = $('#su-pass').value, token = $('#su-token').value.trim();
+    if (!/^[\w.\-@]{3,40}$/.test(name)) { err.textContent = 'Användarnamnet ska vara 3–40 tecken: bokstäver, siffror, punkt, bindestreck eller @.'; return; }
+    if (pass.length < MIN_PW) { err.textContent = 'Lösenordet måste vara minst ' + MIN_PW + ' tecken.'; return; }
+    if (pass !== $('#su-pass2').value) { err.textContent = 'Lösenorden är inte lika.'; return; }
+    btn.disabled = true; btn.textContent = 'Skapar konto…'; err.textContent = '';
+    tokenCanPush(token).then(function () { return makeUser(name, pass, 'admin', token); }).then(function (u) {
+      S.token = token;
+      return loadUsers().then(function (list) {
+        if (list.length) throw new Error('Det finns redan användare. Ladda om sidan och logga in.');
+        AUTH.users = [u];
+        return saveUsers('skapade administratör ' + name);
+      }).then(function () {
+        startSession(u, token, false);
+        enterApp(getSession());
+        toast('Kontot är skapat och sparat i repot.');
+      });
+    }).catch(function (x) { err.textContent = x.message || String(x); })
+      .then(function () { btn.disabled = false; btn.textContent = 'Skapa konto och logga in'; });
+  });
+
+  // användarhantering
+  function isAdmin() { return AUTH.me && AUTH.me.role === 'admin'; }
+  function renderUsers() {
+    var ul = $('#u-list');
+    ul.innerHTML = '';
+    $('#u-count').textContent = AUTH.users.length + (AUTH.users.length === 1 ? ' användare' : ' användare');
+    AUTH.users.forEach(function (u) {
+      var li = document.createElement('li');
+      var me = AUTH.me && u.username === AUTH.me.username;
+      li.innerHTML = '<span class="av">' + esc(u.username.slice(0, 1)) + '</span><span class="what"><b>' + esc(u.username) + (me ? ' (du)' : '') + '</b><small>' +
+        (u.role === 'admin' ? 'Administratör' : 'Redaktör') + ' · skapad ' + esc(new Date(u.created).toLocaleDateString('sv-SE')) + (u.token ? '' : ' · ingen token') + '</small></span>' +
+        (isAdmin() && !me ? '<button class="link danger" type="button">Ta bort</button>' : '');
+      var b = li.querySelector('button');
+      if (b) b.addEventListener('click', function () {
+        if (b.dataset.confirm !== '1') { b.dataset.confirm = '1'; b.textContent = 'Klicka igen för att ta bort'; return; }
+        var keep = AUTH.users.filter(function (x) { return x !== u; });
+        if (!keep.some(function (x) { return x.role === 'admin'; })) { toast('Minst en administratör måste finnas.', true); return; }
+        var before = AUTH.users;
+        AUTH.users = keep;
+        saveUsers('tog bort användare ' + u.username).then(function () { toast(u.username + ' är borttagen.'); renderUsers(); })
+          .catch(function (x) { AUTH.users = before; toast('Kunde inte spara: ' + x.message, true); renderUsers(); });
+      });
+      ul.appendChild(li);
+    });
+    $('#u-add').hidden = !isAdmin();
+  }
+  function genPassword() {
+    var cs = 'abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789-_!?';
+    return [].map.call(rand(16), function (b) { return cs[b % cs.length]; }).join('');
+  }
+  function addUser(e) {
+    e.preventDefault();
+    var msg = $('#u-msg'), name = $('#u-name').value.trim(), pass = $('#u-pass').value;
+    if (!isAdmin()) return;
+    if (!/^[\w.\-@]{3,40}$/.test(name)) { msg.textContent = 'Användarnamnet ska vara 3–40 tecken.'; return; }
+    if (findUser(name)) { msg.textContent = 'Användarnamnet finns redan.'; return; }
+    if (pass.length < MIN_PW) { msg.textContent = 'Lösenordet måste vara minst ' + MIN_PW + ' tecken.'; return; }
+    if (pass !== $('#u-pass2').value) { msg.textContent = 'Lösenorden är inte lika.'; return; }
+    if (!S.token) { msg.textContent = 'Ditt konto behöver en GitHub-token för att spara användare.'; return; }
+    msg.textContent = 'Sparar…';
+    makeUser(name, pass, $('#u-role').value, S.token).then(function (u) {
+      AUTH.users = AUTH.users.concat([u]);
+      return saveUsers('lade till användare ' + name);
+    }).then(function () {
+      $('#u-add').reset(); msg.textContent = name + ' är tillagd.'; renderUsers();
+    }).catch(function (x) { AUTH.users = AUTH.users.filter(function (u) { return u.username !== name; }); msg.textContent = 'Kunde inte spara: ' + x.message; });
+  }
+  function replaceMe(u) {
+    AUTH.users = AUTH.users.map(function (x) { return x.username === AUTH.me.username ? u : x; });
+    AUTH.me = u;
+  }
+  function changePassword(e) {
+    e.preventDefault();
+    var msg = $('#pw-msg'), np = $('#pw-new').value;
+    if (np.length < MIN_PW) { msg.textContent = 'Minst ' + MIN_PW + ' tecken.'; return; }
+    if (np !== $('#pw-new2').value) { msg.textContent = 'Lösenorden är inte lika.'; return; }
+    msg.textContent = 'Sparar…';
+    var before = AUTH.users, beforeMe = AUTH.me;
+    unlock(AUTH.me, $('#pw-old').value).then(function (token) {
+      return makeUser(AUTH.me.username, np, AUTH.me.role, token || S.token, AUTH.me.created);
+    }, function () { throw new Error('Nuvarande lösenord stämmer inte.'); }).then(function (u) {
+      replaceMe(u);
+      return saveUsers('bytte lösenord för ' + u.username);
+    }).then(function () { $('#u-pw').reset(); msg.textContent = 'Lösenordet är bytt.'; })
+      .catch(function (x) { AUTH.users = before; AUTH.me = beforeMe; msg.textContent = x.message; });
+  }
+  function changeToken(e) {
+    e.preventDefault();
+    var msg = $('#tk-msg'), nt = $('#tk-new').value.trim(), pass = $('#tk-pass').value;
+    msg.textContent = 'Kontrollerar…';
+    var before = AUTH.users, beforeMe = AUTH.me;
+    unlock(AUTH.me, pass).catch(function () { throw new Error('Lösenordet stämmer inte.'); })
+      .then(function () { return tokenCanPush(nt); })
+      .then(function () { return makeUser(AUTH.me.username, pass, AUTH.me.role, nt, AUTH.me.created); })
+      .then(function (u) { replaceMe(u); setToken(nt); updateSessionToken(nt); return saveUsers('bytte token för ' + u.username); })
+      .then(function () { $('#u-tok').reset(); msg.textContent = 'Token är sparad.'; renderUsers(); })
+      .catch(function (x) { AUTH.users = before; AUTH.me = beforeMe; msg.textContent = x.message; });
+  }
+
+  // start: läs användare och kontrollera session
+  if (!window.crypto || !crypto.subtle) {
+    $('#login-loading').textContent = 'Adminpanelen kräver en säker anslutning (https).';
+  } else {
+    S.gh = Object.assign({}, GH_DEFAULT, store.get('bloms-admin-gh') || {});
+    loadUsers().then(function () {
+      var sess = getSession();
+      if (sess && findUser(sess.user)) enterApp(sess);
+      else { endSession(); showLogin(); }
+    });
+  }
 })();

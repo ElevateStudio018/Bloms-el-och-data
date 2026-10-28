@@ -29,4 +29,17 @@ behövs en formulärtjänst (t.ex. Formspree eller Netlify Forms) när sajten pu
 - **Historik**: tidigare publicerade versioner, kan läsas in och återställas.
 
 Ändringar sparas som utkast i webbläsaren tills de publiceras. Sajten läser `content.json` när sidan laddas.
-Panelen är inte lösenordsskyddad i sig, det är GitHub-token som styr vem som kan publicera.
+
+### Inloggning
+
+- Första gången visas **Skapa första administratören**: användarnamn, lösenord (minst 12 tecken) och en GitHub-token.
+  Kontot sparas i `site/admin/users.json` i repot.
+- Därefter loggar man in med användarnamn och lösenord. Under **Användare** kan administratörer lägga till och ta bort
+  användare (roller: administratör, redaktör), och alla kan byta sitt lösenord och sin token.
+- Lösenord sparas aldrig. `users.json` innehåller en PBKDF2-härledning (SHA-256, 210 000 iterationer, unikt salt per
+  användare) och användarens GitHub-token krypterad med AES-GCM och en nyckel från lösenordet.
+- Fem felaktiga försök ger en spärr som växer från 30 sekunder upp till 15 minuter.
+
+Sajten är statisk, så filerna (även `users.json`) går att läsa för den som letar. Skyddet är att token bara kan
+låsas upp med rätt lösenord. Använd därför långa lösenord och en fine-grained token som bara har
+*Contents: Read and write* för det här repot och ett utgångsdatum.

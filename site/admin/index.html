@@ -18,14 +18,23 @@
     <div class="brand"><img src="../img/logo-white.png" alt=""><span>BLOMS EL &amp; DATA</span></div>
     <h1>Adminpanel</h1>
     <p>Redigera texter, bilder, SEO, heron och kontaktuppgifter. Ändringar sparas som utkast tills du publicerar.</p>
-    <form id="login-form" class="stack">
-      <label for="l-token">GitHub-token <small>(för att publicera direkt till sajten)</small>
-        <input id="l-token" type="password" autocomplete="off" placeholder="github_pat_…"></label>
-      <label class="check"><input id="l-remember" type="checkbox"> Kom ihåg på den här datorn</label>
-      <button class="btn primary" type="submit">Logga in</button>
-      <button class="btn ghost" type="button" id="l-demo">Fortsätt utan token (bara utkast)</button>
+    <form id="login-form" class="stack" hidden>
+      <label for="l-user">Användarnamn<input id="l-user" autocomplete="username" autocapitalize="none" spellcheck="false" required></label>
+      <label for="l-pass">Lösenord<input id="l-pass" type="password" autocomplete="current-password" required></label>
+      <label class="check"><input id="l-remember" type="checkbox"> Håll mig inloggad på den här datorn</label>
+      <button class="btn primary" type="submit" id="l-submit">Logga in</button>
       <p class="err" id="l-err" role="alert"></p>
     </form>
+    <form id="setup-form" class="stack" hidden>
+      <div class="setup-note"><b>Skapa första administratören</b><p>Inga användare finns ännu. Välj användarnamn och lösenord. GitHub-token behövs för att spara kontot i repot och sparas krypterad med ditt lösenord.</p></div>
+      <label for="su-user">Användarnamn<input id="su-user" autocomplete="username" autocapitalize="none" spellcheck="false" required></label>
+      <label for="su-pass">Lösenord <small>(minst 12 tecken)</small><input id="su-pass" type="password" autocomplete="new-password" minlength="12" required></label>
+      <label for="su-pass2">Upprepa lösenord<input id="su-pass2" type="password" autocomplete="new-password" required></label>
+      <label for="su-token">GitHub-token <small>(Contents: Read and write för repot)</small><input id="su-token" type="password" autocomplete="off" placeholder="github_pat_…" required></label>
+      <button class="btn primary" type="submit" id="su-submit">Skapa konto och logga in</button>
+      <p class="err" id="su-err" role="alert"></p>
+    </form>
+    <p class="muted" id="login-loading">Laddar…</p>
   </div>
 </section>
 
@@ -42,8 +51,10 @@
       <a href="#installningar" data-view="installningar"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>Företag &amp; tema</a>
       <a href="#publicera" data-view="publicera"><svg viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"/></svg>Publicera<span class="badge" id="nav-badge" hidden></span></a>
       <a href="#historik" data-view="historik"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/></svg>Historik</a>
+      <a href="#anvandare" data-view="anvandare"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.9.8 3.1 2.5 3.5 5.2"/></svg>Användare</a>
     </nav>
     <div class="side-foot">
+      <span class="who" id="who"></span>
       <span class="conn" id="conn">Inte ansluten</span>
       <a href="../index.html" target="_blank" rel="noopener">Öppna sajten ↗</a>
       <button class="link" id="logout" type="button">Logga ut</button>
@@ -160,7 +171,7 @@
           <label for="g-owner">Ägare<input id="g-owner"></label>
           <label for="g-repo">Repo<input id="g-repo"></label>
           <label for="g-branch">Branch<input id="g-branch"></label>
-          <label for="g-token">Token<input id="g-token" type="password" autocomplete="off" placeholder="github_pat_…"></label>
+          <p class="muted" id="g-tokinfo">Token: krypterad för ditt konto. Byt den under Användare.</p>
           <div class="row"><button class="btn ghost sm" id="g-test" type="button">Testa anslutning</button><span class="muted" id="g-msg" role="status"></span></div>
           <label for="p-msg">Beskrivning av ändringen<input id="p-msg" placeholder="Uppdaterade texter på startsidan"></label>
           <button class="btn primary" id="p-publish" type="button">Publicera till sajten</button>
@@ -168,6 +179,40 @@
           <div class="panel-h" style="margin-top:8px"><h2>Säkerhetskopia</h2></div>
           <div class="row"><button class="btn ghost sm" id="p-export" type="button">Exportera JSON</button>
             <label class="btn ghost sm">Importera JSON<input id="p-import" type="file" accept="application/json" hidden></label></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Användare -->
+    <section class="view" id="v-anvandare" hidden>
+      <div class="cols wide">
+        <div class="panel">
+          <div class="panel-h"><h2>Användare</h2><span class="muted" id="u-count"></span></div>
+          <ul class="users" id="u-list"></ul>
+          <form class="stack" id="u-add" style="margin-top:18px">
+            <div class="panel-h" style="margin:0"><h2>Lägg till användare</h2></div>
+            <div class="two"><label for="u-name">Användarnamn<input id="u-name" autocapitalize="none" spellcheck="false" required></label>
+            <label for="u-role">Roll<select id="u-role"><option value="redaktor">Redaktör (redigera och publicera)</option><option value="admin">Administratör (även användare)</option></select></label></div>
+            <div class="two"><label for="u-pass">Lösenord <small>(minst 12 tecken)</small><input id="u-pass" type="password" autocomplete="new-password" minlength="12" required></label>
+            <label for="u-pass2">Upprepa lösenord<input id="u-pass2" type="password" autocomplete="new-password" required></label></div>
+            <div class="row"><button class="btn primary sm" type="submit">Lägg till</button><button class="btn ghost sm" type="button" id="u-gen">Föreslå lösenord</button><span class="muted" id="u-msg" role="status"></span></div>
+          </form>
+        </div>
+        <div class="panel stack">
+          <form class="stack" id="u-pw">
+            <div class="panel-h" style="margin:0"><h2>Byt mitt lösenord</h2></div>
+            <label for="pw-old">Nuvarande lösenord<input id="pw-old" type="password" autocomplete="current-password" required></label>
+            <label for="pw-new">Nytt lösenord <small>(minst 12 tecken)</small><input id="pw-new" type="password" autocomplete="new-password" minlength="12" required></label>
+            <label for="pw-new2">Upprepa nytt lösenord<input id="pw-new2" type="password" autocomplete="new-password" required></label>
+            <div class="row"><button class="btn primary sm" type="submit">Byt lösenord</button><span class="muted" id="pw-msg" role="status"></span></div>
+          </form>
+          <form class="stack" id="u-tok" style="margin-top:10px">
+            <div class="panel-h" style="margin:0"><h2>Byt GitHub-token</h2></div>
+            <p class="muted">Token krypteras med ditt lösenord. Använd en fine-grained token som bara har åtkomst till det här repot.</p>
+            <label for="tk-pass">Ditt lösenord<input id="tk-pass" type="password" autocomplete="current-password" required></label>
+            <label for="tk-new">Ny token<input id="tk-new" type="password" autocomplete="off" placeholder="github_pat_…" required></label>
+            <div class="row"><button class="btn primary sm" type="submit">Spara token</button><span class="muted" id="tk-msg" role="status"></span></div>
+          </form>
         </div>
       </div>
     </section>

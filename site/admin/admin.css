@@ -52,6 +52,14 @@ input[type=color]{width:48px;height:34px;border:1.5px solid var(--line);border-r
 .login-card h1{font-size:26px}
 .login-card p{color:var(--muted)}
 .err{color:#b42318;font-size:13px;min-height:1em}
+.setup-note{background:var(--warn-soft);border-radius:10px;padding:12px 14px;font-size:13px}
+.setup-note b{display:block;margin-bottom:2px}
+.who{color:#fff;font-weight:600}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.users{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.users li{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.users .av{width:36px;height:36px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-weight:700;text-transform:uppercase;flex:none}
+.users .what{flex:1;min-width:0}.users small{display:block;color:var(--muted)}
 .brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:600;letter-spacing:.3px}
 .brand img{width:30px;height:30px}
 
@@ -218,4 +226,5 @@ input[type=color]{width:48px;height:34px;border:1.5px solid var(--line);border-r
   .ed-bar .search{margin-left:0;max-width:none}
   .hero-item{grid-template-columns:24px 28px 1fr;row-gap:8px}
   .diff{grid-template-columns:1fr}
+  .two{grid-template-columns:1fr}
 }
