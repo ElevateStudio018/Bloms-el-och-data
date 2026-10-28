@@ -52,6 +52,9 @@ input[type=color]{width:48px;height:34px;border:1.5px solid var(--line);border-r
 .login-card h1{font-size:26px}
 .login-card p{color:var(--muted)}
 .err{color:#b42318;font-size:13px;min-height:1em}
+.adv{border:1px solid var(--line);border-radius:10px;padding:0 14px;margin-top:6px}
+.adv summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:13px;color:var(--muted)}
+.adv[open]{padding-bottom:14px}
 .setup-note{background:var(--warn-soft);border-radius:10px;padding:12px 14px;font-size:13px}
 .setup-note b{display:block;margin-bottom:2px}
 .who{color:#fff;font-weight:600}

@@ -1,1 +1,14 @@
-{"version": 1, "users": []}
+{
+ "version": 1,
+ "users": [
+  {
+   "username": "admin",
+   "role": "admin",
+   "salt": "41ecb395a24f6bf6cbe13fb4e25a3b97",
+   "iterations": 210000,
+   "verifier": "9f64cec1f04102d050afb0a956d3f8e77b4ffa723c0c91f4cf3f40c5d2f1e2d5",
+   "token": null,
+   "created": "2026-10-28T11:50:32.374Z"
+  }
+ ]
+}

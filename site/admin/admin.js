@@ -331,8 +331,7 @@
       return '<li><time>' + esc(new Date(l.t).toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })) + '</time><span class="what">' + esc(l.what) + '<small>' + esc(pageName(l.page || 'alla')) + '</small></span></li>';
     }).join('') : '<li class="empty">Inga ändringar ännu. Börja under Sidor &amp; innehåll.</li>';
     var todo = [];
-    if (!S.token) todo.push('<li><span class="what">Ditt konto saknar GitHub-token. Ändringar kan bara exporteras, inte publiceras.</span><a href="#anvandare">Lägg till</a></li>');
-    if (ch.length) todo.push('<li><span class="what">' + ch.length + ' ändringar väntar på publicering.</span><a href="#publicera">Publicera</a></li>');
+    if (ch.length) todo.push('<li><span class="what">' + ch.length + ' ändringar är inte sparade på sajten. Ladda ner content.json och lägg upp den.</span><a href="#publicera">Spara</a></li>');
     issues.slice(0, 6).forEach(function (i) { todo.push('<li><span class="what">' + esc(pageName(i.page)) + ': ' + esc(i.msg) + '</span><a href="#seo">Åtgärda</a></li>'); });
     if (issues.length > 6) todo.push('<li><span class="what">…och ' + (issues.length - 6) + ' till.</span><a href="#seo">Visa</a></li>');
     $('#todo').innerHTML = todo.join('') || '<li class="ok"><span class="what">Allt ser bra ut.</span></li>';
@@ -552,7 +551,7 @@
     var ch = changes(), box = $('#p-diff');
     var g = S.gh;
     $('#g-owner').value = g.owner; $('#g-repo').value = g.repo; $('#g-branch').value = g.branch;
-    $('#g-tokinfo').textContent = S.token ? 'Token: krypterad för ditt konto. Byt den under Användare.' : 'Ditt konto saknar GitHub-token. Lägg till en under Användare.';
+    $('#g-token').value = S.token;
     if (!ch.length) { box.innerHTML = '<p class="empty">Inga ändringar. Allt är publicerat.</p>'; return; }
     var groups = {};
     ch.forEach(function (c) { (groups[c.page] = groups[c.page] || []).push(c); });
@@ -581,7 +580,7 @@
   function setToken(t) {
     S.token = t;
     var c = $('#conn');
-    c.textContent = t ? 'GitHub ansluten' : 'Inte ansluten';
+    c.textContent = t ? 'GitHub ansluten' : 'Lokalt läge';
     c.classList.toggle('on', !!t);
   }
   function gh(path, opts) {
@@ -610,7 +609,7 @@
   }
   function publish() {
     readGh();
-    if (!S.token) { toast('Ditt konto saknar GitHub-token. Lägg till en under Användare.', true); return; }
+    if (!S.token) { toast('Lägg in en GitHub-token under Avancerat, eller ladda ner content.json.', true); return; }
     var ch = changes();
     if (!ch.length) { toast('Inget att publicera.'); return; }
     var msg = $('#p-msg').value.trim() || 'Uppdaterade innehåll via adminpanelen';
@@ -676,15 +675,23 @@
     }).catch(function (e) { msg.textContent = 'Fel: ' + e.message + (S.token ? '' : ' (privat repo kräver token)'); });
   }
 
-  function exportJson() {
-    var blob = new Blob([JSON.stringify(S.draft, null, 1)], { type: 'application/json' });
+  function download(name, text) {
+    var blob = new Blob([text], { type: 'application/json' });
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'content.json';
+    a.download = name;
     document.body.appendChild(a);
     a.click();
     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
-    toast('content.json exporterad');
+  }
+  function exportJson() {
+    var out = clone(S.draft);
+    out.updated = new Date().toISOString();
+    if (Object.keys(out.uploads).length) toast('Obs: uppladdade bilder ligger inbäddade i filen. Publicera via GitHub för att spara dem som egna filer.');
+    download('content.json', JSON.stringify(out, null, 1));
+    S.published = normal(clone(out));
+    commit('Laddade ner content.json', 'alla');
+    renderPublish();
   }
   function importJson(file) {
     var r = new FileReader();
@@ -736,7 +743,6 @@
     });
     $('#u-add').addEventListener('submit', addUser);
     $('#u-pw').addEventListener('submit', changePassword);
-    $('#u-tok').addEventListener('submit', changeToken);
     $('#u-gen').addEventListener('click', function () {
       var pw = genPassword();
       $('#u-pass').value = pw; $('#u-pass2').value = pw;
@@ -771,6 +777,7 @@
     $('#p-publish').addEventListener('click', publish);
     $('#g-test').addEventListener('click', testGh);
     ['#g-owner', '#g-repo', '#g-branch'].forEach(function (s) { $(s).addEventListener('change', readGh); });
+    $('#g-token').addEventListener('change', function () { setToken(this.value.trim()); updateSessionToken(S.token); });
     $('#p-export').addEventListener('click', exportJson);
     $('#p-import').addEventListener('change', function () { if (this.files[0]) importJson(this.files[0]); this.value = ''; });
     $('#p-discard').addEventListener('click', function () {
@@ -841,7 +848,10 @@
   function saveUsers(msg) {
     readGhSafe();
     var body = JSON.stringify({ version: 1, users: AUTH.users }, null, 1);
-    return putFile('admin/users.json', b64(body), 'Admin: ' + msg);
+    if (S.token) return putFile('admin/users.json', b64(body), 'Admin: ' + msg);
+    download('users.json', body);
+    toast('users.json laddades ner. Lägg den i site/admin/ på sajten så att ändringen gäller överallt.');
+    return Promise.resolve();
   }
   function readGhSafe() { if ($('#g-owner') && $('#g-owner').value) readGh(); }
   function tokenCanPush(token) {
@@ -922,21 +932,19 @@
   $('#setup-form').addEventListener('submit', function (e) {
     e.preventDefault();
     var err = $('#su-err'), btn = $('#su-submit');
-    var name = $('#su-user').value.trim(), pass = $('#su-pass').value, token = $('#su-token').value.trim();
+    var name = $('#su-user').value.trim(), pass = $('#su-pass').value;
     if (!/^[\w.\-@]{3,40}$/.test(name)) { err.textContent = 'Användarnamnet ska vara 3–40 tecken: bokstäver, siffror, punkt, bindestreck eller @.'; return; }
     if (pass.length < MIN_PW) { err.textContent = 'Lösenordet måste vara minst ' + MIN_PW + ' tecken.'; return; }
     if (pass !== $('#su-pass2').value) { err.textContent = 'Lösenorden är inte lika.'; return; }
     btn.disabled = true; btn.textContent = 'Skapar konto…'; err.textContent = '';
-    tokenCanPush(token).then(function () { return makeUser(name, pass, 'admin', token); }).then(function (u) {
-      S.token = token;
+    makeUser(name, pass, 'admin', null).then(function (u) {
       return loadUsers().then(function (list) {
         if (list.length) throw new Error('Det finns redan användare. Ladda om sidan och logga in.');
         AUTH.users = [u];
         return saveUsers('skapade administratör ' + name);
       }).then(function () {
-        startSession(u, token, false);
+        startSession(u, '', false);
         enterApp(getSession());
-        toast('Kontot är skapat och sparat i repot.');
       });
     }).catch(function (x) { err.textContent = x.message || String(x); })
       .then(function () { btn.disabled = false; btn.textContent = 'Skapa konto och logga in'; });
@@ -952,7 +960,7 @@
       var li = document.createElement('li');
       var me = AUTH.me && u.username === AUTH.me.username;
       li.innerHTML = '<span class="av">' + esc(u.username.slice(0, 1)) + '</span><span class="what"><b>' + esc(u.username) + (me ? ' (du)' : '') + '</b><small>' +
-        (u.role === 'admin' ? 'Administratör' : 'Redaktör') + ' · skapad ' + esc(new Date(u.created).toLocaleDateString('sv-SE')) + (u.token ? '' : ' · ingen token') + '</small></span>' +
+        (u.role === 'admin' ? 'Administratör' : 'Redaktör') + ' · skapad ' + esc(new Date(u.created).toLocaleDateString('sv-SE')) + '' + '</small></span>' +
         (isAdmin() && !me ? '<button class="link danger" type="button">Ta bort</button>' : '');
       var b = li.querySelector('button');
       if (b) b.addEventListener('click', function () {
@@ -980,9 +988,8 @@
     if (findUser(name)) { msg.textContent = 'Användarnamnet finns redan.'; return; }
     if (pass.length < MIN_PW) { msg.textContent = 'Lösenordet måste vara minst ' + MIN_PW + ' tecken.'; return; }
     if (pass !== $('#u-pass2').value) { msg.textContent = 'Lösenorden är inte lika.'; return; }
-    if (!S.token) { msg.textContent = 'Ditt konto behöver en GitHub-token för att spara användare.'; return; }
     msg.textContent = 'Sparar…';
-    makeUser(name, pass, $('#u-role').value, S.token).then(function (u) {
+    makeUser(name, pass, $('#u-role').value, null).then(function (u) {
       AUTH.users = AUTH.users.concat([u]);
       return saveUsers('lade till användare ' + name);
     }).then(function () {
@@ -1001,26 +1008,13 @@
     msg.textContent = 'Sparar…';
     var before = AUTH.users, beforeMe = AUTH.me;
     unlock(AUTH.me, $('#pw-old').value).then(function (token) {
-      return makeUser(AUTH.me.username, np, AUTH.me.role, token || S.token, AUTH.me.created);
+      return makeUser(AUTH.me.username, np, AUTH.me.role, token || null, AUTH.me.created);
     }, function () { throw new Error('Nuvarande lösenord stämmer inte.'); }).then(function (u) {
       replaceMe(u);
       return saveUsers('bytte lösenord för ' + u.username);
     }).then(function () { $('#u-pw').reset(); msg.textContent = 'Lösenordet är bytt.'; })
       .catch(function (x) { AUTH.users = before; AUTH.me = beforeMe; msg.textContent = x.message; });
   }
-  function changeToken(e) {
-    e.preventDefault();
-    var msg = $('#tk-msg'), nt = $('#tk-new').value.trim(), pass = $('#tk-pass').value;
-    msg.textContent = 'Kontrollerar…';
-    var before = AUTH.users, beforeMe = AUTH.me;
-    unlock(AUTH.me, pass).catch(function () { throw new Error('Lösenordet stämmer inte.'); })
-      .then(function () { return tokenCanPush(nt); })
-      .then(function () { return makeUser(AUTH.me.username, pass, AUTH.me.role, nt, AUTH.me.created); })
-      .then(function (u) { replaceMe(u); setToken(nt); updateSessionToken(nt); return saveUsers('bytte token för ' + u.username); })
-      .then(function () { $('#u-tok').reset(); msg.textContent = 'Token är sparad.'; renderUsers(); })
-      .catch(function (x) { AUTH.users = before; AUTH.me = beforeMe; msg.textContent = x.message; });
-  }
-
   // start: läs användare och kontrollera session
   if (!window.crypto || !crypto.subtle) {
     $('#login-loading').textContent = 'Adminpanelen kräver en säker anslutning (https).';

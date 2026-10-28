@@ -32,14 +32,18 @@ behövs en formulärtjänst (t.ex. Formspree eller Netlify Forms) när sajten pu
 
 ### Inloggning
 
-- Första gången visas **Skapa första administratören**: användarnamn, lösenord (minst 12 tecken) och en GitHub-token.
-  Kontot sparas i `site/admin/users.json` i repot.
-- Därefter loggar man in med användarnamn och lösenord. Under **Användare** kan administratörer lägga till och ta bort
-  användare (roller: administratör, redaktör), och alla kan byta sitt lösenord och sin token.
-- Lösenord sparas aldrig. `users.json` innehåller en PBKDF2-härledning (SHA-256, 210 000 iterationer, unikt salt per
-  användare) och användarens GitHub-token krypterad med AES-GCM och en nyckel från lösenordet.
+- Logga in med användarnamn och lösenord. Konton finns i `site/admin/users.json`.
+- Under **Användare** kan administratörer lägga till och ta bort användare (roller: administratör, redaktör),
+  och alla kan byta sitt lösenord. Eftersom sajten är statisk laddas en ny `users.json` ner vid ändring;
+  lägg den i `site/admin/` på sajten.
+- Lösenord sparas aldrig. `users.json` innehåller en PBKDF2-härledning (SHA-256, 210 000 iterationer, unikt salt).
 - Fem felaktiga försök ger en spärr som växer från 30 sekunder upp till 15 minuter.
+- Inloggningen varar 12 timmar, eller 14 dagar med "Håll mig inloggad".
 
-Sajten är statisk, så filerna (även `users.json`) går att läsa för den som letar. Skyddet är att token bara kan
-låsas upp med rätt lösenord. Använd därför långa lösenord och en fine-grained token som bara har
-*Contents: Read and write* för det här repot och ett utgångsdatum.
+### Spara ändringar
+
+**Publicera → Ladda ner content.json** och lägg filen i `site/` på sajten (ersätt den gamla).
+Under *Avancerat* går det att publicera direkt till GitHub med en token, men det behövs inte.
+
+Inloggningen hindrar att obehöriga kommer åt panelen i webbläsaren. Eftersom sajten är statisk kan den inte
+ändra något på servern av sig själv: ändringar blir synliga först när den nya filen läggs upp.

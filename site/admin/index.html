@@ -26,11 +26,10 @@
       <p class="err" id="l-err" role="alert"></p>
     </form>
     <form id="setup-form" class="stack" hidden>
-      <div class="setup-note"><b>Skapa första administratören</b><p>Inga användare finns ännu. Välj användarnamn och lösenord. GitHub-token behövs för att spara kontot i repot och sparas krypterad med ditt lösenord.</p></div>
+      <div class="setup-note"><b>Skapa första administratören</b><p>Inga användare finns ännu. Välj användarnamn och lösenord. Efteråt laddas filen <code>users.json</code> ner. Lägg den i <code>site/admin/</code> så att kontot finns kvar.</p></div>
       <label for="su-user">Användarnamn<input id="su-user" autocomplete="username" autocapitalize="none" spellcheck="false" required></label>
       <label for="su-pass">Lösenord <small>(minst 12 tecken)</small><input id="su-pass" type="password" autocomplete="new-password" minlength="12" required></label>
       <label for="su-pass2">Upprepa lösenord<input id="su-pass2" type="password" autocomplete="new-password" required></label>
-      <label for="su-token">GitHub-token <small>(Contents: Read and write för repot)</small><input id="su-token" type="password" autocomplete="off" placeholder="github_pat_…" required></label>
       <button class="btn primary" type="submit" id="su-submit">Skapa konto och logga in</button>
       <p class="err" id="su-err" role="alert"></p>
     </form>
@@ -166,19 +165,24 @@
           <div id="p-diff"></div>
         </div>
         <div class="panel stack">
-          <div class="panel-h"><h2>GitHub</h2></div>
-          <p class="muted">Publicering sparar <code>site/content.json</code> (och uppladdade bilder) i repot. Sajten läser filen direkt.</p>
-          <label for="g-owner">Ägare<input id="g-owner"></label>
-          <label for="g-repo">Repo<input id="g-repo"></label>
-          <label for="g-branch">Branch<input id="g-branch"></label>
-          <p class="muted" id="g-tokinfo">Token: krypterad för ditt konto. Byt den under Användare.</p>
-          <div class="row"><button class="btn ghost sm" id="g-test" type="button">Testa anslutning</button><span class="muted" id="g-msg" role="status"></span></div>
-          <label for="p-msg">Beskrivning av ändringen<input id="p-msg" placeholder="Uppdaterade texter på startsidan"></label>
-          <button class="btn primary" id="p-publish" type="button">Publicera till sajten</button>
-          <p class="muted" id="p-status" role="status"></p>
-          <div class="panel-h" style="margin-top:8px"><h2>Säkerhetskopia</h2></div>
-          <div class="row"><button class="btn ghost sm" id="p-export" type="button">Exportera JSON</button>
-            <label class="btn ghost sm">Importera JSON<input id="p-import" type="file" accept="application/json" hidden></label></div>
+          <div class="panel-h"><h2>Spara ändringarna på sajten</h2></div>
+          <p class="muted">Ladda ner <code>content.json</code> och lägg den i mappen <code>site/</code> på sajten (ersätt den gamla). Då syns ändringarna för alla besökare.</p>
+          <button class="btn primary" id="p-export" type="button">Ladda ner content.json</button>
+          <label class="btn ghost sm">Läs in en sparad content.json<input id="p-import" type="file" accept="application/json" hidden></label>
+          <details class="adv">
+            <summary>Avancerat: publicera direkt till GitHub</summary>
+            <div class="stack">
+              <p class="muted">Med en GitHub-token kan panelen spara direkt i repot. Token sparas bara under den här inloggningen.</p>
+              <label for="g-owner">Ägare<input id="g-owner"></label>
+              <label for="g-repo">Repo<input id="g-repo"></label>
+              <label for="g-branch">Branch<input id="g-branch"></label>
+              <label for="g-token">Token<input id="g-token" type="password" autocomplete="off" placeholder="github_pat_…"></label>
+              <div class="row"><button class="btn ghost sm" id="g-test" type="button">Testa anslutning</button><span class="muted" id="g-msg" role="status"></span></div>
+              <label for="p-msg">Beskrivning av ändringen<input id="p-msg" placeholder="Uppdaterade texter på startsidan"></label>
+              <button class="btn primary sm" id="p-publish" type="button">Publicera till GitHub</button>
+              <p class="muted" id="p-status" role="status"></p>
+            </div>
+          </details>
         </div>
       </div>
     </section>
@@ -205,13 +209,6 @@
             <label for="pw-new">Nytt lösenord <small>(minst 12 tecken)</small><input id="pw-new" type="password" autocomplete="new-password" minlength="12" required></label>
             <label for="pw-new2">Upprepa nytt lösenord<input id="pw-new2" type="password" autocomplete="new-password" required></label>
             <div class="row"><button class="btn primary sm" type="submit">Byt lösenord</button><span class="muted" id="pw-msg" role="status"></span></div>
-          </form>
-          <form class="stack" id="u-tok" style="margin-top:10px">
-            <div class="panel-h" style="margin:0"><h2>Byt GitHub-token</h2></div>
-            <p class="muted">Token krypteras med ditt lösenord. Använd en fine-grained token som bara har åtkomst till det här repot.</p>
-            <label for="tk-pass">Ditt lösenord<input id="tk-pass" type="password" autocomplete="current-password" required></label>
-            <label for="tk-new">Ny token<input id="tk-new" type="password" autocomplete="off" placeholder="github_pat_…" required></label>
-            <div class="row"><button class="btn primary sm" type="submit">Spara token</button><span class="muted" id="tk-msg" role="status"></span></div>
           </form>
         </div>
       </div>
