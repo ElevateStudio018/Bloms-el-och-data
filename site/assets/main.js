@@ -45,3 +45,52 @@
     });
   }
 })();
+
+// Herokarusell på startsidan: tio förslag som bläddras i sidled
+(function () {
+  var track = document.getElementById('hx-track');
+  if (!track) return;
+  var slides = [].slice.call(track.children);
+  var lab = document.getElementById('hx-lab'), dots = document.getElementById('hx-dots');
+  var prev = document.querySelector('.hx-prev'), next = document.querySelector('.hx-next');
+  var cur = 0;
+  slides.forEach(function (s, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = s.id.slice(1);
+    b.title = 'Förslag ' + s.id.slice(1) + ' · ' + s.dataset.name;
+    b.setAttribute('aria-label', b.title);
+    b.addEventListener('click', function () { go(i); });
+    dots.appendChild(b);
+  });
+  function show(i) {
+    cur = i;
+    var s = slides[i];
+    lab.innerHTML = '<b>' + (i + 1) + ' / ' + slides.length + '</b>Förslag ' + s.id.slice(1) + ' · ' + s.dataset.name;
+    [].forEach.call(dots.children, function (d, j) { d.setAttribute('aria-current', j === i ? 'true' : 'false'); });
+    track.style.height = s.offsetHeight + 'px';
+    prev.disabled = i === 0;
+    next.disabled = i === slides.length - 1;
+  }
+  function go(i) {
+    i = Math.max(0, Math.min(slides.length - 1, i));
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+    show(i);
+  }
+  var t;
+  track.addEventListener('scroll', function () {
+    clearTimeout(t);
+    t = setTimeout(function () { show(Math.round(track.scrollLeft / track.clientWidth)); }, 60);
+  }, { passive: true });
+  prev.addEventListener('click', function () { go(cur - 1); });
+  next.addEventListener('click', function () { go(cur + 1); });
+  document.addEventListener('keydown', function (e) {
+    if (e.target.closest && e.target.closest('input,textarea,select')) return;
+    var r = track.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > innerHeight) return;
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(cur + 1); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1); }
+  });
+  window.addEventListener('resize', function () { track.style.height = ''; show(cur); });
+  show(0);
+})();

@@ -218,6 +218,29 @@ a.card:hover .img img{transform:scale(1.04)}
 
 main{overflow-x:clip}
 
+/* ---------- herokarusell på startsidan (tio förslag, bläddras i sidled) ---------- */
+.heroes{position:relative;--gut:max(16px,8.3vw);--shadow:rgba(20,0,0,.35);--muted:#666;--white:#fff;--red-hi:#ff5a4a}
+.hx-track{display:flex;align-items:flex-start;transition:height .3s ease;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;overscroll-behavior-x:contain}
+.hx-track::-webkit-scrollbar{display:none}
+.hx{flex:0 0 100%;scroll-snap-align:start;scroll-snap-stop:always;position:relative;overflow:hidden;display:flex;flex-direction:column;
+  min-height:clamp(600px,calc(100svh - var(--nav-h) - 64px),860px);background:#fff;line-height:1.5}
+.hx > .h{flex:1}
+.hx-arrow{position:absolute;z-index:30;top:calc(50% - 32px);transform:translateY(-50%);width:48px;height:48px;border-radius:50%;border:0;cursor:pointer;
+  background:rgba(255,255,255,.92);color:var(--red);display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.25);transition:transform .15s,opacity .15s}
+.hx-arrow:hover{transform:translateY(-50%) scale(1.06)}
+.hx-arrow:disabled{opacity:0;pointer-events:none}
+.hx-arrow svg{width:22px;height:22px}
+.hx-prev{left:max(12px,env(safe-area-inset-left,0px))}.hx-next{right:max(12px,env(safe-area-inset-right,0px))}
+.hx-bar{background:var(--ink);color:var(--white)}
+.hx-bar .wrap{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:12px}
+.hx-lab{font-size:14px;font-weight:500;min-width:0}
+.hx-lab b{color:var(--yellow);font-variant-numeric:tabular-nums;margin-right:10px}
+.hx-dots{display:flex;gap:8px;flex-wrap:wrap}
+.hx-dots button{width:34px;height:34px;border-radius:8px;border:1.5px solid rgba(255,255,255,.3);background:transparent;color:var(--white);font:600 12px var(--font);cursor:pointer}
+.hx-dots button:hover{border-color:var(--white)}
+.hx-dots button[aria-current="true"]{background:var(--yellow);border-color:var(--yellow);color:var(--ink)}
+@media (max-width:720px){.hx-arrow{width:40px;height:40px;top:auto;bottom:12px;transform:none}.hx-arrow:hover{transform:none}.hx-dots button{width:30px;height:30px}}
+
 /* ---------- responsivt ---------- */
 @media (max-width:1020px){
   .hero-cards,.g4{grid-template-columns:repeat(2,1fr)}

@@ -194,6 +194,66 @@ def view_section(place_phrase):
             + btns(ghost=False) + '</div></div></section>')
 
 
+# ---------------------------------------------------------------- herokarusell (startsidan)
+# De tio heroförslagen från design/hero-galleri visas på startsidan och bläddras i sidled.
+GALLERY = OUT.parent / "design" / "hero-galleri" / "index.html"
+
+
+def prefix_css(css, pre):
+    """Prefixar alla selektorer med `pre`, även inne i @media-block."""
+    out, i = [], 0
+    while i < len(css):
+        j = css.find("{", i)
+        if j < 0:
+            break
+        sel = css[i:j].strip()
+        if sel.startswith("@"):
+            depth, k = 1, j + 1
+            while depth:
+                depth += {"{": 1, "}": -1}.get(css[k], 0)
+                k += 1
+            out.append(f"{sel}{{{prefix_css(css[j + 1:k - 1], pre)}}}")
+        else:
+            k = css.find("}", j) + 1
+            sels = ",".join(f"{pre} {s.strip()}" for s in sel.split(",") if s.strip())
+            out.append(f"{sels}{css[j:k]}")
+        i = k
+    return "\n".join(out)
+
+
+def gallery_parts():
+    import re
+    src = GALLERY.read_text(encoding="utf-8")
+    style = src[src.index("<style>") + 7:src.index("</style>")]
+    css = style[style.index("/* hero body */"):style.index("/* ---------- presenter controls")]
+    css += style[style.index("/* ---------- phone ---------- */"):]
+    css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+    slides = re.findall(r'<section class="slide" id="(f\d+)" data-name="([^"]+)">(.*?)</section>', src, flags=re.S)
+    return prefix_css(css, ".heroes"), slides
+
+
+def localize(html):
+    import re
+    html = html.replace('<nav class="nav"></nav>', "").replace('src="img/', 'src="img/hero/')
+    html = html.replace('https://www.blomsel.se/kontakt', "kontakt.html")
+    html = re.sub(r'https://www\.blomsel\.se/([a-z-]+)', r'\1.html', html)
+    return html.replace(' target="_blank" rel="noopener"', "")
+
+
+def hero_carousel():
+    css, slides = gallery_parts()
+    (OUT / "assets" / "heroes.css").write_text("/* Genereras av build.py från design/hero-galleri */\n" + css, encoding="utf-8")
+    items = "".join(
+        f'<div class="hx" id="{sid}" data-name="{name}" role="group" aria-roledescription="bild" aria-label="Förslag {sid[1:]}: {name}">{localize(body)}</div>'
+        for sid, name, body in slides)
+    return ('<section class="heroes" aria-roledescription="karusell" aria-label="Heroförslag">'
+            f'<div class="hx-track" id="hx-track" tabindex="0">{items}</div>'
+            '<button class="hx-arrow hx-prev" type="button" aria-label="Föregående förslag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6"/></svg></button>'
+            '<button class="hx-arrow hx-next" type="button" aria-label="Nästa förslag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></button>'
+            '<div class="hx-bar"><div class="wrap"><span class="hx-lab" id="hx-lab" aria-live="polite"></span><div class="hx-dots" id="hx-dots"></div></div></div>'
+            '</section>')
+
+
 # ---------------------------------------------------------------- sidmall
 def page(slug, title, desc, body, active=None):
     menu = "".join(
@@ -212,6 +272,7 @@ def page(slug, title, desc, body, active=None):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="assets/style.css">
+{'<link rel="stylesheet" href="assets/heroes.css">' if slug == "index" else ""}
 </head>
 <body>
 <a class="skip" href="#innehall">Hoppa till innehållet</a>
@@ -245,9 +306,7 @@ PAGES = {}
 # ================================================================ HEM
 PAGES["index"] = page("index", "Elektriker Göteborg | Elfirma - Bloms El & Data",
     "Elservice i Göteborg. Nyinstallation, ombyggnation, service och rådgivning - kort sagt allt man förväntar sig av en elektriker och ofta lite till.",
-    hero("team-bro.jpg", "Certifierad elektriker i Göteborg",
-         "Bloms El & Data AB har sedan 2008 utfört elarbeten åt privatpersoner, fastighetsägare, restauranger, butiker och industriföretag i Göteborg med omnejd. Vi erbjuder snabb och professionell kompetens inom vårt verksamhetsområde.",
-         HOME_CARDS, eyebrow="Bloms El & Data")
+    hero_carousel()
     + split("kraft-uttag.jpg", head("Hela kedjan", "Nyinstallation, ombyggnation, service, felsökning och rådgivning")
             + ps("Vi täcker hela kedjan från planering och ritning till installation, dokumentation och besiktning. Samtliga montörer är certifierade elektriker med ABL- eller BB1-behörighet och självklart är Bloms El & Data ansvarsförsäkrade för din skull."),
             alt="Röda kraftuttag på en vägg")
