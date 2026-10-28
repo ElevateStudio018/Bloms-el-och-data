@@ -23,7 +23,7 @@
   function normal(c) {
     var b = blank();
     c = c && typeof c === 'object' ? c : {};
-    Object.keys(b).forEach(function (k) { if (c[k] == null) c[k] = b[k]; });
+    Object.keys(b).forEach(function (k) { if (c[k] == null || (Array.isArray(c[k]) && k !== 'updated')) c[k] = b[k]; });
     return c;
   }
 

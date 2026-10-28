@@ -1,0 +1,36 @@
+# Genereras av build.py
+Options -Indexes
+DirectoryIndex index.html
+AddDefaultCharset utf-8
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+# https och www
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^ https://www.blomsel.se%{REQUEST_URI} [R=301,L]
+# Gamla Wix-adresser (utan .html) till nya sidor
+RewriteRule ^(tjanster|elbilsladdare|smart-teknik|solceller|skattereduktion|kontakt|elektriker-hisingen|elektriker-kungsbacka|elektriker-kungalv|elektriker-i-partille|elektriker-molndal|elektriker-vastra-frolunda|cookiepolicy|elservice-felsokning|belysning|datanat|kraft|golvvarme|elcentral|dokumentation|industrielektriker|kok-och-badrum|nybyggnation-renovering|batterilager|laddbox-brf|om-oss|vanliga-fragor|elektriker-boras)/?$ /$1.html [R=301,L]
+RewriteRule ^inquiry-services-page/?$ /kontakt.html [R=301,L]
+RewriteRule ^index\.html$ / [R=301,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+<FilesMatch "^(content\.json|users\.json)$">
+Header set Cache-Control "no-cache"
+</FilesMatch>
+Header always set X-Content-Type-Options "nosniff"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType image/jpeg "access plus 1 year"
+ExpiresByType image/png "access plus 1 year"
+ExpiresByType text/css "access plus 1 week"
+ExpiresByType application/javascript "access plus 1 week"
+</IfModule>
+
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json text/plain image/svg+xml
+</IfModule>

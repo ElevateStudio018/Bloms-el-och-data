@@ -219,20 +219,6 @@
   "img/elskap.jpg",
   "img/garo.jpg",
   "img/gata-servicebil.jpg",
-  "img/hero/alvsborg.jpg",
-  "img/hero/bridge.jpg",
-  "img/hero/cable.jpg",
-  "img/hero/canal.jpg",
-  "img/hero/doc.jpg",
-  "img/hero/laddbox.jpg",
-  "img/hero/portrait.jpg",
-  "img/hero/roof2.jpg",
-  "img/hero/smart.jpg",
-  "img/hero/solar.jpg",
-  "img/hero/store.jpg",
-  "img/hero/street.jpg",
-  "img/hero/team-wide.jpg",
-  "img/hero/vanwalk.jpg",
   "img/hogtalare.png",
   "img/jordfelsbrytare.png",
   "img/kabel.jpg",
@@ -270,47 +256,5 @@
   "img/uttag-rott.jpg",
   "img/varme.jpg",
   "img/wifi-app.png"
- ],
- "heroes": [
-  {
-   "id": "f20",
-   "name": "Röd duotone"
-  },
-  {
-   "id": "f19",
-   "name": "Lokal elektriker + ROT"
-  },
-  {
-   "id": "f18",
-   "name": "Tre vägar in"
-  },
-  {
-   "id": "f16",
-   "name": "Personligt porträtt"
-  },
-  {
-   "id": "f15",
-   "name": "Tjänstekort"
-  },
-  {
-   "id": "f13",
-   "name": "Minimal helbild"
-  },
-  {
-   "id": "f8",
-   "name": "Solnedgång + siffror"
-  },
-  {
-   "id": "f7",
-   "name": "Kanal med diagonal"
-  },
-  {
-   "id": "f1",
-   "name": "Modernt original"
-  },
-  {
-   "id": "f6",
-   "name": "Glaskort"
-  }
  ]
 }

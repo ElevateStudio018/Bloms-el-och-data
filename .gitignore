@@ -1,0 +1,4 @@
+site/api/config.php
+site/data/
+site/__pycache__/
+*.pyc

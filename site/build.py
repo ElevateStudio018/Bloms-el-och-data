@@ -10,6 +10,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from pages_extra import PAGES as EXTRA, STEPS_STANDARD
 
 OUT = Path(__file__).parent
+SITE = "https://www.blomsel.se/"
 PHONE = "0705-15 02 11"
 TEL = "tel:0705150211"
 MAIL = "info@blomsel.se"
@@ -61,7 +62,7 @@ def btns(call=True, contact=True, ghost=True, extra=""):
 
 
 def img_card(img, title, href, alt=""):
-    return (f'<a class="card" href="{href}"><div class="img"><img src="img/{img}" alt="{e(alt)}" loading="lazy"></div>'
+    return (f'<a class="card" href="{href}"><div class="img"><img src="img/{img}" alt="{e(alt or title)}" loading="lazy"></div>'
             f'<div class="row">{e(title)}<span aria-hidden="true">→</span></div></a>')
 
 
@@ -199,70 +200,36 @@ def view_section(place_phrase):
             + btns(ghost=False) + '</div></div></section>')
 
 
-# ---------------------------------------------------------------- herokarusell (startsidan)
-# De tio heroförslagen från design/hero-galleri visas på startsidan och bläddras i sidled.
-GALLERY = OUT.parent / "design" / "hero-galleri" / "index.html"
-
-
-def prefix_css(css, pre):
-    """Prefixar alla selektorer med `pre`, även inne i @media-block."""
-    out, i = [], 0
-    while i < len(css):
-        j = css.find("{", i)
-        if j < 0:
-            break
-        sel = css[i:j].strip()
-        if sel.startswith("@"):
-            depth, k = 1, j + 1
-            while depth:
-                depth += {"{": 1, "}": -1}.get(css[k], 0)
-                k += 1
-            out.append(f"{sel}{{{prefix_css(css[j + 1:k - 1], pre)}}}")
-        else:
-            k = css.find("}", j) + 1
-            sels = ",".join(f"{pre} {s.strip()}" for s in sel.split(",") if s.strip())
-            out.append(f"{sels}{css[j:k]}")
-        i = k
-    return "\n".join(out)
-
-
-def gallery_parts():
-    import re
-    src = GALLERY.read_text(encoding="utf-8")
-    style = src[src.index("<style>") + 7:src.index("</style>")]
-    css = style[style.index("/* hero body */"):style.index("/* ---------- presenter controls")]
-    css += style[style.index("/* ---------- phone ---------- */"):]
-    css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
-    slides = re.findall(r'<section class="slide" id="(f\d+)" data-name="([^"]+)">(.*?)</section>', src, flags=re.S)
-    unit = re.compile(r'(?<![\w.#-])(\d*\.?\d+)(s?)v([wh])\b')
-    css = unit.sub(lambda m: f"calc(var(--v{m.group(3)},1{m.group(2)}v{m.group(3)})*{m.group(1)})", css)
-    return prefix_css(css, ".heroes"), slides
-
-
-def localize(html):
-    import re
-    html = html.replace('<nav class="nav"></nav>', "").replace('src="img/', 'src="img/hero/')
-    html = html.replace('https://www.blomsel.se/kontakt', "kontakt.html")
-    html = re.sub(r'https://www\.blomsel\.se/([a-z-]+)', r'\1.html', html)
-    return html.replace(' target="_blank" rel="noopener"', "")
-
-
-def hero_carousel():
-    css, slides = gallery_parts()
-    (OUT / "assets" / "heroes.css").write_text("/* Genereras av build.py från design/hero-galleri */\n" + css, encoding="utf-8")
-    items = "".join(
-        f'<div class="hx" id="{sid}" data-name="{name}" role="group" aria-roledescription="bild" aria-label="Förslag {sid[1:]}: {name}">{localize(body)}</div>'
-        for sid, name, body in slides)
-    return ('<section class="heroes" aria-roledescription="karusell" aria-label="Heroförslag">'
-            f'<div class="hx-track" id="hx-track" tabindex="0">{items}</div>'
-            '<button class="hx-arrow hx-prev" type="button" aria-label="Föregående förslag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6"/></svg></button>'
-            '<button class="hx-arrow hx-next" type="button" aria-label="Nästa förslag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></button>'
-            '<div class="hx-bar"><div class="wrap"><span class="hx-lab" id="hx-lab" aria-live="polite"></span><div class="hx-dots" id="hx-dots"></div></div></div>'
-            '</section>')
-
-
 # ---------------------------------------------------------------- sidmall
-def page(slug, title, desc, body, active=None):
+def url_of(slug):
+    return SITE if slug == "index" else f"{SITE}{slug}.html"
+
+
+ORG = {
+    "@type": "Electrician", "@id": SITE + "#foretag", "name": "Bloms El & Data AB", "alternateName": "Bloms El",
+    "url": SITE, "logo": SITE + "img/logo-symbol.png", "image": SITE + "img/team-bro.jpg",
+    "telephone": "+46705150211", "email": "info@blomsel.se", "foundingDate": "2008",
+    "address": {"@type": "PostalAddress", "streetAddress": "Blomstergatan 5", "postalCode": "411 04", "addressLocality": "Göteborg", "addressCountry": "SE"},
+    "areaServed": [{"@type": "City", "name": c} for c in ["Göteborg", "Mölndal", "Partille", "Kungälv", "Kungsbacka", "Västra Frölunda", "Hisingen", "Borås"]],
+    "knowsAbout": ["Elinstallation", "Elservice och felsökning", "Belysning", "Datanät", "Kraft", "Golvvärme", "Byte av elcentral",
+                   "Elsäkerhetsintyg", "Industrielektriker", "Elbilsladdare", "Solceller", "Batterilager", "Smart teknik"],
+    "description": "Certifierad elfirma i Göteborg sedan 2008. Elinstallation, service, laddboxar och solceller för privatpersoner, fastighetsägare och företag.",
+}
+
+
+def page_ld(slug, title, desc, name, extra):
+    crumbs = [{"@type": "ListItem", "position": 1, "name": "Hem", "item": SITE}]
+    if slug != "index":
+        crumbs.append({"@type": "ListItem", "position": 2, "name": name, "item": url_of(slug)})
+    graph = [ORG, {"@type": "WebPage", "@id": url_of(slug) + "#sida", "url": url_of(slug), "name": title, "description": desc,
+                   "inLanguage": "sv-SE", "isPartOf": {"@type": "WebSite", "@id": SITE + "#webb", "url": SITE, "name": "Bloms El & Data"},
+                   "about": {"@id": SITE + "#foretag"}},
+             {"@type": "BreadcrumbList", "itemListElement": crumbs}] + (extra or [])
+    import json
+    return json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False).replace("</", "<\\/")
+
+
+def page(slug, title, desc, body, active=None, image="team-bro.jpg", name=None, ld=None):
     menu = "".join(
         f'<li><a href="{h}"{" aria-current=\"page\"" if h == active else ""}>{e(t)}</a></li>' for h, t in NAV)
     areas = "".join(f'<li><a href="{h}">{e(t)}</a></li>' for h, t in AREAS)
@@ -275,13 +242,22 @@ def page(slug, title, desc, body, active=None):
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{e(title)}</title>
 <meta name="description" content="{escape(desc)}">
+<link rel="canonical" href="{url_of(slug)}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bloms El &amp; Data">
+<meta property="og:locale" content="sv_SE">
+<meta property="og:title" content="{escape(title)}">
+<meta property="og:description" content="{escape(desc)}">
+<meta property="og:url" content="{url_of(slug)}">
+<meta property="og:image" content="{SITE}img/{image}">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{page_ld(slug, title, desc, name or title.split("|")[0].strip(), ld)}</script>
 <meta name="claude:viewport-fit-sides" content="cover">
 <script>(function(){{var d=document.documentElement;function f(){{var w=innerWidth,h=innerHeight,z=w<1100?1:Math.max(1,Math.min(w/1440,h/900));d.style.zoom=z>1.001?z:'';d.style.setProperty('--vw',w/z/100+'px');d.style.setProperty('--vh',h/z/100+'px')}}f();addEventListener('resize',f)}})()</script>
 <link rel="icon" href="img/logo-symbol.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="assets/style.css">
-{'<link rel="stylesheet" href="assets/heroes.css">' if slug == "index" else ""}
 </head>
 <body data-page="{slug}">
 <a class="skip" href="#innehall">Hoppa till innehållet</a>
@@ -317,7 +293,9 @@ PAGES = {}
 # ================================================================ HEM
 PAGES["index"] = page("index", "Elektriker Göteborg | Elfirma - Bloms El & Data",
     "Elservice i Göteborg. Nyinstallation, ombyggnation, service och rådgivning - kort sagt allt man förväntar sig av en elektriker och ofta lite till.",
-    hero_carousel()
+    hero("team-bro.jpg", "Certifierad elektriker i Göteborg",
+         "Bloms El & Data AB har sedan 2008 utfört elarbeten åt privatpersoner, fastighetsägare, restauranger, butiker och industriföretag i Göteborg med omnejd.",
+         HOME_CARDS, eyebrow="Bloms El & Data", pos="center 35%")
     + split("kraft-uttag.jpg", head("Hela kedjan", "Nyinstallation, ombyggnation, service, felsökning och rådgivning")
             + ps("Vi täcker hela kedjan från planering och ritning till installation, dokumentation och besiktning. Samtliga montörer är certifierade elektriker med ABL- eller BB1-behörighet och självklart är Bloms El & Data ansvarsförsäkrade för din skull."),
             alt="Röda kraftuttag på en vägg")
@@ -761,7 +739,15 @@ def service_page(d):
               '<a class="btn btn-line arrow" href="tjanster.html">Alla tjänster </a></div><div class="grid g4">' + "".join(rel) + '</div></div></section>')
     b += contact_cta(*d["cta"])
     active = {"tjanster": "tjanster.html", "elbilsladdare": "elbilsladdare.html"}.get(d.get("parent"))
-    return page(d["slug"], d["title"], d["desc"], b, active)
+    ld = []
+    if d.get("parent"):
+        ld.append({"@type": "Service", "@id": url_of(d["slug"]) + "#tjanst", "name": d["name"], "serviceType": d["name"],
+                   "description": d["desc"], "provider": {"@id": SITE + "#foretag"}, "url": url_of(d["slug"]),
+                   "areaServed": ORG["areaServed"]})
+    qa = list(d.get("faq") or []) + [q for _, _, items in d.get("faq_groups") or [] for q in items]
+    if qa:
+        ld.append({"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in qa]})
+    return page(d["slug"], d["title"], d["desc"], b, active, image=d["hero"], name=d["name"], ld=ld)
 
 
 for d in EXTRA:
@@ -780,9 +766,68 @@ manifest = {
                "description": re.search(r'<meta name="description" content="(.*?)">', html).group(1).replace("&amp;", "&")}
               for slug, html in PAGES.items()],
     "images": sorted(f"img/{p.relative_to(OUT / 'img').as_posix()}" for p in (OUT / "img").rglob("*") if p.is_file()),
-    "heroes": [{"id": sid, "name": name} for sid, name, _ in gallery_parts()[1]],
 }
 (OUT / "assets" / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=1), encoding="utf-8")
+# Sitemap, robots.txt, llms.txt och .htaccess för produktion
+from datetime import date
+today = date.today().isoformat()
+(OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(
+    f"  <url><loc>{url_of(p['slug'])}</loc><lastmod>{today}</lastmod><priority>{'1.0' if p['slug'] == 'index' else '0.8' if p['slug'] != 'cookiepolicy' else '0.2'}</priority></url>\n"
+    for p in manifest["pages"]) + "</urlset>\n", encoding="utf-8")
+(OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /api/\nDisallow: /data/\n\nSitemap: {SITE}sitemap.xml\n", encoding="utf-8")
+llms = ["# Bloms El & Data AB", "",
+        "> Certifierad elfirma i Göteborg sedan 2008. Elinstallation, elservice och felsökning, belysning, datanät, kraft, golvvärme, byte av elcentral, "
+        "elbilsladdare, solceller och batterilager för privatpersoner, bostadsrättsföreningar, fastighetsägare och företag i Göteborgsregionen.", "",
+        "## Fakta", "",
+        "- Företag: Bloms El & Data AB, org.nr 556754-3656",
+        "- Adress: Blomstergatan 5, 411 04 Göteborg",
+        f"- Telefon: {PHONE}", f"- E-post: {MAIL}",
+        "- Behörighet: samtliga montörer har ABL- eller BB1-behörighet",
+        "- Registrerat elinstallationsföretag hos Elsäkerhetsverket, ansvarsförsäkrat, garanti på alla arbeten, CE-märkt material",
+        "- Område: Göteborg, Mölndal, Partille, Hisingen, Västra Frölunda, Kungälv, Kungsbacka, Borås; uppdrag från Falkenberg till Uddevalla",
+        "- ROT-avdrag och Grön teknik (solceller, batterilager, laddbox) dras direkt på fakturan",
+        "- Svarar normalt samma arbetsdag med bedömning och offert", "",
+        "## Sidor", ""] + [f"- [{p['name']}]({url_of(p['slug'])}): {p['description']}" for p in manifest["pages"] if p["slug"] != "cookiepolicy"]
+(OUT / "llms.txt").write_text("\n".join(llms) + "\n", encoding="utf-8")
+slugs = "|".join(p["slug"] for p in manifest["pages"] if p["slug"] != "index")
+(OUT / ".htaccess").write_text(f"""# Genereras av build.py
+Options -Indexes
+DirectoryIndex index.html
+AddDefaultCharset utf-8
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+# https och www
+RewriteCond %{{HTTPS}} off [OR]
+RewriteCond %{{HTTP_HOST}} !^www\\. [NC]
+RewriteRule ^ https://www.blomsel.se%{{REQUEST_URI}} [R=301,L]
+# Gamla Wix-adresser (utan .html) till nya sidor
+RewriteRule ^({slugs})/?$ /$1.html [R=301,L]
+RewriteRule ^inquiry-services-page/?$ /kontakt.html [R=301,L]
+RewriteRule ^index\\.html$ / [R=301,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+<FilesMatch "^(content\\.json|users\\.json)$">
+Header set Cache-Control "no-cache"
+</FilesMatch>
+Header always set X-Content-Type-Options "nosniff"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType image/jpeg "access plus 1 year"
+ExpiresByType image/png "access plus 1 year"
+ExpiresByType text/css "access plus 1 week"
+ExpiresByType application/javascript "access plus 1 week"
+</IfModule>
+
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json text/plain image/svg+xml
+</IfModule>
+""", encoding="utf-8")
+
 if not (OUT / "content.json").exists():
     (OUT / "content.json").write_text(json.dumps({"version": 1, "updated": None, "text": {}, "link": {}, "img": {}, "meta": {},
                                                   "hero": {}, "settings": {}}, indent=1), encoding="utf-8")
