@@ -174,11 +174,12 @@ def smart_band():
             + '<div class="btns"><a class="btn btn-white arrow" href="smart-teknik.html">Läs mer </a></div></div></div></section>')
 
 
-def trust_section():
-    return ('<section class="sec gray" style="padding-block:48px"><div class="wrap"><div class="trust">'
-            '<div><img src="img/uc.png" alt="UC"><span><b>HÖGSTA KREDITVÄRDIGHET</b><small>Bloms El &amp; Data · 556754-3656</small></span></div>'
-            '<a href="https://www.elsakerhetsverket.se/" target="_blank" rel="noopener"><img src="img/kolla.png" alt=""><span><b>KOLLA ELFÖRETAGET</b><small>Kontrollera att ditt elföretag är registrerat hos Elsäkerhetsverket</small></span></a>'
-            '</div></div></section>')
+FOOT_CERTS = ('<div class="foot-certs">'
+              '<div class="cert"><img src="img/uc.png" alt=""><span><b>Högsta kreditvärdighet</b><small>UC · Bloms El &amp; Data AB · 556754-3656</small></span></div>'
+              '<a class="cert" href="https://www.elsakerhetsverket.se/" target="_blank" rel="noopener"><img src="img/kolla.png" alt=""><span><b>Kolla elföretaget</b><small>Registrerat hos Elsäkerhetsverket</small></span></a>'
+              '<div class="cert txt"><span><b>ABL / BB1</b><small>Behöriga elektriker</small></span></div>'
+              '<div class="cert txt"><span><b>Ansvarsförsäkrade</b><small>Garanti på alla arbeten</small></span></div>'
+              '</div>')
 
 
 def contact_cta(title, text):
@@ -301,6 +302,7 @@ def page(slug, title, desc, body, active=None):
 <div><h4>Tjänster</h4><ul>{servs}</ul></div>
 <div><h4>Göteborg med omnejd</h4><ul>{areas}<li><a href="elektriker-boras.html">Borås</a></li></ul></div>
 </div>
+{FOOT_CERTS}
 <div class="foot-bottom"><span>© 2026 Bloms El &amp; Data AB · Org.nr 556754-3656</span><a href="cookiepolicy.html">Cookiepolicy</a></div>
 </div></footer>
 <div class="cookie" id="cookie" hidden><span>Vi använder cookies på vår webbplats för att ge dig en bättre upplevelse. <a href="cookiepolicy.html">Cookiepolicy</a></span><button class="btn btn-white" type="button">Ok</button></div>
@@ -334,8 +336,7 @@ PAGES["index"] = page("index", "Elektriker Göteborg | Elfirma - Bloms El & Data
             + btns(call=False, ghost=False), alt="Montörer vid servicebilen nära Älvsborgsbron", media_cls="tall", badge=ROT_BADGE)
     + view_section("i Göteborg")
     + trygg_section()
-    + smart_band()
-    + trust_section(),
+    + smart_band(),
     active="index.html")
 
 
@@ -373,7 +374,6 @@ body += TJANSTER_OVERVIEW
 for n, (k, i, t, a, txt) in enumerate(SV):
     body += split(i, head("Tjänst", t) + ps(*txt) + f'<div class="btns"><a class="btn btn-line arrow" href="{SV_PAGE[k]}.html">Läs mer om {e(t.lower())} </a></div>',
                   rev=n % 2 == 1, bg="gray" if n % 2 == 1 else "", alt=a).replace('<section class="sec', f'<section id="{k}" class="sec', 1)
-body += trust_section()
 PAGES["tjanster"] = page("tjanster", "Elektriker Göteborg | Tjänster | Bloms El & Data",
     "Elektriker Göteborg, Installation, Service, Belysning, Kraft, Solceller, Elbilsladdning, Datanät, Nybyggnation", body, "tjanster.html")
 
@@ -555,7 +555,7 @@ def big_area(slug, place, title, desc, h1, intro, sec2_title, sec2, sec3_title, 
     b += view_section(f"{'på' if place == 'Hisingen' else 'i'} {place}")
     b += extra
     b += contact_cta(f"Kontakta din elektriker {'på' if place == 'Hisingen' else 'i'} {place}", cta_text)
-    b += smart_band() + trust_section()
+    b += smart_band()
     return page(slug, title, desc, b)
 
 
@@ -655,7 +655,6 @@ def small_area(slug, place, title, desc, hero_img, intro, services, doing, also,
                + ps(also, "Vi åtar oss uppdrag från Falkenberg i söder till Uddevalla i norr; Ulricehamn, Göteborg, Borås och allt där emellan.",
                     "Kontakta oss gärna så pratar vi mer om hur vi kan hjälpa er med smarta ellösningar. Och om hur du kan få trygg, säker el av erfarna elyrkesmän på hemmaplan.")
                + btns(ghost=False), alt="Montörer vid servicebilen", media_cls="tall", badge=ROT_BADGE)
-    b += trust_section()
     return page(slug, title, desc, b)
 
 
@@ -760,7 +759,7 @@ def service_page(d):
     if rel:
         b += ('<section class="sec gray"><div class="wrap"><div class="sec-head"><div class="prose">' + head("Mer från Bloms El & Data", "Relaterade tjänster") + '</div>'
               '<a class="btn btn-line arrow" href="tjanster.html">Alla tjänster </a></div><div class="grid g4">' + "".join(rel) + '</div></div></section>')
-    b += contact_cta(*d["cta"]) + trust_section()
+    b += contact_cta(*d["cta"])
     active = {"tjanster": "tjanster.html", "elbilsladdare": "elbilsladdare.html"}.get(d.get("parent"))
     return page(d["slug"], d["title"], d["desc"], b, active)
 
