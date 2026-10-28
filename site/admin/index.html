@@ -47,6 +47,8 @@
       <a href="#hero" data-view="hero"><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3zM3 15l5-5 4 4 3-3 6 6"/></svg>Herokarusell</a>
       <a href="#seo" data-view="seo"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l5 5"/></svg>SEO</a>
       <a href="#media" data-view="media"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM8.5 10a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM20 15l-5-5L5 20"/></svg>Mediabibliotek</a>
+      <a href="#ai" data-view="ai"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2 2.2.8-2.2.8L19 21l-.8-2.2-2.2-.8 2.2-.8z"/></svg>AI-assistent</a>
+      <a href="#typsnitt" data-view="typsnitt"><svg viewBox="0 0 24 24"><path d="M4 20L10 4h1l6 16M6.5 14h8"/><path d="M17 20h4"/></svg>Typsnitt</a>
       <a href="#installningar" data-view="installningar"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>Företag &amp; tema</a>
       <a href="#publicera" data-view="publicera"><svg viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"/></svg>Publicera<span class="badge" id="nav-badge" hidden></span></a>
       <a href="#historik" data-view="historik"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/></svg>Historik</a>
@@ -183,6 +185,63 @@
               <p class="muted" id="p-status" role="status"></p>
             </div>
           </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI-assistent -->
+    <section class="view ai-view" id="v-ai" hidden>
+      <div class="ai-layout">
+        <div class="panel ai-chat">
+          <div class="ai-msgs" id="ai-msgs" aria-live="polite">
+            <div class="ai-hello" id="ai-hello">
+              <b>Fråga AI-assistenten</b>
+              <p>Den känner till Bloms El &amp; Data och sajtens sidor. Be den skriva texter, förbättra SEO, svara på kundfrågor eller förklara elregler.</p>
+              <div class="ai-chips" id="ai-chips"></div>
+            </div>
+          </div>
+          <form class="ai-input" id="ai-form">
+            <label class="sr" for="ai-text">Meddelande</label>
+            <textarea id="ai-text" rows="2" placeholder="Skriv en fråga… (Enter skickar, Shift+Enter ny rad)"></textarea>
+            <div class="ai-actions">
+              <label class="sel">Sammanhang <select id="ai-page"><option value="">Ingen sida</option></select></label>
+              <button class="btn ghost sm" type="button" id="ai-clear">Ny konversation</button>
+              <button class="btn ghost sm" type="button" id="ai-stop" hidden>Stoppa</button>
+              <button class="btn primary sm" type="submit" id="ai-send">Skicka</button>
+            </div>
+          </form>
+        </div>
+        <aside class="panel stack ai-side">
+          <div class="panel-h" style="margin:0"><h2>Inställningar</h2></div>
+          <label for="ai-key">API-nyckel från Anthropic<input id="ai-key" type="password" autocomplete="off" placeholder="sk-ant-…"></label>
+          <label class="check"><input id="ai-remember" type="checkbox"> Kom ihåg nyckeln på den här datorn</label>
+          <p class="muted">Nyckeln skickas bara till Anthropic och sparas i den här webbläsaren. Skapa en på console.anthropic.com. Varje fråga kostar en liten summa.</p>
+          <label for="ai-tone">Ton<select id="ai-tone"><option value="vardaglig">Vardaglig och tydlig</option><option value="formell">Formell</option><option value="saljande">Säljande</option></select></label>
+          <p class="muted" id="ai-status"></p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Typsnitt -->
+    <section class="view" id="v-typsnitt" hidden>
+      <div class="cols wide">
+        <div class="panel stack">
+          <div class="panel-h" style="margin:0"><h2>Typsnitt på sajten</h2><button class="link" type="button" id="f-reset">Återställ till Poppins</button></div>
+          <div class="two">
+            <label for="f-head">Rubriker<select id="f-head"></select></label>
+            <label for="f-body">Brödtext<select id="f-body"></select></label>
+          </div>
+          <div class="font-preview" id="f-preview">
+            <div class="fp-nav">BLOMS EL &amp; DATA</div>
+            <div class="fp-hero"><span class="fp-eyebrow">CERTIFIERAD ELEKTRIKER</span><h3>Certifierad elektriker i Göteborg</h3>
+              <p>Bloms El &amp; Data AB har sedan 2008 utfört elarbeten åt privatpersoner, fastighetsägare, restauranger, butiker och industriföretag i Göteborg med omnejd.</p>
+              <span class="fp-btn">Ring oss</span></div>
+          </div>
+          <p class="muted">Ändringen syns direkt i förhandsvisningen under Sidor &amp; innehåll och sparas när du publicerar.</p>
+        </div>
+        <div class="panel">
+          <div class="panel-h"><h2>Välj bland typsnitt</h2><span class="muted">Klicka för rubriker, Shift-klicka för brödtext</span></div>
+          <div class="font-grid" id="f-grid"></div>
         </div>
       </div>
     </section>

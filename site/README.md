@@ -40,6 +40,17 @@ behövs en formulärtjänst (t.ex. Formspree eller Netlify Forms) när sajten pu
 - Fem felaktiga försök ger en spärr som växer från 30 sekunder upp till 15 minuter.
 - Inloggningen varar 12 timmar, eller 14 dagar med "Håll mig inloggad".
 
+### AI-assistent
+
+Chatt med Claude (Opus 5.5) som känner till företagets fakta och sajtens sidor. Välj en sida som sammanhang
+för att låta den läsa sidans text. Kräver en API-nyckel från console.anthropic.com som sparas i webbläsaren;
+anropet går direkt från webbläsaren till Anthropic.
+
+### Typsnitt
+
+Välj typsnitt för rubriker och brödtext bland 20 Google Fonts. Valet sparas i `content.json` och sajten laddar
+typsnitten när sidan öppnas.
+
 ### Spara ändringar
 
 **Publicera → Ladda ner content.json** och lägg filen i `site/` på sajten (ersätt den gamla).

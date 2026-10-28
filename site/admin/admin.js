@@ -15,7 +15,7 @@
   var DEFAULTS = { phone: '0705-15 02 11', email: 'info@blomsel.se', address: 'Blomstergatan 5', city: '411 04 Göteborg', orgnr: '556754-3656' };
   var THEME = { red: '#8B0000', yellow: '#F9CD19', ink: '#303030' };
   var GH_DEFAULT = { owner: 'ElevateStudio018', repo: 'Bloms-el-och-data', branch: 'claude/dazzling-fermi-wmmmt5', path: 'site' };
-  var VIEWS = { oversikt: 'Översikt', innehall: 'Sidor & innehåll', hero: 'Herokarusell', seo: 'SEO', media: 'Mediabibliotek', installningar: 'Företag & tema', publicera: 'Publicera', historik: 'Historik', anvandare: 'Användare' };
+  var VIEWS = { oversikt: 'Översikt', innehall: 'Sidor & innehåll', hero: 'Herokarusell', seo: 'SEO', media: 'Mediabibliotek', installningar: 'Företag & tema', publicera: 'Publicera', historik: 'Historik', anvandare: 'Användare', ai: 'AI-assistent', typsnitt: 'Typsnitt' };
 
   var S = { manifest: null, published: null, draft: null, log: [], undo: [], gh: {}, token: '', page: 'index', frameWin: null, heroWin: null, sel: null, picking: null };
 
@@ -88,6 +88,7 @@
       var out = Object.keys(names).filter(function (k) { return x[k]; }).map(function (k) { return names[k] + ': ' + x[k]; });
       if (x.theme) out.push('Tema: ' + Object.keys(x.theme).map(function (k) { return x.theme[k]; }).join(', '));
       if (x.cookie === false) out.push('Cookie-banner av');
+      if (x.fonts) out.push('Typsnitt: ' + (x.fonts.head || 'Poppins') + ' / ' + (x.fonts.body || 'Poppins'));
       return out.join(' · ');
     };
     var label = { text: 'Text', img: 'Bild', link: 'Länk', meta: c.field === 'title' ? 'SEO-titel' : 'SEO-beskrivning', hero: 'Herokarusell', settings: 'Företag & tema', uploads: 'Uppladdning' }[c.area];
@@ -303,7 +304,7 @@
     $('#view-title').textContent = VIEWS[v];
     $('#app').classList.remove('nav-open');
     if (v !== 'media') S.picking = null;
-    ({ oversikt: renderOverview, innehall: renderEditor, hero: renderHero, seo: renderSeo, media: renderMedia, installningar: renderSettings, publicera: renderPublish, historik: function () {}, anvandare: renderUsers })[v]();
+    ({ oversikt: renderOverview, innehall: renderEditor, hero: renderHero, seo: renderSeo, media: renderMedia, installningar: renderSettings, publicera: renderPublish, historik: function () {}, anvandare: renderUsers, ai: renderAi, typsnitt: renderFonts })[v]();
   }
 
   function seoIssues() {
@@ -543,6 +544,7 @@
     ['red', 'yellow', 'ink'].forEach(function (k) { var v = $('#t-' + k).value; if (v.toLowerCase() !== THEME[k].toLowerCase()) th[k] = v; });
     if (Object.keys(th).length) s.theme = th;
     if (!$('#s-cookie').checked) s.cookie = false;
+    if (S.draft.settings.fonts) s.fonts = S.draft.settings.fonts;
     S.draft.settings = s;
     commit(what, 'alla', true);
   }
@@ -790,6 +792,226 @@
       b.dataset.confirm = ''; b.textContent = 'Släng utkast';
     });
     $('#hi-load').addEventListener('click', loadHistory);
+    $('#f-head').addEventListener('change', function () { setFont('head', this.value); });
+    $('#f-body').addEventListener('change', function () { setFont('body', this.value); });
+    $('#f-reset').addEventListener('click', function () { snapshot(); var st = clone(S.draft.settings); delete st.fonts; S.draft.settings = st; commit('Återställde typsnitt', 'alla', true); renderFonts(); });
+  }
+
+
+  // ---------------------------------------------------------------- typsnitt
+  // Google Fonts som sajten kan använda. Vikterna måste finnas i respektive familj.
+  var FONTS = [
+    ['Poppins', 'Geometrisk', '400;500;600;700;800'], ['Montserrat', 'Geometrisk', '400;500;600;700;800'],
+    ['Outfit', 'Geometrisk', '400;500;600;700;800'], ['DM Sans', 'Rak och modern', '400;500;600;700;800'],
+    ['Manrope', 'Rak och modern', '400;500;600;700;800'], ['Plus Jakarta Sans', 'Rak och modern', '400;500;600;700;800'],
+    ['Work Sans', 'Rak och modern', '400;500;600;700;800'], ['Inter', 'Neutral', '400;500;600;700;800'],
+    ['Open Sans', 'Neutral', '400;500;600;700;800'], ['Lato', 'Neutral', '400;700;900'],
+    ['Nunito', 'Rundad', '400;500;600;700;800'], ['Rubik', 'Rundad', '400;500;600;700;800'],
+    ['Barlow', 'Teknisk', '400;500;600;700;800'], ['Archivo', 'Teknisk', '400;500;600;700;800'],
+    ['Oswald', 'Smal rubrik', '400;500;600;700'], ['Bebas Neue', 'Smal rubrik', '400'],
+    ['Playfair Display', 'Serif', '400;500;600;700;800'], ['Merriweather', 'Serif', '400;700;900'],
+    ['Source Serif 4', 'Serif', '400;500;600;700;800'], ['Lora', 'Serif', '400;500;600;700']
+  ];
+  var fontCss = function (names) {
+    var fams = names.filter(Boolean).filter(function (n, i, a) { return a.indexOf(n) === i; });
+    return 'https://fonts.googleapis.com/css2?' + fams.map(function (n) {
+      var f = FONTS.filter(function (x) { return x[0] === n; })[0];
+      return 'family=' + n.replace(/ /g, '+') + ':wght@' + (f ? f[2] : '400;700');
+    }).join('&') + '&display=swap';
+  };
+  function loadFontsInAdmin() {
+    if (document.getElementById('admin-font-gallery')) return;
+    for (var i = 0; i < FONTS.length; i += 10) {
+      var l = document.createElement('link');
+      l.rel = 'stylesheet';
+      l.id = i ? '' : 'admin-font-gallery';
+      l.href = fontCss(FONTS.slice(i, i + 10).map(function (f) { return f[0]; }));
+      document.head.appendChild(l);
+    }
+  }
+  function curFonts() { var f = S.draft.settings.fonts || {}; return { head: f.head || 'Poppins', body: f.body || 'Poppins' }; }
+  function setFont(which, name) {
+    snapshot();
+    var f = curFonts();
+    f[which] = name;
+    var st = clone(S.draft.settings);
+    if (f.head === 'Poppins' && f.body === 'Poppins') delete st.fonts; else st.fonts = f;
+    S.draft.settings = st;
+    commit('Bytte typsnitt för ' + (which === 'head' ? 'rubriker' : 'brödtext') + ' till ' + name, 'alla', true);
+    renderFonts();
+  }
+  function renderFonts() {
+    loadFontsInAdmin();
+    var f = curFonts();
+    var opts = FONTS.map(function (x) { return '<option value="' + esc(x[0]) + '">' + esc(x[0]) + ' · ' + esc(x[1]) + '</option>'; }).join('');
+    ['head', 'body'].forEach(function (k) { var sel = $('#f-' + k); if (!sel.options.length) sel.innerHTML = opts; sel.value = f[k]; });
+    var pv = $('#f-preview');
+    pv.style.setProperty('--fp-head', '"' + f.head + '", system-ui, sans-serif');
+    pv.style.setProperty('--fp-body', '"' + f.body + '", system-ui, sans-serif');
+    var grid = $('#f-grid');
+    grid.innerHTML = '';
+    FONTS.forEach(function (x) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'font-card' + (x[0] === f.head ? ' is-head' : '') + (x[0] === f.body ? ' is-body' : '');
+      b.innerHTML = '<span class="aa" style="font-family:\'' + esc(x[0]) + '\',sans-serif;font-weight:700">Elektriker Aa</span><b style="font-family:\'' + esc(x[0]) + '\',sans-serif">' + esc(x[0]) + '</b><small>' + esc(x[1]) + '</small>' +
+        '<span class="tags">' + (x[0] === f.head ? '<span class="pill edit">Rubriker</span>' : '') + (x[0] === f.body ? '<span class="pill">Brödtext</span>' : '') + '</span>';
+      b.addEventListener('click', function (e) { setFont(e.shiftKey ? 'body' : 'head', x[0]); });
+      grid.appendChild(b);
+    });
+  }
+
+  // ---------------------------------------------------------------- AI-assistent (Claude via Messages API)
+  var AI = { msgs: [], ctrl: null, busy: false };
+  var AI_KEY = 'bloms-admin-ai-key';
+  var AI_CHIPS = ['Skriv en kort säljande text om laddboxar för startsidan', 'Förbättra SEO-beskrivningen för sidan Solceller',
+    'Svara en kund som frågar om ROT-avdrag gäller byte av elcentral', 'Skriv ett inlägg till Facebook om golvvärme inför vintern',
+    'Vad får en privatperson göra själv med elen?'];
+  function aiSystem() {
+    var pages = S.manifest.pages.map(function (p) { return '- ' + (p.name || p.slug) + ' (' + p.file + ')'; }).join('\n');
+    var tone = { vardaglig: 'vardaglig, tydlig och personlig', formell: 'formell och saklig', saljande: 'säljande men trovärdig' }[$('#ai-tone').value];
+    return 'Du är en skrivassistent för redaktörerna på webbplatsen för Bloms El & Data AB, en elfirma i Göteborg. ' +
+      'Svara på svenska. Tonen ska vara ' + tone + '.\n\nFakta om företaget (använd bara dessa när du skriver om företaget):\n' +
+      '- Certifierade elektriker i Göteborg sedan 2008. Kontor och lager på Blomstergatan 5, 411 04 Göteborg.\n' +
+      '- Telefon 0705-15 02 11, e-post info@blomsel.se, org.nr 556754-3656.\n' +
+      '- Alla montörer har ABL- eller BB1-behörighet. Registrerade hos Elsäkerhetsverket. Ansvarsförsäkrade. Garanti på alla arbeten. CE-märkt material.\n' +
+      '- Kunder: privatpersoner, bostadsrättsföreningar, fastighetsägare, restauranger, butiker, kontor, industri, lantbrukare, kommuner, byggföretag.\n' +
+      '- Område: Falkenberg i söder till Uddevalla i norr, Ulricehamn och Borås. Materialdepåer i Mölndal, Partille, Hisingen, Västra Frölunda, Lindholmen, Kungsbacka, Kungälv och Borås.\n' +
+      '- ROT-avdrag upp till 30 % av arbetskostnaden. Grön teknik: 20 % för solceller, 50 % för batterilager och laddbox, max 50 000 kr per person och år. Bloms sköter avdragen på fakturan.\n' +
+      '- Återkommer normalt samma arbetsdag med bedömning och offert.\n\nSajtens sidor:\n' + pages + '\n\n' +
+      'Hitta inte på priser, kundomdömen, siffror eller tjänster som inte står ovan. Om något är osäkert, till exempel regler som kan ha ändrats, säg det och föreslå att kontrollera med Elsäkerhetsverket eller Skatteverket. ' +
+      'När du skriver texter till sajten: skriv färdig text utan rubriker som "Här är texten", använd korta stycken och ingen markdown-formatering om användaren inte ber om det. ' +
+      'För SEO-titlar gäller max 60 tecken och för beskrivningar 70–160 tecken.';
+  }
+  function aiBubble(role, text) {
+    var hello = $('#ai-hello');
+    if (hello) hello.remove();
+    var d = document.createElement('div');
+    d.className = 'msg ' + role;
+    d.textContent = text;
+    $('#ai-msgs').appendChild(d);
+    $('#ai-msgs').scrollTop = 1e9;
+    return d;
+  }
+  function aiTools(d, text) {
+    var t = document.createElement('div');
+    t.className = 'tools';
+    t.innerHTML = '<button type="button">Kopiera</button>';
+    t.firstChild.addEventListener('click', function () { copy(text); });
+    d.appendChild(t);
+  }
+  function pageText(slug) {
+    var p = S.manifest.pages.filter(function (x) { return x.slug === slug; })[0];
+    if (!p) return Promise.resolve('');
+    return fetch('../' + p.file, { cache: 'no-store' }).then(function (r) { return r.text(); }).then(function (html) {
+      var doc = new DOMParser().parseFromString(html, 'text/html');
+      var m = doc.querySelector('main');
+      return (p.name || slug) + ' (' + p.file + ')\nSEO-titel: ' + p.title + '\nSEO-beskrivning: ' + p.description + '\n\n' + (m ? m.innerText || m.textContent : '').replace(/\n\s*\n+/g, '\n').trim();
+    });
+  }
+  function aiSend(text) {
+    if (AI.busy || !text.trim()) return;
+    var key = $('#ai-key').value.trim();
+    if (!key) { toast('Lägg in en API-nyckel från Anthropic först.', true); $('#ai-key').focus(); return; }
+    var slug = $('#ai-page').value;
+    aiBubble('user', text);
+    $('#ai-text').value = '';
+    var bot = aiBubble('bot typing', '');
+    AI.busy = true; $('#ai-send').disabled = true; $('#ai-stop').hidden = false;
+    $('#ai-status').textContent = 'Skriver…';
+    (slug ? pageText(slug) : Promise.resolve('')).then(function (ctx) {
+      var content = ctx ? 'Text från sidan som frågan gäller:\n<sida>\n' + ctx.slice(0, 60000) + '\n</sida>\n\n' + text : text;
+      AI.msgs.push({ role: 'user', content: content });
+      AI.ctrl = new AbortController();
+      return fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST', signal: AI.ctrl.signal,
+        headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2026-10-21',
+          'anthropic-beta': 'server-side-fallback-2026-07-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+        body: JSON.stringify({ model: 'claude-opus-5-5', max_tokens: 16000, stream: true, fallbacks: 'default',
+          output_config: { effort: 'medium' }, system: aiSystem(), messages: AI.msgs })
+      });
+    }).then(function (r) {
+      if (!r.ok) return r.json().catch(function () { return {}; }).then(function (j) {
+        var m = (j.error && j.error.message) || ('HTTP ' + r.status);
+        if (r.status === 401) m = 'API-nyckeln är ogiltig.';
+        if (r.status === 429) m = 'För många frågor just nu. Vänta en stund och försök igen.';
+        throw new Error(m);
+      });
+      var reader = r.body.getReader(), dec = new TextDecoder(), buf = '', out = '', stop = null;
+      var pump = function () {
+        return reader.read().then(function (res) {
+          if (res.done) return;
+          buf += dec.decode(res.value, { stream: true });
+          var parts = buf.split('\n\n');
+          buf = parts.pop();
+          parts.forEach(function (chunk) {
+            var line = chunk.split('\n').filter(function (l) { return l.indexOf('data:') === 0; })[0];
+            if (!line) return;
+            var ev; try { ev = JSON.parse(line.slice(5)); } catch (e) { return; }
+            if (ev.type === 'content_block_delta' && ev.delta && ev.delta.type === 'text_delta') { out += ev.delta.text; bot.textContent = out; $('#ai-msgs').scrollTop = 1e9; }
+            else if (ev.type === 'message_delta' && ev.delta) stop = ev.delta.stop_reason;
+            else if (ev.type === 'error') throw new Error((ev.error && ev.error.message) || 'Fel i svaret');
+          });
+          return pump();
+        });
+      };
+      return pump().then(function () {
+        if (stop === 'refusal' && !out) out = 'Assistenten kunde inte svara på den frågan. Försök formulera den på ett annat sätt.';
+        if (stop === 'max_tokens') out += '\n\n(Svaret blev för långt och kortades av.)';
+        bot.classList.remove('typing');
+        bot.textContent = out;
+        aiTools(bot, out);
+        AI.msgs.push({ role: 'assistant', content: out || '(tomt svar)' });
+        store.set('bloms-admin-ai-chat', AI.msgs.slice(-30), sessionStorage);
+        $('#ai-status').textContent = '';
+      });
+    }).catch(function (e) {
+      bot.classList.remove('typing');
+      if (e.name === 'AbortError') { bot.textContent = (bot.textContent || '') + '\n(Stoppad)'; AI.msgs.pop(); }
+      else { bot.classList.add('err'); bot.textContent = 'Kunde inte få svar: ' + e.message; AI.msgs.pop(); }
+      $('#ai-status').textContent = '';
+    }).then(function () { AI.busy = false; $('#ai-send').disabled = false; $('#ai-stop').hidden = true; AI.ctrl = null; });
+  }
+  var aiWired = false;
+  function renderAi() {
+    if (aiWired) return;
+    aiWired = true;
+    $('#ai-key').value = store.get(AI_KEY) || store.get(AI_KEY, sessionStorage) || '';
+    $('#ai-remember').checked = !!store.get(AI_KEY);
+    var saveKey = function () {
+      var k = $('#ai-key').value.trim();
+      store.del(AI_KEY); store.del(AI_KEY, sessionStorage);
+      if (k) store.set(AI_KEY, k, $('#ai-remember').checked ? localStorage : sessionStorage);
+    };
+    $('#ai-key').addEventListener('change', saveKey);
+    $('#ai-remember').addEventListener('change', saveKey);
+    $('#ai-page').innerHTML = '<option value="">Ingen sida</option>' + S.manifest.pages.map(function (p) { return '<option value="' + esc(p.slug) + '">' + esc(p.name || p.slug) + '</option>'; }).join('');
+    AI_CHIPS.forEach(function (c) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.textContent = c;
+      b.addEventListener('click', function () {
+        if (/Solceller/.test(c)) $('#ai-page').value = 'solceller';
+        aiSend(c);
+      });
+      $('#ai-chips').appendChild(b);
+    });
+    $('#ai-form').addEventListener('submit', function (e) { e.preventDefault(); aiSend($('#ai-text').value); });
+    $('#ai-text').addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); aiSend(this.value); } });
+    $('#ai-stop').addEventListener('click', function () { if (AI.ctrl) AI.ctrl.abort(); });
+    $('#ai-clear').addEventListener('click', function () {
+      if (AI.busy) return;
+      AI.msgs = [];
+      store.del('bloms-admin-ai-chat', sessionStorage);
+      $('#ai-msgs').innerHTML = '';
+      toast('Ny konversation');
+    });
+    var saved = store.get('bloms-admin-ai-chat', sessionStorage) || [];
+    saved.forEach(function (m) {
+      var shown = m.role === 'user' ? m.content.replace(/^Text från sidan[\s\S]*?<\/sida>\n\n/, '') : m.content;
+      var d = aiBubble(m.role === 'user' ? 'user' : 'bot', shown);
+      if (m.role !== 'user') aiTools(d, m.content);
+    });
+    AI.msgs = saved;
   }
 
   // ---------------------------------------------------------------- inloggning

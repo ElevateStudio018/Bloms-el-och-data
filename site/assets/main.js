@@ -131,7 +131,24 @@
     ['red', 'yellow', 'ink'].forEach(function (k) { if (th[k]) r.setProperty('--' + k, th[k]); else r.removeProperty('--' + k); });
     var ck = document.getElementById('cookie');
     if (ck && s.cookie === false) ck.hidden = true;
+    fonts(s.fonts);
     if (BC.carousel) BC.carousel.configure(c.hero || {});
+  }
+
+  // Typsnitt valda i adminpanelen (Google Fonts)
+  var WEIGHTS = { 'Lato': '400;700;900', 'Merriweather': '400;700;900', 'Bebas Neue': '400', 'Oswald': '400;500;600;700', 'Lora': '400;500;600;700' };
+  function fonts(f) {
+    var r = document.documentElement.style, link = document.getElementById('bc-fonts');
+    if (!f || (!f.head && !f.body)) { r.removeProperty('--font'); r.removeProperty('--font-head'); if (link) link.remove(); return; }
+    var names = [f.head, f.body].filter(function (n, i, a) { return n && n !== 'Poppins' && a.indexOf(n) === i; });
+    if (names.length) {
+      var href = 'https://fonts.googleapis.com/css2?' + names.map(function (n) { return 'family=' + n.replace(/ /g, '+') + ':wght@' + (WEIGHTS[n] || '400;500;600;700;800'); }).join('&') + '&display=swap';
+      if (!link) { link = document.createElement('link'); link.id = 'bc-fonts'; link.rel = 'stylesheet'; document.head.appendChild(link); }
+      if (link.getAttribute('href') !== href) link.setAttribute('href', href);
+    }
+    var stack = function (n) { return '"' + n + '", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif'; };
+    if (f.body) r.setProperty('--font', stack(f.body)); else r.removeProperty('--font');
+    if (f.head) r.setProperty('--font-head', stack(f.head)); else r.removeProperty('--font-head');
   }
 
   // Redigeringsläge som adminpanelen slår på i sin förhandsvisning
