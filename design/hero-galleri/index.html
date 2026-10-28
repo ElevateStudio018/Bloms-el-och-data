@@ -1,0 +1,491 @@
+<title>Bloms El &amp; Data heroförslag</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
+<style>
+/* Layout: a vertical scroll-snap deck, one live hero per screen, with a presenter bar on top */
+:root{
+  --red:#8B0000; --red-hi:#ff5a4a; --ink:#303030; --gray:#424040; --light:#EFEFEF; --yellow:#F9CD19;
+  --white:#fff; --muted:#666; --shadow:rgba(20,0,0,.35);
+  --font:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --nav-h:clamp(64px,5.8vw,84px);
+  --gut:max(16px,8.3vw);
+  color-scheme:light;
+}
+html,body{height:100%}
+body{margin:0;background:var(--ink);color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased;overflow:hidden}
+*{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+h1,h2,h3{margin:0;text-wrap:balance}
+p{margin:0}
+
+.deck{height:100%;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth;overscroll-behavior:contain}
+@media (prefers-reduced-motion:reduce){.deck{scroll-behavior:auto}}
+.slide{position:relative;min-height:100%;scroll-snap-align:start;display:flex;flex-direction:column;background:var(--white);overflow:hidden}
+
+/* ---------- shared: the original red navbar ---------- */
+.nav{flex:none;height:var(--nav-h);background:var(--red);display:flex;align-items:center;justify-content:space-between;
+  padding-left:max(var(--gut),env(safe-area-inset-left,0px));padding-right:max(var(--gut),env(safe-area-inset-right,0px));position:relative;z-index:20}
+.nav .logo{display:flex;align-items:center;gap:12px;color:var(--white);font-weight:600;font-size:clamp(18px,2vw,28px);letter-spacing:.3px;white-space:nowrap}
+.nav .logo img{width:clamp(30px,2.8vw,40px);height:auto}
+.nav ul{display:flex;gap:clamp(16px,2.1vw,30px);list-style:none;margin:0;padding:0;color:var(--white);font-weight:500;font-size:15px}
+.nav ul a{opacity:1;transition:opacity .15s}.nav ul a:hover{opacity:.7}
+.nav ul li:first-child a{opacity:.6}
+.nav .menu{display:none;background:none;border:0;color:var(--white);font:inherit;font-weight:600;font-size:15px;cursor:pointer;padding:8px 0}
+.nav .drop{display:none}
+@media (max-width:980px){
+  .nav ul{display:none}.nav .menu{display:block}
+  .nav.open .drop{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--red);
+    padding:8px max(var(--gut),env(safe-area-inset-left,0px)) 18px;gap:4px;border-top:1px solid rgba(255,255,255,.15)}
+  .nav.open .drop a{color:var(--white);font-weight:500;padding:10px 0}
+}
+
+/* hero body */
+.h{position:relative;flex:1;display:flex;min-height:560px}
+.pad{padding-left:max(var(--gut),env(safe-area-inset-left,0px));padding-right:max(var(--gut),env(safe-area-inset-right,0px))}
+.cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.shade{position:absolute;inset:0;pointer-events:none}
+
+/* buttons */
+.btns{display:flex;flex-wrap:wrap;gap:14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 30px;border-radius:10px;font-weight:600;font-size:15px;white-space:nowrap;
+  border:1.5px solid transparent;transition:transform .15s ease,background .15s,color .15s,border-color .15s;cursor:pointer}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible,.nav a:focus-visible,.ctrl button:focus-visible,.dots button:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.b-red{background:var(--red);color:var(--white)}.b-red:hover{background:#a30d0d}
+.b-white{background:var(--white);color:var(--red)}
+.b-yellow{background:var(--yellow);color:var(--ink)}
+.b-ghost{border-color:rgba(255,255,255,.65);color:var(--white)}.b-ghost:hover{background:rgba(255,255,255,.12)}
+.b-line{border-color:#cfcfcf;color:var(--ink)}.b-line:hover{border-color:var(--red);color:var(--red)}
+.arrow::after{content:"→"}
+
+.chk{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500}
+.chk::before{content:"";width:18px;height:18px;border-radius:50%;flex:none;background:var(--red) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E") center/11px no-repeat}
+
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.3em;text-transform:uppercase}
+.lead{font-size:clamp(15px,1.25vw,18px);line-height:1.7;max-width:62ch}
+
+/* ===== Förslag 20: röd duotone ===== */
+#f20 .cover{filter:grayscale(1) contrast(1.1)}
+#f20 .shade{background:linear-gradient(135deg,rgba(139,0,0,.92),rgba(60,0,0,.78));mix-blend-mode:multiply}
+#f20 .h{flex-direction:column;justify-content:center;align-items:center;text-align:center;color:var(--white);padding-block:60px 40px;gap:40px}
+#f20 .c{position:relative;display:flex;flex-direction:column;align-items:center;gap:22px}
+#f20 h1{font-size:clamp(40px,5.8vw,84px);font-weight:800;letter-spacing:-.035em;line-height:1.02}
+#f20 .lead{opacity:.92}
+#f20 .cards{position:relative;width:100%;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;text-align:left}
+#f20 .cards div{background:var(--white);color:var(--ink);border-radius:16px;padding:20px 22px;font-weight:600;font-size:15px}
+#f20 .cards i{display:block;font-style:normal;color:var(--red);font-size:13px;margin-bottom:6px}
+
+/* ===== Förslag 19: lokal elektriker + ROT ===== */
+#f19 .cover{object-position:center 60%}
+#f19 .shade{background:linear-gradient(90deg,rgba(0,0,0,.72) 0%,rgba(0,0,0,.25) 60%,rgba(0,0,0,.1))}
+#f19 .h{align-items:center;color:var(--white);padding-block:60px}
+#f19 .c{position:relative;max-width:640px;display:flex;flex-direction:column;gap:24px}
+#f19 h1{font-size:clamp(40px,4.9vw,70px);font-weight:700;letter-spacing:-.03em;line-height:1.05}
+#f19 .lead{opacity:.88}
+#f19 .proof{display:flex;flex-wrap:wrap;gap:14px;margin-top:20px}
+#f19 .proof div{display:flex;gap:12px;align-items:center;background:rgba(255,255,255,.13);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.18);padding:12px 18px;border-radius:12px;font-size:13px}
+#f19 .proof b{font-size:14px;margin-right:6px}
+#f19 .proof svg{width:22px;height:22px;flex:none}
+#f19 .rot{position:absolute;right:13%;top:12%;width:clamp(120px,13vw,190px);aspect-ratio:1;border-radius:50%;background:var(--yellow);color:var(--ink);
+  display:grid;place-items:center;text-align:center;font-weight:800;font-size:clamp(22px,2.1vw,30px);line-height:1.05;transform:rotate(-10deg);box-shadow:0 25px 50px rgba(0,0,0,.35);z-index:2}
+#f19 .rot small{display:block;font-size:clamp(11px,.9vw,13px);font-weight:600;margin-top:4px}
+
+/* ===== Förslag 18: tre vägar in ===== */
+#f18 .h{display:grid;grid-template-columns:repeat(3,1fr)}
+#f18 .top{position:absolute;z-index:5;inset:0 0 auto;text-align:center;padding-block:clamp(36px,4.5vw,64px) 120px;color:var(--white);background:linear-gradient(180deg,rgba(0,0,0,.72),transparent);pointer-events:none}
+#f18 .top h1{font-size:clamp(30px,3.6vw,52px);font-weight:700}
+#f18 .top p{opacity:.9;margin-top:6px}
+#f18 .p{position:relative;overflow:hidden;display:flex;align-items:flex-end;min-height:280px}
+#f18 .p img{transition:transform .6s ease}
+#f18 .p:hover img{transform:scale(1.05)}
+#f18 .p .shade{background:linear-gradient(0deg,rgba(0,0,0,.86),rgba(0,0,0,.15) 60%)}
+#f18 .t{position:relative;z-index:2;color:var(--white);padding:0 clamp(20px,3vw,44px) clamp(32px,4vw,56px);display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+#f18 .t h2{font-size:clamp(26px,2.6vw,38px);font-weight:700}
+#f18 .t p{opacity:.82;font-size:15px;line-height:1.6;max-width:40ch}
+#f18 .t .btn{padding:12px 22px;margin-top:6px}
+
+/* ===== Förslag 16: personligt porträtt ===== */
+#f16 .h{display:grid;grid-template-columns:1fr 1fr}
+#f16 .im{position:relative;min-height:320px}
+#f16 .im img{filter:grayscale(1);object-position:40% center}
+#f16 .im .shade{background:linear-gradient(0deg,rgba(139,0,0,.6),transparent 55%)}
+#f16 .im .n{position:absolute;z-index:2;left:clamp(20px,4vw,60px);bottom:clamp(24px,4vw,50px);color:var(--white)}
+#f16 .im .n b{display:block;font-size:clamp(18px,1.6vw,22px)}
+#f16 .im .n small{opacity:.88;font-size:13px}
+#f16 .c{display:flex;flex-direction:column;justify-content:center;gap:24px;padding-block:60px;padding-left:clamp(24px,5.5vw,80px);padding-right:max(var(--gut),env(safe-area-inset-right,0px))}
+#f16 .q{font-size:84px;color:var(--red);line-height:.5;font-weight:700;height:36px}
+#f16 h1{font-size:clamp(30px,3.2vw,46px);font-weight:600;line-height:1.25;letter-spacing:-.02em;color:var(--ink)}
+#f16 h1 span{color:var(--red)}
+#f16 .lead{color:var(--muted)}
+
+/* ===== Förslag 15: tjänstekort ===== */
+#f15 .h{flex-direction:column}
+#f15 .bg{position:absolute;inset:0 0 22% 0;overflow:hidden}
+#f15 .bg .shade{background:linear-gradient(90deg,rgba(0,0,0,.75),rgba(0,0,0,.2))}
+#f15 .c{position:relative;z-index:2;color:var(--white);padding-block:clamp(40px,6vw,90px) 40px;display:flex;flex-direction:column;gap:22px;max-width:calc(760px + 2*var(--gut))}
+#f15 h1{font-size:clamp(36px,4.3vw,62px);font-weight:700;line-height:1.08}
+#f15 .lead{opacity:.88}
+#f15 .sv{position:relative;z-index:3;margin-top:auto;padding-bottom:clamp(30px,4vw,60px);display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+#f15 .sv a{background:var(--white);border-radius:18px;overflow:hidden;box-shadow:0 30px 50px -20px var(--shadow);transition:transform .2s}
+#f15 .sv a:hover{transform:translateY(-6px)}
+#f15 .sv img{width:100%;aspect-ratio:16/9;object-fit:cover}
+#f15 .sv div{padding:18px 20px;display:flex;justify-content:space-between;font-weight:600;color:var(--ink)}
+#f15 .sv span{color:var(--red)}
+
+/* ===== Förslag 13: minimal helbild ===== */
+#f13 .shade{background:rgba(0,0,0,.45)}
+#f13 .h{align-items:center;justify-content:center;text-align:center;color:var(--white);padding-block:60px}
+#f13 .c{position:relative;display:flex;flex-direction:column;align-items:center;gap:18px}
+#f13 h1{font-size:clamp(44px,7.6vw,110px);font-weight:800;letter-spacing:-.04em;line-height:1}
+#f13 h2{font-size:clamp(13px,1.7vw,24px);font-weight:300;letter-spacing:.35em}
+#f13 .btns{justify-content:center;margin-top:26px}
+#f13 .sc{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-size:12px;letter-spacing:.25em;opacity:.8}
+#f13 .sc::after{content:"";display:block;width:1px;height:46px;background:var(--white);margin:10px auto 0}
+
+/* ===== Förslag 8: solnedgång + siffror ===== */
+#f8 .shade{background:linear-gradient(0deg,rgba(0,0,0,.82) 0%,rgba(0,0,0,.1) 62%)}
+#f8 .h{flex-direction:column;justify-content:flex-end;color:var(--white)}
+#f8 .c{position:relative;display:flex;flex-direction:column;gap:20px;max-width:calc(800px + 2*var(--gut));padding-bottom:50px}
+#f8 h1{font-size:clamp(40px,5.3vw,76px);font-weight:700;letter-spacing:-.03em;line-height:1.02}
+#f8 .lead{opacity:.85}
+#f8 .st{position:relative;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.22)}
+#f8 .st div{padding:26px 0 30px}
+#f8 .st div+div{border-left:1px solid rgba(255,255,255,.22);padding-left:clamp(16px,2.8vw,40px)}
+#f8 .st b{display:block;font-size:clamp(22px,2.1vw,30px)}
+#f8 .st small{opacity:.72;font-size:13px}
+
+/* ===== Förslag 7: kanal med diagonal ===== */
+#f7 .cover{object-position:70% center}
+#f7 .diag{position:absolute;inset:0 auto 0 0;width:53%;background:var(--red);clip-path:polygon(0 0,100% 0,78% 100%,0 100%)}
+#f7 .h{align-items:center;padding-block:60px}
+#f7 .c{position:relative;z-index:2;max-width:520px;color:var(--white);display:flex;flex-direction:column;gap:22px}
+#f7 .eyebrow{color:var(--yellow);font-size:12px}
+#f7 h1{font-size:clamp(36px,4.3vw,62px);font-weight:700;line-height:1.08}
+#f7 .lead{opacity:.9}
+
+/* ===== Förslag 1: modernt original ===== */
+#f1 .shade{background:linear-gradient(180deg,rgba(0,0,0,.4),rgba(0,0,0,.66))}
+#f1 .h{flex-direction:column;color:var(--white)}
+#f1 .c{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:20px;padding-block:60px}
+#f1 .eyebrow{font-size:clamp(11px,1vw,14px);opacity:.88}
+#f1 h1{font-size:clamp(44px,5.6vw,80px);font-weight:700;letter-spacing:-.03em;line-height:1.05}
+#f1 .lead{opacity:.92}
+#f1 .btns{justify-content:center;margin-top:12px}
+#f1 .u{position:relative;background:rgba(255,255,255,.96);color:var(--ink);display:flex;flex-wrap:wrap;justify-content:center;gap:14px 46px;padding-block:24px}
+
+/* ===== Förslag 6: glaskort ===== */
+#f6 .shade{background:rgba(0,0,0,.3)}
+#f6 .h{align-items:center;justify-content:center;padding-block:60px}
+#f6 .card{position:relative;width:min(820px,100%);padding:clamp(32px,4vw,56px) clamp(22px,4.4vw,64px);border-radius:28px;text-align:center;color:var(--white);
+  background:rgba(255,255,255,.15);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.32);display:flex;flex-direction:column;align-items:center;gap:16px}
+#f6 h1{font-size:clamp(32px,4.2vw,60px);font-weight:700;letter-spacing:-.01em}
+#f6 h2{font-size:clamp(17px,1.5vw,22px);font-weight:400;opacity:.92}
+#f6 .lead{opacity:.92;margin-block:8px 16px}
+#f6 .btns{justify-content:center}
+
+/* ---------- presenter controls ---------- */
+.ctrl{position:fixed;z-index:100;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);
+  display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:rgba(24,22,22,.88);color:var(--white);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 12px 40px rgba(0,0,0,.35);font-size:14px;transition:opacity .25s,transform .25s;max-width:calc(100vw - 32px)}
+.ctrl button{background:none;border:0;color:inherit;font:inherit;cursor:pointer;border-radius:999px;height:40px;min-width:40px;padding:0 12px;display:grid;place-items:center}
+.ctrl button:hover{background:rgba(255,255,255,.12)}
+.ctrl .lab{padding:0 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.ctrl .lab b{font-variant-numeric:tabular-nums;color:var(--yellow);margin-right:8px}
+.ctrl .sep{width:1px;height:22px;background:rgba(255,255,255,.2);margin:0 4px}
+.ctrl svg{width:18px;height:18px}
+.dots{position:fixed;z-index:100;right:calc(18px + env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;transition:opacity .25s}
+.dots button{width:12px;height:12px;border-radius:50%;border:2px solid var(--white);background:transparent;padding:0;cursor:pointer;box-shadow:0 0 0 1px rgba(0,0,0,.25);position:relative}
+.dots button[aria-current="true"]{background:var(--white);transform:scale(1.25)}
+.dots button span{position:absolute;right:22px;top:50%;transform:translateY(-50%);background:rgba(24,22,22,.9);color:var(--white);font:500 12px var(--font);padding:5px 10px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s}
+.dots button:hover span{opacity:1}
+body.clean .ctrl{opacity:0;transform:translate(-50%,20px);pointer-events:none}
+body.clean .dots{opacity:0;pointer-events:none}
+.peek{position:fixed;z-index:101;left:calc(16px + env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));display:none;
+  background:rgba(24,22,22,.75);color:var(--white);border:0;border-radius:999px;font:500 12px var(--font);padding:8px 14px;cursor:pointer}
+body.clean .peek{display:block}
+
+/* ---------- phone ---------- */
+@media (max-width:820px){
+  .h{min-height:calc(100svh - var(--nav-h))}
+  .btn{padding:14px 22px}
+  .dots{display:none}
+  #f20 .cards{grid-template-columns:1fr 1fr;gap:10px}#f20 .cards div{padding:14px;font-size:13px}
+  #f20 .h{padding-bottom:90px}
+  #f19 .rot{right:16px;top:16px;width:104px;font-size:20px}
+  #f19 .c{padding-top:90px;padding-bottom:70px}
+  #f18 .h{grid-template-columns:1fr}
+  #f18 .top{position:relative;background:var(--ink);padding-block:28px;grid-row:1}
+  #f18 .p{min-height:300px}
+  #f18 .p:last-child{padding-bottom:70px}
+  #f16 .h{grid-template-columns:1fr}
+  #f16 .c{padding-left:max(16px,env(safe-area-inset-left,0px));padding-bottom:100px}
+  #f15 .bg{inset:0 0 40% 0}
+  #f15 .sv{grid-template-columns:1fr 1fr;gap:12px;padding-bottom:90px}
+  #f15 .sv div{padding:12px 14px;font-size:14px}
+  #f8 .st{grid-template-columns:1fr 1fr;padding-bottom:70px}
+  #f8 .st div:nth-child(3){border-left:0;padding-left:0}
+  #f7 .diag{width:100%;clip-path:none;opacity:.88}
+  #f1 .u{justify-content:flex-start;gap:10px 22px;padding-bottom:84px}
+  #f6 .h{padding-bottom:90px}
+}
+</style>
+
+<main class="deck" id="deck">
+
+<!-- Förslag 20 -->
+<section class="slide" id="f20" data-name="Röd duotone">
+  <nav class="nav"></nav>
+  <div class="h pad">
+    <img class="cover" src="img/team-wide.jpg" alt="Tre montörer från Bloms El &amp; Data bär verktyg över en bro">
+    <div class="shade"></div>
+    <div class="c">
+      <h1>Certifierad elektriker<br>i Göteborg</h1>
+      <p class="lead">Bloms El &amp; Data AB har sedan 2008 utfört elarbeten åt privatpersoner, fastighetsägare, restauranger, butiker och industriföretag i Göteborg med omnejd.</p>
+      <div class="btns"><a class="btn b-yellow" href="tel:0705150211">Ring oss</a><a class="btn b-ghost arrow" href="https://www.blomsel.se/kontakt" target="_blank" rel="noopener">Kontakta oss </a></div>
+    </div>
+    <div class="cards"><div><i>01</i>CE-märkt material</div><div><i>02</i>Garanti på alla arbeten</div><div><i>03</i>Registrerad hos Elsäkerhetsverket</div><div><i>04</i>ABL / BB1-behörighet</div></div>
+  </div>
+</section>
+
+<!-- Förslag 19 -->
+<section class="slide" id="f19" data-name="Lokal elektriker + ROT">
+  <nav class="nav"></nav>
+  <div class="h pad">
+    <img class="cover" src="img/alvsborg.jpg" alt="Montörer vid Bloms El &amp; Datas servicebil nära Älvsborgsbron">
+    <div class="shade"></div>
+    <div class="rot"><div>Rot?<small>Avdrag direkt<br>på fakturan</small></div></div>
+    <div class="c">
+      <h1>Din lokala elektriker i Göteborg</h1>
+      <p class="lead">Bloms El &amp; Data AB har sedan 2008 utfört elarbeten åt privatpersoner, fastighetsägare, restauranger, butiker och industriföretag i Göteborg med omnejd.</p>
+      <div class="btns"><a class="btn b-red" href="tel:0705150211">Ring oss</a><a class="btn b-ghost arrow" href="https://www.blomsel.se/kontakt" target="_blank" rel="noopener">Kontakta oss </a></div>
+      <div class="proof">
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="#F9CD19" stroke-width="2"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><span><b>Högsta kreditvärdighet</b>UC · 556754-3656</span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="#F9CD19" stroke-width="2"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l5 5"/></svg><span><b>Kolla elföretaget</b>Registrerad hos Elsäkerhetsverket</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Förslag 18 -->
+<section class="slide" id="f18" data-name="Tre vägar in">
+  <nav class="nav"></nav>
+  <div class="h">
+    <div class="top pad"><h1>Certifierad elektriker i Göteborg</h1><p>Vad behöver du hjälp med?</p></div>
+    <a class="p" href="https://www.blomsel.se/tjanster" target="_blank" rel="noopener"><img class="cover" src="img/street.jpg" alt="Montörer lastar servicebilen på en gata i Göteborg"><div class="shade"></div>
+      <div class="t"><h2>Privatperson</h2><p>Kök och badrum, elservice, laddbox och solceller, med ROT-avdrag direkt på fakturan.</p><span class="btn b-white arrow">Läs mer </span></div></a>
+    <a class="p" href="https://www.blomsel.se/tjanster" target="_blank" rel="noopener"><img class="cover" src="img/store.jpg" alt="Servicebil utanför butiker i Göteborg"><div class="shade"></div>
+      <div class="t"><h2>Företag</h2><p>Restauranger, butiker och industri. Kraft, datanät och dokumentation.</p><span class="btn b-white arrow">Läs mer </span></div></a>
+    <a class="p" href="https://www.blomsel.se/tjanster" target="_blank" rel="noopener"><img class="cover" src="img/alvsborg.jpg" alt="Montörer vid servicebilen"><div class="shade"></div>
+      <div class="t"><h2>Fastighetsägare</h2><p>Nyinstallation, ombyggnation, besiktning och elsäkerhetsintyg.</p><span class="btn b-white arrow">Läs mer </span></div></a>
+  </div>
+</section>
+
+<!-- Förslag 16 -->
+<section class="slide" id="f16" data-name="Personligt porträtt">
+  <nav class="nav"></nav>
+  <div class="h">
+    <div class="im"><img class="cover" src="img/portrait.jpg" alt="Porträtt av montör från Bloms El &amp; Data"><div class="shade"></div>
+      <div class="n"><b>Bloms El &amp; Data AB</b><small>Certifierad elektriker i Göteborg sedan 2008</small></div></div>
+    <div class="c">
+      <div class="q" aria-hidden="true">“</div>
+      <h1>Vi vill helt enkelt vara en elektriker du <span>känner förtroende för</span> och anlitar igen.</h1>
+      <p class="lead">Bloms El &amp; Data AB har sedan 2008 utfört elarbeten åt privatpersoner, fastighetsägare, restauranger, butiker och industriföretag i Göteborg med omnejd.</p>
+      <div class="btns"><a class="btn b-red" href="tel:0705150211">Ring oss</a><a class="btn b-line arrow" href="https://www.blomsel.se/kontakt" target="_blank" rel="noopener">Kontakta oss </a></div>
+    </div>
+  </div>
+</section>
+
+<!-- Förslag 15 -->
+<section class="slide" id="f15" data-name="Tjänstekort">
+  <nav class="nav"></nav>
+  <div class="h">
+    <div class="bg"><img class="cover" src="img/team-wide.jpg" alt="Tre montörer från Bloms El &amp; Data på en bro"><div class="shade"></div></div>
+    <div class="c pad">
+      <h1>Certifierad elektriker i Göteborg</h1>
+      <p class="lead">Bloms El &amp; Data AB har sedan 2008 utfört elarbeten åt privatpersoner, fastighetsägare, restauranger, butiker och industriföretag i Göteborg med omnejd.</p>
+      <div class="btns"><a class="btn b-red" href="tel:0705150211">Ring oss</a><a class="btn b-ghost arrow" href="https://www.blomsel.se/kontakt" target="_blank" rel="noopener">Kontakta oss </a></div>
+    </div>
+    <div class="sv pad">
+      <a href="https://www.blomsel.se/tjanster" target="_blank" rel="noopener"><img src="img/doc.jpg" alt=""><div>Elservice<span>→</span></div></a>
+      <a href="https://www.blomsel.se/elbilsladdare" target="_blank" rel="noopener"><img src="img/laddbox.jpg" alt=""><div>Elbilsladdare<span>→</span></div></a>
+      <a href="https://www.blomsel.se/solceller" target="_blank" rel="noopener"><img src="img/solar.jpg" alt=""><div>Solceller<span>→</span></div></a>
+      <a href="https://www.blomsel.se/smart-teknik" target="_blank" rel="noopener"><img src="img/smart.jpg" alt=""><div>Smart Teknik<span>→</span></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- Förslag 13 -->
+<section class="slide" id="f13" data-name="Minimal helbild">
+  <nav class="nav"></nav>
+  <div class="h pad">
+    <img class="cover" src="img/cable.jpg" alt="Montör bär en kabelrulle">
+    <div class="shade"></div>
+    <div class="c">
+      <h1>BLOMS EL &amp; DATA</h1>
+      <h2>CERTIFIERAD ELEKTRIKER · GÖTEBORG</h2>
+      <div class="btns"><a class="btn b-red" href="tel:0705150211">Ring oss</a><a class="btn b-ghost arrow" href="https://www.blomsel.se/kontakt" target="_blank" rel="noopener">Kontakta oss </a></div>
+    </div>
+    <div class="sc">SCROLLA</div>
+  </div>
+</section>
+
+<!-- Förslag 8 -->
+<section class="slide" id="f8" data-name="Solnedgång + siffror">
+  <nav class="nav"></nav>
+  <div class="h pad">
+    <img class="cover" src="img/roof2.jpg" alt="Montörer installerar solpaneler på ett tak i solnedgång">
+    <div class="shade"></div>
+    <div class="c">
+      <h1>Trygg el, från tak till uttag.</h1>
+      <p class="lead">Elinstallationer, solceller och laddboxar i hela Göteborgsregionen.</p>
+      <div class="btns"><a class="btn b-red" href="tel:0705150211">Ring oss</a><a class="btn b-ghost arrow" href="https://www.blomsel.se/kontakt" target="_blank" rel="noopener">Kontakta oss </a></div>
+    </div>
+    <div class="st"><div><b>2008</b><small>Sedan år</small></div><div><b>ABL/BB1</b><small>Behöriga montörer</small></div><div><b>CE</b><small>Märkt material</small></div><div><b>ROT</b><small>Avdrag direkt på fakturan</small></div></div>
+  </div>
+</section>
+
+<!-- Förslag 7 -->
+<section class="slide" id="f7" data-name="Kanal med diagonal">
+  <nav class="nav"></nav>
+  <div class="h pad">
+    <img class="cover" src="img/canal.jpg" alt="Bloms El &amp; Datas servicebil vid en kanal i Göteborg">
+    <div class="diag"></div>
+    <div class="c">
+      <span class="eyebrow">Hela Göteborgsregionen</span>
+      <h1>Elektriker i Göteborg för privat och företag</h1>
+      <p class="lead">Nyinstallation, ombyggnation, service, felsökning och rådgivning. Från planering och ritning till installation, dokumentation och besiktning.</p>
+      <div class="btns"><a class="btn b-white" href="tel:0705150211">Ring oss</a><a class="btn b-ghost arrow" href="https://www.blomsel.se/kontakt" target="_blank" rel="noopener">Kontakta oss </a></div>
+    </div>
+  </div>
+</section>
+
+<!-- Förslag 1 -->
+<section class="slide" id="f1" data-name="Modernt original">
+  <nav class="nav"></nav>
+  <div class="h">
+    <img class="cover" src="img/team-wide.jpg" alt="Tre montörer från Bloms El &amp; Data på en bro">
+    <div class="shade"></div>
+    <div class="c pad">
+      <span class="eyebrow">Certifierad elektriker · Göteborg</span>
+      <h1>Bloms El &amp; Data</h1>
+      <p class="lead">Bloms El &amp; Data AB har sedan 2008 utfört elarbeten åt privatpersoner, fastighetsägare, restauranger, butiker och industriföretag i Göteborg med omnejd.</p>
+      <div class="btns"><a class="btn b-white" href="tel:0705150211">Ring oss</a><a class="btn b-ghost arrow" href="https://www.blomsel.se/kontakt" target="_blank" rel="noopener">Kontakta oss </a></div>
+    </div>
+    <div class="u pad"><span class="chk">CE-märkt material</span><span class="chk">Garanti på alla arbeten</span><span class="chk">Registrerad hos Elsäkerhetsverket</span><span class="chk">ABL / BB1-behörighet</span></div>
+  </div>
+</section>
+
+<!-- Förslag 6 -->
+<section class="slide" id="f6" data-name="Glaskort">
+  <nav class="nav"></nav>
+  <div class="h pad">
+    <img class="cover" src="img/team-wide.jpg" alt="Tre montörer från Bloms El &amp; Data på en bro">
+    <div class="shade"></div>
+    <div class="card">
+      <h1>BLOMS EL &amp; DATA</h1>
+      <h2>Certifierad Elektriker Göteborg</h2>
+      <p class="lead">Bloms El &amp; Data AB har sedan 2008 utfört elarbeten åt privatpersoner, fastighetsägare, restauranger, butiker och industriföretag i Göteborg med omnejd.</p>
+      <div class="btns"><a class="btn b-red" href="tel:0705150211">Ring oss</a><a class="btn b-ghost arrow" href="https://www.blomsel.se/kontakt" target="_blank" rel="noopener">Kontakta oss </a></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="ctrl" role="toolbar" aria-label="Bläddra mellan förslag">
+  <button id="prev" aria-label="Föregående förslag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6"/></svg></button>
+  <div class="lab" id="lab" aria-live="polite"></div>
+  <button id="next" aria-label="Nästa förslag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></button>
+  <span class="sep"></span>
+  <button id="full" aria-label="Helskärm" title="Helskärm (F)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+  <button id="hide" title="Dölj kontroller (H)">Dölj</button>
+</div>
+<nav class="dots" id="dots" aria-label="Förslag"></nav>
+<button class="peek" id="peek">Visa kontroller</button>
+
+<script>
+(function(){
+  var NAV = '<a class="logo" href="https://www.blomsel.se/" target="_blank" rel="noopener"><img src="img/logo-white.png" alt="">BLOMS EL &amp; DATA</a>' +
+    '<ul><li><a href="https://www.blomsel.se/" target="_blank" rel="noopener">Hem</a></li><li><a href="https://www.blomsel.se/tjanster" target="_blank" rel="noopener">Tjänster</a></li>' +
+    '<li><a href="https://www.blomsel.se/smart-teknik" target="_blank" rel="noopener">Smart Teknik</a></li><li><a href="https://www.blomsel.se/kontakt" target="_blank" rel="noopener">Kontakt</a></li>' +
+    '<li><a href="https://www.blomsel.se/skattereduktion" target="_blank" rel="noopener">Rot</a></li><li><a href="https://www.blomsel.se/solceller" target="_blank" rel="noopener">Solceller</a></li>' +
+    '<li><a href="https://www.blomsel.se/elbilsladdare" target="_blank" rel="noopener">Elbilsladdare</a></li></ul>' +
+    '<button class="menu" type="button" aria-expanded="false">Meny ☰</button>' +
+    '<div class="drop"><a href="https://www.blomsel.se/tjanster" target="_blank" rel="noopener">Tjänster</a><a href="https://www.blomsel.se/smart-teknik" target="_blank" rel="noopener">Smart Teknik</a>' +
+    '<a href="https://www.blomsel.se/kontakt" target="_blank" rel="noopener">Kontakt</a><a href="https://www.blomsel.se/skattereduktion" target="_blank" rel="noopener">Rot</a>' +
+    '<a href="https://www.blomsel.se/solceller" target="_blank" rel="noopener">Solceller</a><a href="https://www.blomsel.se/elbilsladdare" target="_blank" rel="noopener">Elbilsladdare</a></div>';
+  var deck = document.getElementById('deck');
+  var slides = [].slice.call(document.querySelectorAll('.slide'));
+  var lab = document.getElementById('lab'), dots = document.getElementById('dots');
+  var cur = 0;
+
+  slides.forEach(function(s, i){
+    var n = s.querySelector('.nav'); n.innerHTML = NAV;
+    var m = n.querySelector('.menu');
+    m.addEventListener('click', function(){ var o = n.classList.toggle('open'); m.setAttribute('aria-expanded', o); });
+    var d = document.createElement('button');
+    d.setAttribute('aria-label', 'Förslag ' + s.id.slice(1) + ': ' + s.dataset.name);
+    d.innerHTML = '<span>' + s.id.slice(1) + ' · ' + s.dataset.name + '</span>';
+    d.addEventListener('click', function(){ go(i); });
+    dots.appendChild(d);
+  });
+
+  function label(i){
+    var s = slides[i];
+    lab.innerHTML = '<b>' + (i + 1) + ' / ' + slides.length + '</b>Förslag ' + s.id.slice(1) + ' · ' + s.dataset.name;
+    [].forEach.call(dots.children, function(d, j){ d.setAttribute('aria-current', j === i ? 'true' : 'false'); });
+  }
+  function go(i){
+    i = Math.max(0, Math.min(slides.length - 1, i));
+    slides[i].scrollIntoView({block:'start'});
+  }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if (e.isIntersecting && e.intersectionRatio > 0.5){
+        cur = slides.indexOf(e.target); label(cur);
+        var h = '#forslag-' + e.target.id.slice(1);
+        if (location.hash !== h) { try { history.replaceState(null, '', h); } catch(_){} }
+      }
+    });
+  }, {root:deck, threshold:[0.5]});
+  slides.forEach(function(s){ io.observe(s); });
+
+  document.getElementById('prev').onclick = function(){ go(cur - 1); };
+  document.getElementById('next').onclick = function(){ go(cur + 1); };
+  function toggleClean(){ document.body.classList.toggle('clean'); }
+  document.getElementById('hide').onclick = toggleClean;
+  document.getElementById('peek').onclick = toggleClean;
+  function full(){
+    var el = document.documentElement;
+    try {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else if (el.requestFullscreen) el.requestFullscreen().catch(function(){});
+    } catch(_){}
+  }
+  document.getElementById('full').onclick = full;
+
+  document.addEventListener('keydown', function(e){
+    if (e.target.closest && e.target.closest('input,textarea')) return;
+    var k = e.key;
+    if (k === 'ArrowDown' || k === 'ArrowRight' || k === 'PageDown' || k === ' ') { e.preventDefault(); go(cur + 1); }
+    else if (k === 'ArrowUp' || k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); go(cur - 1); }
+    else if (k === 'Home') { e.preventDefault(); go(0); }
+    else if (k === 'End') { e.preventDefault(); go(slides.length - 1); }
+    else if (k === 'h' || k === 'H') toggleClean();
+    else if (k === 'f' || k === 'F') full();
+    else if (/^[0-9]$/.test(k)) go(k === '0' ? 9 : +k - 1);
+  });
+
+  function fromHash(){
+    var m = /^#forslag-(\d+)$/.exec(location.hash);
+    var i = m ? slides.findIndex(function(s){ return s.id === 'f' + m[1]; }) : -1;
+    if (i >= 0) { deck.style.scrollBehavior = 'auto'; slides[i].scrollIntoView({block:'start'}); deck.style.scrollBehavior = ''; cur = i; }
+    label(cur);
+  }
+  window.addEventListener('hashchange', fromHash);
+  fromHash();
+})();
+</script>
