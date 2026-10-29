@@ -124,12 +124,24 @@ def stat(v, txt, src):
 SIGN = ('<div class="sign"><p>Med vänliga hälsningar</p><p class="script">Isak Mattsson</p>'
         '<p><b>Isak Mattsson</b><br>Elevate Studio<br>info@elevatestudio.nu · elevatestudio.nu</p></div>')
 
+SEO_SCOPE = '''<p class="agr__lead">Avancerad SEO och AIO, ingår:</p>
+<ul><li>Sökordsanalys och finjustering av alla sidor.</li>
+<li>Google Företagsprofil: kategori, tjänster, bilder och serviceområden.</li>
+<li>Enhetliga företagsuppgifter i Hitta, Eniro, Reco, Bing och Apple Kartor.</li>
+<li>Flöde för kundomdömen med SMS-text och QR-kod.</li>
+<li>Google Search Console och Bing Webmaster Tools.</li>
+<li>AI-synlighetstest före och efter samt rapport efter tre månader.</li>
+<li>Förutsätter att Beställaren ger åtkomst till Google Företagsprofil och domän samt själv ber kunder om omdömen. Resultatet beror till stor del på Beställarens medverkan.</li></ul>
+'''
+
+
 # ------------------------------------------------------------------ offerten (två blad, samma mall som elevatestudio.nu/avtal)
-def offer_sheets(page_from=1, total=2):
+def offer_sheets(page_from=1, total=2, seo=False):
+    no = OFFER_NO + ('-2' if seo else '-1')
     top = lambda sub: f'<header class="agr__top">{MARK}<div><p class="agr__brand">ELEVATE STUDIO</p><p class="agr__sub">{sub}</p></div></header>'
     foot = lambda n: f'<footer class="agr__foot"><span>ELEVATE STUDIO&nbsp; | &nbsp;OFFERT</span><span>Sida {n} av {total}</span></footer>'
     s1 = f'''<section class="agr__sheet">{top("WEBBUTVECKLING / OFFERT")}<div class="agr__body">
-<div class="agr__meta"><p class="agr__no">OFFERT NR {OFFER_NO}</p><p>Datum: {DATE}&nbsp; | &nbsp;Giltig till: {VALID}</p></div>
+<div class="agr__meta"><p class="agr__no">OFFERT NR {no}</p><p>Datum: {DATE}&nbsp; | &nbsp;Giltig till: {VALID}</p></div>
 <h2>1. Parter</h2>
 <p>Producent: Elevate Studio (PJM Projekteffektivitet AB, org.nr 556969-4358)</p>
 <p>Producentens företrädare: Isak Mattsson</p>
@@ -137,7 +149,7 @@ def offer_sheets(page_from=1, total=2):
 <p>Beställarens företrädare: Rustan Blom</p>
 <h2>2. Uppdragets omfattning (specifikation)</h2>
 <p>Utveckling och leverans av en ny, modern och mobilanpassad webbplats för Beställaren på blomsel.se.</p>
-<p class="agr__lead">Grundpaket, i uppdraget ingår:</p>
+<p class="agr__lead">I uppdraget ingår:</p>
 <ul><li>Webbplats med 29 sidor: startsida, en egen sida per tjänst, områdessidor, om oss, vanliga frågor och kontakt, enligt den design som visats.</li>
 <li>Adminpanel med inloggning där Beställaren själv ändrar texter, bilder, SEO, kontaktuppgifter, färger och typsnitt och publicerar direkt.</li>
 <li>Förfrågningsinkorg: kontaktformulärets förfrågningar samlas i adminpanelen med status, ordervärde och anteckningar, och aviseras via e-post.</li>
@@ -145,28 +157,25 @@ def offer_sheets(page_from=1, total=2):
 <li>Grundläggande sökmotoroptimering (SEO): titlar och beskrivningar, strukturerad data, sitemap, alt-texter och vidarekoppling från de gamla adresserna.</li>
 <li>Enkel AI-optimering (AIO): llms.txt, faktasidor och vanliga frågor som AI-tjänster kan läsa.</li>
 <li>Två korrekturvändor före leverans.</li></ul>
-<p class="agr__lead">Tillval A: Avancerad SEO och AIO</p>
-<ul><li>Sökordsanalys och finjustering av alla sidor, Google-företagsprofil, enhetliga uppgifter i kataloger (Hitta, Eniro, Reco, Bing, Apple), flöde för kundomdömen, Search Console, AI-synlighetstest före och efter samt rapport efter tre månader.</li>
-<li>Förutsätter att Beställaren ger åtkomst till Google Företagsprofil och domän samt själv ber kunder om omdömen. Resultatet beror till stor del på Beställarens medverkan.</li></ul>
-<p class="agr__lead">Tillval B: Löpande underhåll</p>
+{SEO_SCOPE if seo else ""}<p class="agr__lead">Tillval: Löpande underhåll</p>
 <ul><li>Uppdateringar av webbplatsen, nya sektioner och omfattande ombyggnationer av webbplatsen.</li></ul>
+</div>{foot(page_from)}</section>'''
+    s2 = f'''<section class="agr__sheet">{top("OFFERT / VILLKOR OCH GODKÄNNANDE")}<div class="agr__body">
 <h2>3. Driftmiljö</h2>
 <p>Beställaren äger sin domän och sitt webbhotell, och betalar webbhotellets avgifter. Elevate Studio driftsätter webbplatsen där. Adminpanelen och inkorgen kräver PHP, som ingår hos de flesta webbhotell. AI-assistenten använder en API-nyckel från Anthropic, och användningen debiteras av Anthropic.</p>
 <h2>4. Leverans</h2>
 <p>Webbplatsen driftsätts efter godkännande och när åtkomst till webbhotellet finns, så att bytet hinner ske innan bindningstiden för det nuvarande abonnemanget löper ut 7 december 2026.</p>
-</div>{foot(page_from)}</section>'''
-    s2 = f'''<section class="agr__sheet">{top("OFFERT / VILLKOR OCH GODKÄNNANDE")}<div class="agr__body">
 <h2>5. Fast pris och betalning</h2>
 <table><thead><tr><th>Post</th><th>Pris (exkl. moms)</th></tr></thead><tbody>
-<tr><td>Grundpaket: webbplats med adminpanel, förfrågningsinkorg, AI-assistent, grundläggande SEO och enkel AIO – fast pris</td><td>3 000 kr</td></tr>
-<tr><td>Tillval A: Avancerad SEO och AIO</td><td>+ 4 000 kr</td></tr>
-<tr><td>Tillval B: Löpande underhåll</td><td>99 kr/mån</td></tr>
-</tbody><tfoot><tr><td>Totalt grundpaket med Tillval A</td><td>7 000 kr</td></tr></tfoot></table>
-<p>Grundpaketet och Tillval A är engångsbelopp. Tillval B gäller uppdateringar av webbplatsen, nya sektioner och omfattande ombyggnationer av webbplatsen, och löper per månad tills det sägs upp.</p>
+<tr><td>Webbplats med adminpanel, förfrågningsinkorg, AI-assistent, grundläggande SEO och enkel AIO – fast pris</td><td>3 000 kr</td></tr>
+{'<tr><td>Avancerad SEO och AIO – fast pris</td><td>4 000 kr</td></tr>' if seo else ''}
+<tr><td>Tillval: Löpande underhåll</td><td>99 kr/mån</td></tr>
+</tbody><tfoot><tr><td>Totalt fast pris</td><td>{'7 000 kr' if seo else '3 000 kr'}</td></tr></tfoot></table>
+<p>Det fasta priset är ett engångsbelopp. Löpande underhåll gäller uppdateringar av webbplatsen, nya sektioner och omfattande ombyggnationer av webbplatsen, och löper per månad tills det sägs upp.</p>
 <p>Fast pris och tillval faktureras vid driftsättning. Löpande underhåll faktureras från och med driftsättningen. Betalningsvillkor: 30 dagar. Samtliga priser anges exklusive moms.</p>
 <h2>6. Godkännande av offert</h2>
-<p>Beställaren kan acceptera denna offert genom att svara på mejlet med följande text och stryka det som inte ska ingå:</p>
-<blockquote>Jag godkänner offert nr {OFFER_NO} och beställer grundpaketet / grundpaketet med Tillval A, med / utan Tillval B, enligt offertens villkor.</blockquote>
+<p>Beställaren kan acceptera denna offert genom att svara på mejlet med följande text och ange om löpande underhåll ska ingå:</p>
+<blockquote>Jag godkänner offert nr {no} och beställer tjänsterna enligt offertens villkor, med / utan löpande underhåll.</blockquote>
 <p>Genom godkännandet accepterar Beställaren uppdragets omfattning, priser, betalningsvillkor och övriga villkor i denna offert.</p>
 <div class="agr__sig"><div><p class="script">Isak Mattsson</p><p>Isak Mattsson, Elevate Studio<br>Uppsala, {DATE}</p></div><div><p class="line"></p><p>Rustan Blom, Bloms El &amp; Data AB<br>Ort och datum</p></div></div>
 </div>{foot(page_from + 1)}</section>'''
@@ -210,7 +219,6 @@ def info():
 <div class="pb-row"><b>+4 000 kr</b><span>Tillval: avancerad SEO och AIO (7 000 kr totalt)</span></div>
 <div class="pb-row"><b>99 kr/mån</b><span>Tillval: löpande underhåll, nya sektioner och ombyggnationer</span></div>
 <p class="pb-note">Ni behåller domänen och webbhotellet. Vi driftsätter före 7 december, när bindningstiden för nuvarande abonnemang går ut. Erbjudandet gäller till {VALID}.</p>
-<p class="pb-big">En enda extra laddbox- eller elcentralsorder betalar hela paketet, ofta flera gånger om.</p>
 <p class="pb-note"><b>Er del:</b> resultatet avgörs till stor del av att ni ber kunder om omdömen och ger oss åtkomst till Google-profilen. Se sidan "Er del av jobbet".</p>
 </div></div>
 <h3>Så går bytet till</h3><ol class="steps"><li><b>Ni godkänner offerten</b>senast {VALID}, genom att svara på mejlet</li><li><b>Vi får åtkomst</b>till webbhotellet och domänen</li><li><b>Vi driftsätter</b>och kopplar om. Gamla adresser vidarekopplas så att Google-länkar fungerar</li><li><b>Ni säger upp Wix</b>innan bindningstiden går ut 7 december</li></ol>''', num=2))
@@ -312,16 +320,13 @@ def info():
 <p class="small">Alla priser exklusive moms.</p>''', num=8))
 
     # 9. är det värt det
-    sc = [("Försiktigt", 60000, 180000, "+1–2 förfrågningar/mån"), ("Medel", 160000, 540000, "+3–6 förfrågningar/mån"), ("Bra", 430000, 1350000, "+8–15 förfrågningar/mån")]
     pages.append(sheet(head_block("Ärligt svar", "Är avancerat värt 4 000 kr?",
         "Ja, för ett lokalt elföretag är det de här åtgärderna som påverkar rankingen mest, och priset motsvarar ungefär en månads billigaste SEO-abonnemang. Men det finns saker ingen kan lova.")
         + '''<div class="cols2"><div><h3>Det som påverkar lokal ranking mest</h3><ol class="rank"><li><b>Google Företagsprofil</b>rätt kategori, komplett, bilder</li><li><b>Kundomdömen</b>antal, hur nya de är och att ni svarar</li><li><b>En sida per tjänst och område</b>den viktigaste faktorn på själva sajten</li><li><b>Samma uppgifter i alla kataloger</b>namn, adress, telefon</li><li><b>Snabb mobilsajt</b>finns redan i grundpaketet</li></ol><p class="src">Google Företagsprofil hjälpcenter · Whitespark, Local Search Ranking Factors 2026</p></div>
 <div><h3>Det vi inte lovar</h3><ul class="chk neg"><li>En viss placering. Ingen kan garantera plats 1 hos Google.</li><li>Ett visst antal förfrågningar.</li><li>Att ChatGPT eller Google nämner er. Det går att påverka men inte styra.</li><li>Resultat utan er medverkan. Hur mycket det ger avgörs till stor del av er, se nästa sida.</li></ul>
 <h3>När det märks</h3><p>Google Företagsprofil och omdömen brukar ge effekt inom några veckor. Placeringen i vanliga sökresultat tar normalt 3–6 månader.</p></div></div>
-<h3>Räkneexempel: vad fler förfrågningar kan vara värda per år</h3><p class="cap">Extra omsättning per år med 30–50 % av förfrågningarna till order och ett snittjobb på 15 000 kr</p>'''
-        + range_bars(sc, maxv=1400000)
-        + '''<p class="src">Exempel, inte prognos. Omsättning, inte vinst. Effekten kommer från nya sajten och SEO tillsammans. Jobbvärden: laddbox 10 000–20 000 kr, byte av elcentral 8 000–20 000 kr (Offerta 2026).</p>
-<div class="callout big"><b>En order räcker.</b> En enda extra laddbox eller elcentral är värd 10 000–20 000 kr, alltså 2,5–5 gånger uppgraderingen och 1,4–2,9 gånger hela paketet på 7 000 kr.</div>''', num=9))
+<div class="callout"><b>Två offerter följer:</b> en för grundpaketet och en för grundpaketet med avancerad SEO och AIO. Löpande underhåll kan läggas till på båda.</div>
+''', num=9))
 
     # 10. så bidrar ni
     pages.append(sheet(head_block("Er del av jobbet", "Resultatet avgörs till stor del av er",
@@ -343,10 +348,10 @@ def info():
 <div class="callout big"><b>Tidsåtgång:</b> uppskattningsvis 15–30 minuter i veckan, mest att skicka SMS efter avslutade jobb och svara på omdömen. Med löpande underhåll lägger vi in referensjobben åt er.</div>
 <p class="small">Utan omdömen och åtkomst till Google Företagsprofil blir effekten av SEO-arbetet betydligt mindre, oavsett paket.</p>''', num=10))
 
-    # 11–12. offerten
-    pages.append(f'<div class="offer">{offer_sheets(1, 2)}</div>')
+    # 11–14. offerterna: grundpaket, och grundpaket med SEO och AIO
+    pages.append(f'<div class="offer">{offer_sheets(1, 2)}</div><div class="offer">{offer_sheets(1, 2, seo=True)}</div>')
 
-    # 13. källor och signatur
+    # 15. källor och signatur
     src = [("Internetstiftelsen, Svenskarna och internet 2026: AI", "svenskarnaochinternet.se/rapporter/svenskarna-och-internet-2026"),
            ("BrightLocal, Local Consumer Review Survey 2026", "brightlocal.com/research/local-consumer-review-survey"),
            ("StatCounter, Desktop vs Mobile vs Tablet, Sverige, september 2026", "gs.statcounter.com/platform-market-share/desktop-mobile-tablet/sweden"),
@@ -365,7 +370,7 @@ def info():
     li = "".join(f"<li>{a}<small>{b}</small></li>" for a, b in src)
     pages.append(sheet(head_block("Källor", "Varifrån siffrorna kommer") + f'<ol class="sources">{li}</ol>'
         + '<p class="small">Där källorna är amerikanska har vi angett det i underlaget. Svenska siffror är från Internetstiftelsen och StatCounter.</p>'
-        + '<div class="end"><p>Tack för att ni tar er tid. Hör av er om något är oklart, så går vi igenom förslaget tillsammans.</p>' + SIGN + '</div>', num=13))
+        + '<div class="end"><p>Tack för att ni tar er tid. Hör av er om något är oklart, så går vi igenom förslaget tillsammans.</p>' + SIGN + '</div>', num=15))
     return pages
 
 
@@ -379,5 +384,6 @@ def doc(title, body):
 
 
 (OUT / "info.html").write_text(doc("Bloms El & Data – förslag från Elevate Studio", "".join(info())), encoding="utf-8")
-(OUT / "offert.html").write_text(doc(f"Offert {OFFER_NO} – Elevate Studio", f'<div class="offer">{offer_sheets(1, 2)}</div>'), encoding="utf-8")
-print("info.html och offert.html skrivna")
+(OUT / "offert-grund.html").write_text(doc(f"Offert {OFFER_NO}-1 – Elevate Studio", f'<div class="offer">{offer_sheets(1, 2)}</div>'), encoding="utf-8")
+(OUT / "offert-seo.html").write_text(doc(f"Offert {OFFER_NO}-2 – Elevate Studio", f'<div class="offer">{offer_sheets(1, 2, seo=True)}</div>'), encoding="utf-8")
+print("info.html, offert-grund.html och offert-seo.html skrivna")

@@ -112,7 +112,7 @@ body>.offer:not(:last-child) .agr__sheet:last-child{break-after:page}
 .agr__top .mark{width:6.4cqw;flex:none;color:#fff}
 .agr__brand{margin:0;font-size:3.5cqw;font-weight:700;line-height:1;letter-spacing:.02em}
 .agr__sub{margin:1.4cqw 0 0;font-size:1.55cqw;letter-spacing:.02em}
-.agr__body{flex:1;padding:4.2cqw 9.4cqw 0;font-size:1.52cqw;line-height:1.52}
+.agr__body{flex:1;padding:3.8cqw 9.4cqw 0;font-size:1.45cqw;line-height:1.48}
 .agr__body p{margin:0 0 .9cqw}
 .agr__meta{display:flex;gap:6cqw;align-items:baseline;margin-bottom:2.4cqw}
 .agr__meta p{margin:0;font-size:1.6cqw}
@@ -122,13 +122,13 @@ body>.offer:not(:last-child) .agr__sheet:last-child{break-after:page}
 .agr__body ul{margin:0;padding:0 0 0 1.4cqw;list-style:none}
 .agr__body li{margin-bottom:.6cqw;padding-left:1.6cqw;text-indent:-1.6cqw}
 .agr__body li::before{content:"•";display:inline-block;width:1.6cqw;text-indent:0}
-.agr__body table{width:100%;margin:0 0 3.4cqw;border-collapse:collapse;font-size:1.6cqw}
-.agr__body th,.agr__body td{padding:2.4cqw 2cqw;text-align:left;border-bottom:1px solid #dfe6e1}
+.agr__body table{width:100%;margin:0 0 2.4cqw;border-collapse:collapse;font-size:1.6cqw}
+.agr__body th,.agr__body td{padding:1.7cqw 2cqw;text-align:left;border-bottom:1px solid #dfe6e1}
 .agr__body th:last-child,.agr__body td:last-child{width:28%}
 .agr__body thead th{background:var(--mint);font-weight:700;color:var(--accent)}
 .agr__body tfoot td{background:var(--mint);font-weight:700;color:var(--accent);border-bottom:0}
-.agr__body blockquote{margin:2.2cqw 0 3.2cqw;padding:2.4cqw 2.6cqw;border-left:.6cqw solid var(--accent);background:var(--mint)}
-.agr__sig{display:grid;grid-template-columns:1fr 1fr;gap:6cqw;margin-top:5cqw;align-items:end}
+.agr__body blockquote{margin:1.6cqw 0 2.2cqw;padding:1.8cqw 2.4cqw;border-left:.6cqw solid var(--accent);background:var(--mint)}
+.agr__sig{display:grid;grid-template-columns:1fr 1fr;gap:6cqw;margin-top:2.5cqw;align-items:end}
 .agr__sig .script{font-size:5.4cqw}
 .agr__sig .line{border-bottom:1px solid #9aa79f;height:5.4cqw;margin-bottom:1.2cqw!important}
 .agr__sig p{font-size:1.5cqw}
