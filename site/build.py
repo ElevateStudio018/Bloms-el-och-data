@@ -280,7 +280,7 @@ def page(slug, title, desc, body, active=None, image="team-bro.jpg", name=None, 
 </div>
 {FOOT_CERTS}
 <div class="foot-bottom"><span>© 2026 Bloms El &amp; Data AB · Org.nr 556754-3656</span><a href="cookiepolicy.html">Cookiepolicy</a></div>
-</div></footer>
+</div>{ELEVATE_CREDIT}</footer>
 <div class="cookie" id="cookie" hidden><span>Vi använder cookies på vår webbplats för att ge dig en bättre upplevelse. <a href="cookiepolicy.html">Cookiepolicy</a></span><button class="btn btn-white" type="button">Ok</button></div>
 <script src="assets/main.js"></script>
 </body>
@@ -931,6 +931,13 @@ manifest = {
 (OUT / "assets" / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=1), encoding="utf-8")
 # Sitemap, robots.txt, llms.txt och .htaccess för produktion
 from datetime import date
+
+# Elevate Studio's credit under every footer: the mark and the name, the whole of it one link to elevatestudio.nu.
+ELEVATE_CREDIT = '''<!-- elevate-credit -->
+<style>.elevate-credit{max-width:1240px;margin:24px auto 0;padding:20px 16px 0;border-top:1px solid rgba(128,128,128,.25);display:flex;justify-content:center;box-sizing:border-box}.elevate-credit a{display:inline-flex;align-items:center;gap:8px;padding:8px 0;font:inherit;font-size:13px;line-height:1;color:inherit;opacity:.55;text-decoration:none;transition:opacity .2s}.elevate-credit a:hover,.elevate-credit a:focus-visible{opacity:1}.elevate-credit svg{width:16px;height:16px;flex:none;display:block}@media(min-width:1024px){.elevate-credit a{font-size:14px}}</style>
+<div class="elevate-credit"><a href="https://elevatestudio.nu" target="_blank" rel="noopener"><svg viewBox="0 0 1884.3 1353.9" aria-hidden="true"><path d="M0.0 1353.9 L1218.7 0.0 L1218.7 329.1 L479.7 1136.4 L786.7 1132.4 L1215.5 687.4 L1884.3 1349.9 L1590.1 1349.9 L1218.6 994.7 L865.4 1349.9Z" fill="currentColor"/></svg>Byggd av Elevate Studio</a></div>
+'''
+
 today = date.today().isoformat()
 (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(
     f"  <url><loc>{url_of(p['slug'])}</loc><lastmod>{today}</lastmod><priority>{'1.0' if p['slug'] == 'index' else '0.8' if p['slug'] != 'cookiepolicy' else '0.2'}</priority></url>\n"
