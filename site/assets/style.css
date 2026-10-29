@@ -1,3 +1,10 @@
+/* Poppins (latin), självhostad för snabbare första visning. Licens: SIL Open Font License 1.1 */
+@font-face{font-family:'Poppins';font-style:normal;font-weight:300;font-display:swap;src:url(fonts/poppins-300.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/poppins-400.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/poppins-500.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/poppins-600.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/poppins-700.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:800;font-display:swap;src:url(fonts/poppins-800.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 /* Bloms El & Data — designsystem byggt på heroförslag 15 (foto-hero med överlappande kort).
    Layout: röd navbar, fotohero med kortrad som bryter in i vit yta, därefter växlande vita/ljusgrå sektioner. */
 :root{
@@ -233,7 +240,7 @@ a.card:hover .img img{transform:scale(1.04)}
 /* ---------- footer ---------- */
 .foot{background:var(--red);color:var(--white);padding-block:64px calc(28px + env(safe-area-inset-bottom,0px))}
 .foot-grid{display:grid;grid-template-columns:1.3fr repeat(4,1fr);gap:36px}
-.foot h4{font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;margin-bottom:14px;opacity:.75}
+.foot .foot-h{font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;margin-bottom:14px;opacity:.75}
 .foot ul{list-style:none;padding:0;display:grid;gap:8px;font-size:15px}
 .foot ul a:hover{text-decoration:underline}
 .foot .logo{font-size:24px;margin-bottom:16px}

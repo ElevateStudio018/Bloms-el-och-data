@@ -911,7 +911,7 @@
       '- Alla montörer har ABL- eller BB1-behörighet. Registrerade hos Elsäkerhetsverket. Ansvarsförsäkrade. Garanti på alla arbeten. CE-märkt material.\n' +
       '- Kunder: privatpersoner, bostadsrättsföreningar, fastighetsägare, restauranger, butiker, kontor, industri, lantbrukare, kommuner, byggföretag.\n' +
       '- Område: Falkenberg i söder till Uddevalla i norr, Ulricehamn och Borås. Materialdepåer i Mölndal, Partille, Hisingen, Västra Frölunda, Lindholmen, Kungsbacka, Kungälv och Borås.\n' +
-      '- ROT-avdrag upp till 30 % av arbetskostnaden. Grön teknik: 20 % för solceller, 50 % för batterilager och laddbox, max 50 000 kr per person och år. Bloms sköter avdragen på fakturan.\n' +
+      '- ROT-avdrag upp till 30 % av arbetskostnaden. Grön teknik: 15 % för solceller, 50 % för batterilager och laddbox, max 50 000 kr per person och år. Bloms sköter avdragen på fakturan.\n' +
       '- Återkommer normalt samma arbetsdag med bedömning och offert.\n\nSajtens sidor:\n' + pages + '\n\n' +
       'Hitta inte på priser, kundomdömen, siffror eller tjänster som inte står ovan. Om något är osäkert, till exempel regler som kan ha ändrats, säg det och föreslå att kontrollera med Elsäkerhetsverket eller Skatteverket. ' +
       'Använd ingen markdown-formatering i svaren. För SEO-titlar gäller max 60 tecken och för beskrivningar 70–160 tecken.' +

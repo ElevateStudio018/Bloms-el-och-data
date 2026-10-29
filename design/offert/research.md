@@ -127,3 +127,10 @@ Do not promise:
 - lasting results without upkeep or reviews
 
 Do not use the "46% local" stat, and frame Gartner's 25% figure as a prediction.
+## Tillägg 2026-10-29: Googles testverktyg
+
+- Lighthouse 13.5 (samma motor som PageSpeed Insights) kördes mobilt på 7 sidor på blomsel.se och alla 29 sidor på nya sajten. Nuvarande startsida: prestanda 39, nya: 100. Rapporterna ligger i scratchpad under lh/rep.
+- PageSpeed Insights API svarade 429 (dagskvoten slut), därför lokal Lighthouse med identiska inställningar.
+- validator.schema.org: 0 fel på alla 29 sidor. 22 sidor har Service-schema, 26 har FAQPage.
+- Fynd på nuvarande sajt: elbilsladdare och smart-teknik har `<meta name="robots" content="noindex">` och saknas i pages-sitemap.xml. De kan inte hittas på Google i dag.
+- Skatteverket: grön teknik är högst 15 % för solceller (sajten sa 20 %, rättat).

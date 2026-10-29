@@ -469,7 +469,7 @@ PAGES = [
                 ("Är det farligt med gamla proppar?", "Proppar i sig är inte farliga, men ett gammalt proppskåp är ofta ett tecken på att installationen saknar jordfelsbrytare och inte är anpassad för dagens behov. Läs mer på vår sida om elcentral.")]),
             ("faq-avdrag", "ROT-avdrag och Grön teknik", [
                 ("Hur mycket är ROT-avdraget?", "Som privatperson kan du få skattereduktion med upp till 30 % av arbetskostnaden för godkänt arbete. Maxbeloppet bestäms av Skatteverket och kan ändras."),
-                ("Vad är Grön teknik?", "En skattereduktion för installation av solceller, batterilager och elbilsladdare. Den gäller både arbete och material: 20 % för solceller och 50 % för batterilager och laddbox, upp till 50 000 kr per person och år."),
+                ("Vad är Grön teknik?", "En skattereduktion för installation av solceller, batterilager och elbilsladdare. Den gäller både arbete och material: 15 % för solceller och 50 % för batterilager och laddbox, upp till 50 000 kr per person och år."),
                 ("Måste jag ansöka själv?", "Nej. Vi sköter pappersarbetet och drar av beloppet direkt på fakturan."),
                 ("Kan jag kombinera ROT och Grön teknik?", "Samma arbete kan inte få båda avdragen, men olika arbeten i samma projekt kan omfattas av olika avdrag. Vi hjälper dig att göra rätt.")]),
             ("faq-laddbox", "Elbil och laddbox", [

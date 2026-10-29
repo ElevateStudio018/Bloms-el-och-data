@@ -146,7 +146,8 @@ def offer_sheets(page_from=1, total=2):
 <li>Enkel AI-optimering (AIO): llms.txt, faktasidor och vanliga frågor som AI-tjänster kan läsa.</li>
 <li>Två korrekturvändor före leverans.</li></ul>
 <p class="agr__lead">Tillval A: Avancerad SEO och AIO</p>
-<ul><li>Sökordsanalys och finjustering av alla sidor, Google-företagsprofil, enhetliga uppgifter i kataloger (Hitta, Eniro, Reco, Bing, Apple), flöde för kundomdömen, Search Console, AI-synlighetstest före och efter samt rapport efter tre månader.</li></ul>
+<ul><li>Sökordsanalys och finjustering av alla sidor, Google-företagsprofil, enhetliga uppgifter i kataloger (Hitta, Eniro, Reco, Bing, Apple), flöde för kundomdömen, Search Console, AI-synlighetstest före och efter samt rapport efter tre månader.</li>
+<li>Förutsätter att Beställaren ger åtkomst till Google Företagsprofil och domän samt själv ber kunder om omdömen. Resultatet beror till stor del på Beställarens medverkan.</li></ul>
 <p class="agr__lead">Tillval B: Löpande underhåll</p>
 <ul><li>Uppdateringar av webbplatsen, nya sektioner och omfattande ombyggnationer av webbplatsen.</li></ul>
 <h2>3. Driftmiljö</h2>
@@ -192,7 +193,8 @@ def info():
     pages.append(sheet(head_block("Sammanfattning", "Det här är förslaget på en sida")
         + f'''<div class="cols2"><div>
 <h3>Vad vi har sett</h3>
-<ul class="chk neg"><li>blomsel.se syntes inte i någon av fem typiska kundsökningar vi testade, inte ens på företagsnamnet.</li>
+<ul class="chk neg"><li>Sidorna om elbilsladdare och smart teknik är dolda för Google (noindex) och kan inte hittas i sökresultaten.</li>
+<li>blomsel.se syntes inte i någon av fem typiska kundsökningar vi testade, inte ens på företagsnamnet.</li>
 <li>Startsidan laddar {nf(o["kb"] / 1024, 1)} MB och {o["reqs"]} filer på mobilen. Det tar {nf(o["lcp"] / 1000, 1)} sekunder innan huvudinnehållet syns och {nf(o["load"] / 1000, 1)} sekunder innan sidan är färdigladdad.</li>
 <li>Sajten har {SO["pages"]} sidor och saknar egna sidor för de flesta tjänsterna. Google rankar lokala företag högre när varje tjänst har en egen sida.</li>
 <li>Filen som AI-tjänster läser presenterar företaget som "bloms2".</li></ul>
@@ -209,6 +211,7 @@ def info():
 <div class="pb-row"><b>99 kr/mån</b><span>Tillval: löpande underhåll, nya sektioner och ombyggnationer</span></div>
 <p class="pb-note">Ni behåller domänen och webbhotellet. Vi driftsätter före 7 december, när bindningstiden för nuvarande abonnemang går ut. Erbjudandet gäller till {VALID}.</p>
 <p class="pb-big">En enda extra laddbox- eller elcentralsorder betalar hela paketet, ofta flera gånger om.</p>
+<p class="pb-note"><b>Er del:</b> resultatet avgörs till stor del av att ni ber kunder om omdömen och ger oss åtkomst till Google-profilen. Se sidan "Er del av jobbet".</p>
 </div></div>
 <h3>Så går bytet till</h3><ol class="steps"><li><b>Ni godkänner offerten</b>senast {VALID}, genom att svara på mejlet</li><li><b>Vi får åtkomst</b>till webbhotellet och domänen</li><li><b>Vi driftsätter</b>och kopplar om. Gamla adresser vidarekopplas så att Google-länkar fungerar</li><li><b>Ni säger upp Wix</b>innan bindningstiden går ut 7 december</li></ol>''', num=2))
 
@@ -263,16 +266,36 @@ def info():
         + '<div class="legend"><span><i style="background:' + OLD_C + '"></i>Nuvarande blomsel.se</span><span><i style="background:' + NEW_C + '"></i>Nya sajten</span></div>'
         + f'<table class="t"><thead><tr><th>Sida</th><th>Innehållet syns, nu</th><th>Syns, ny</th><th>Laddad, nu</th><th>Laddad, ny</th><th>Data, nu</th><th>Data, ny</th></tr></thead><tbody>{perf_rows}</tbody></table>'
         + f'<p class="small">Ärligt sagt: på undersidorna visar Wix första texten något snabbare ({sec(P["elbilsladdare"]["old"]["lcp"])} mot {sec(P["elbilsladdare"]["new"]["lcp"])}), men sidan laddar sedan vidare i över 10 sekunder och mobilen svarar trögt under tiden. På startsidan syns innehållet {nf(o["lcp"] / n["lcp"], 0)} gånger snabbare på nya sajten.</p>'
-        + f'<p class="src">{T["method"]}. Nuvarande sajt mätt live på blomsel.se. Nya sajten mätt på en testserver utan komprimering med samma nätverksbegränsning, så på webbhotellet blir den något snabbare. "Innehållet syns" är Largest Contentful Paint, Googles mått, där under 2,5 s räknas som bra. "Mobilen svarar inte" är Total Blocking Time.</p>', num=5))
+        + f'<p class="src">{T["method"]}. Nuvarande sajt mätt live på blomsel.se. Nya sajten mätt på en testserver med komprimering och cache som webbhotellet, med samma nätverksbegränsning. "Innehållet syns" är Largest Contentful Paint, Googles mått, där under 2,5 s räknas som bra. "Mobilen svarar inte" är Total Blocking Time.</p>', num=5))
 
-    # 6. vad ni får
+    # 6. Googles egna testverktyg
+    L = T["lighthouse"]
+    def avg(side, k): return round(sum(r[k] for r in L[side]) / len(L[side]))
+    cats = [("Prestanda", "perf"), ("Tillgänglighet", "a11y"), ("Bästa praxis", "bp"), ("SEO", "seo")]
+    score_rows = "".join(f'<tr><td>{lab}</td><td>{avg("old", k)}</td><td><b>{avg("new", k)}</b></td></tr>' for lab, k in cats)
+    bars = "".join(f'<div><h3>{lab}</h3>{pair_bars([("Nuvarande", avg("old", k)), ("Nya", avg("new", k))], w=300, h=150)}</div>' for lab, k in cats)
+    pages.append(sheet(head_block("Test 4: Googles egna testverktyg", "Bättre betyg i Googles test, och alla sidor kan indexeras",
+        f"Vi körde Lighthouse, samma test som Googles PageSpeed Insights bygger på, på {len(L['old'])} sidor på nuvarande sajt och alla {len(L['new'])} sidor på nya sajten. Strukturerad data kontrollerades med validator.schema.org.")
+        + f'<div class="cols4">{bars}</div>'
+        + '<div class="legend"><span><i style="background:' + OLD_C + '"></i>Nuvarande blomsel.se</span><span><i style="background:' + NEW_C + '"></i>Nya sajten</span><span>Medelbetyg 0–100, högre är bättre</span></div>'
+        + f'''<div class="cols2"><div><h3>Fynd: två sidor är dolda för Google i dag</h3>
+<p>Sidorna <b>Elbilsladdare</b> och <b>Smart teknik</b> på nuvarande blomsel.se har en instruktion till Google om att inte visas i sökresultaten (noindex) och saknas i sajtens sitemap. Laddboxar är en av de mest efterfrågade tjänsterna, men sidan kan i dag inte hittas på Google.</p>
+<p>På nya sajten kan alla {len(L['new'])} sidor indexeras och alla finns i sitemapen.</p></div>
+<div><h3>Strukturerad data</h3><table class="t"><thead><tr><th>Kontroll</th><th>Nuvarande</th><th>Nya</th></tr></thead><tbody>
+<tr><td>Sidor med företagsdata (Electrician)</td><td>{SO["ld"]} av {SO["pages"]}</td><td><b>{SN["ld"]} av {SN["pages"]}</b></td></tr>
+<tr><td>Sidor med tjänstebeskrivning (Service)</td><td>0</td><td><b>{T["schema"]["service"]}</b></td></tr>
+<tr><td>Sidor med vanliga frågor (FAQPage)</td><td>0</td><td><b>{T["schema"]["faq"]}</b></td></tr>
+<tr><td>Fel i validator.schema.org</td><td>–</td><td><b>0</b></td></tr></tbody></table></div></div>'''
+        + '<p class="src">Lighthouse 13.5, mobil, samma inställningar som PageSpeed Insights. Nuvarande sajt testad live på blomsel.se, nya sajten på en testserver med komprimering och cache som webbhotellet. Google visar inte längre vanliga frågor som extra rader i sökresultaten för de flesta företag, men frågorna hjälper Google och AI-tjänster att förstå vad ni gör.</p>', num=6))
+
+    # 7. vad ni får
     pages.append(sheet(head_block("Det här ingår för 3 000 kr", "En komplett hemsida, inte bara en mall")
         + '''<div class="feat"><img src="img/ny-desktop.png" alt=""><div><h3>Ny webbplats med 29 sidor</h3><p>Startsida, en egen sida för varje tjänst (laddbox, solceller, elcentral, belysning, datanät, kraft, golvvärme, kök och badrum, batterilager med flera), sidor för varje område från Mölndal till Borås, om oss, vanliga frågor och kontakt. Samma röda färg och Poppins som i dag, i en modernare form.</p></div></div>
 <div class="feat"><img src="img/admin-inkorg.png" alt=""><div><h3>Förfrågningsinkorg</h3><p>Allt som kommer in via kontaktformuläret hamnar i adminpanelen och mejlas till er. Markera som kontaktad, offert skickad, vunnen eller förlorad, skriv anteckningar och se ordervärdet. Ring eller svara med ett klick.</p></div></div>
 <div class="feat"><img src="img/admin-ai.png" alt=""><div><h3>AI som fixar saker</h3><p>Skriv "byt telefonnummer på hela sajten" eller "gör texten om laddboxar mer säljande". AI:n läser sidorna, gör ändringen och visar vad den gjort. Ni granskar och publicerar med ett klick, eller ångrar.</p></div></div>
-<div class="feat"><img src="img/admin-publicera.png" alt=""><div><h3>Adminpanel som sparar direkt</h3><p>Klicka på en text på sajten och skriv. Byt bilder, SEO-texter, telefonnummer, färger och typsnitt. Publicera direkt, utan filer att ladda upp. Alla tidigare versioner sparas och kan återställas.</p></div></div>''', num=6))
+<div class="feat"><img src="img/admin-publicera.png" alt=""><div><h3>Adminpanel som sparar direkt</h3><p>Klicka på en text på sajten och skriv. Byt bilder, SEO-texter, telefonnummer, färger och typsnitt. Publicera direkt, utan filer att ladda upp. Alla tidigare versioner sparas och kan återställas.</p></div></div>''', num=7))
 
-    # 7. paket
+    # 8. paket
     yes, no = '<td class="y">✓</td>', '<td class="n">–</td>'
     feat_rows = [("Ny webbplats, 29 sidor, mobilanpassad", 1, 1), ("Adminpanel, förfrågningsinkorg och AI-assistent", 1, 1),
                  ("Titlar, beskrivningar, sitemap och alt-texter", 1, 1), ("Strukturerad data: företag, tjänster, vanliga frågor", 1, 1),
@@ -286,24 +309,44 @@ def info():
         + f'''<table class="t pk"><thead><tr><th></th><th>Grund<br><b>3 000 kr</b></th><th>Avancerad<br><b>7 000 kr</b></th></tr></thead><tbody>{ftbl}</tbody></table>
 <div class="cols2"><div class="box"><h3>Löpande underhåll, 99 kr/mån</h3><p>Uppdateringar av hemsidan, nya sektioner och omfattande ombyggnationer när ni behöver dem. Tillval till båda paketen.</p></div>
 <div class="box"><h3>Jämfört med marknaden</h3><p>Grundläggande SEO kostar normalt 3 000–5 000 kr i månaden och löpande optimering 5 000–15 000 kr i månaden. Det avancerade paketet är en engångskostnad på 4 000 kr.</p><p class="src">Offerta, Vad kostar sökmotoroptimering, 2025</p></div></div>
-<p class="small">Alla priser exklusive moms.</p>''', num=7))
+<p class="small">Alla priser exklusive moms.</p>''', num=8))
 
-    # 8. är det värt det
+    # 9. är det värt det
     sc = [("Försiktigt", 60000, 180000, "+1–2 förfrågningar/mån"), ("Medel", 160000, 540000, "+3–6 förfrågningar/mån"), ("Bra", 430000, 1350000, "+8–15 förfrågningar/mån")]
     pages.append(sheet(head_block("Ärligt svar", "Är avancerat värt 4 000 kr?",
         "Ja, för ett lokalt elföretag är det de här åtgärderna som påverkar rankingen mest, och priset motsvarar ungefär en månads billigaste SEO-abonnemang. Men det finns saker ingen kan lova.")
         + '''<div class="cols2"><div><h3>Det som påverkar lokal ranking mest</h3><ol class="rank"><li><b>Google Företagsprofil</b>rätt kategori, komplett, bilder</li><li><b>Kundomdömen</b>antal, hur nya de är och att ni svarar</li><li><b>En sida per tjänst och område</b>den viktigaste faktorn på själva sajten</li><li><b>Samma uppgifter i alla kataloger</b>namn, adress, telefon</li><li><b>Snabb mobilsajt</b>finns redan i grundpaketet</li></ol><p class="src">Google Företagsprofil hjälpcenter · Whitespark, Local Search Ranking Factors 2026</p></div>
-<div><h3>Det vi inte lovar</h3><ul class="chk neg"><li>En viss placering. Ingen kan garantera plats 1 hos Google.</li><li>Ett visst antal förfrågningar.</li><li>Att ChatGPT eller Google nämner er. Det går att påverka men inte styra.</li></ul>
+<div><h3>Det vi inte lovar</h3><ul class="chk neg"><li>En viss placering. Ingen kan garantera plats 1 hos Google.</li><li>Ett visst antal förfrågningar.</li><li>Att ChatGPT eller Google nämner er. Det går att påverka men inte styra.</li><li>Resultat utan er medverkan. Hur mycket det ger avgörs till stor del av er, se nästa sida.</li></ul>
 <h3>När det märks</h3><p>Google Företagsprofil och omdömen brukar ge effekt inom några veckor. Placeringen i vanliga sökresultat tar normalt 3–6 månader.</p></div></div>
 <h3>Räkneexempel: vad fler förfrågningar kan vara värda per år</h3><p class="cap">Extra omsättning per år med 30–50 % av förfrågningarna till order och ett snittjobb på 15 000 kr</p>'''
         + range_bars(sc, maxv=1400000)
         + '''<p class="src">Exempel, inte prognos. Omsättning, inte vinst. Effekten kommer från nya sajten och SEO tillsammans. Jobbvärden: laddbox 10 000–20 000 kr, byte av elcentral 8 000–20 000 kr (Offerta 2026).</p>
-<div class="callout big"><b>En order räcker.</b> En enda extra laddbox eller elcentral är värd 10 000–20 000 kr, alltså 2,5–5 gånger uppgraderingen och 1,4–2,9 gånger hela paketet på 7 000 kr.</div>''', num=8))
+<div class="callout big"><b>En order räcker.</b> En enda extra laddbox eller elcentral är värd 10 000–20 000 kr, alltså 2,5–5 gånger uppgraderingen och 1,4–2,9 gånger hela paketet på 7 000 kr.</div>''', num=9))
 
-    # 9–10. offerten
+    # 10. så bidrar ni
+    pages.append(sheet(head_block("Er del av jobbet", "Resultatet avgörs till stor del av er",
+        "Vi bygger sajten och gör den tekniska SEO:n. Det gör att ni kan synas. Hur mycket ni syns, och hur många som väljer er, avgörs av saker bara ni kan göra. Konkurrenterna som syns i dag har 258 och 435 kundomdömen.")
+        + '''<div class="cols2"><div class="box"><h3>Det gör vi</h3><ul class="chk">
+<li>Bygger och driftsätter sajten med en sida per tjänst och ort.</li>
+<li>Teknisk SEO, strukturerad data och AI-optimering.</li>
+<li>Sätter upp och optimerar Google Företagsprofil (avancerat paket).</li>
+<li>Lägger in samma uppgifter i Hitta, Eniro, Reco, Bing och Apple Kartor (avancerat paket).</li>
+<li>Kopplar Search Console, mäter och rapporterar efter tre månader (avancerat paket).</li>
+<li>Ger er färdig SMS-text och QR-kod för att be om omdömen.</li></ul></div>
+<div class="box mine"><h3>Det gör ni</h3><ol class="rank">
+<li><b>Ger oss åtkomst</b>till Google Företagsprofil och domänen, så att vi kan sätta upp och verifiera allt.</li>
+<li><b>Ber varje nöjd kund om ett omdöme</b>med ett SMS direkt efter jobbet. Det här väger tyngst av allt.</li>
+<li><b>Svarar på omdömena</b>både bra och dåliga. Google räknar med det och kunderna läser svaren.</li>
+<li><b>Svarar snabbt på förfrågningar</b>helst samma dag. Den som svarar först får ofta jobbet.</li>
+<li><b>Skickar bilder från avslutade jobb</b>med några rader om vad som gjordes och var. Ett i månaden räcker för att bygga referenser som Google och AI-tjänster värderar.</li>
+<li><b>Håller uppgifterna lika överallt</b>samma namn, adress och telefon i alla kanaler.</li></ol></div></div>
+<div class="callout big"><b>Tidsåtgång:</b> uppskattningsvis 15–30 minuter i veckan, mest att skicka SMS efter avslutade jobb och svara på omdömen. Med löpande underhåll lägger vi in referensjobben åt er.</div>
+<p class="small">Utan omdömen och åtkomst till Google Företagsprofil blir effekten av SEO-arbetet betydligt mindre, oavsett paket.</p>''', num=10))
+
+    # 11–12. offerten
     pages.append(f'<div class="offer">{offer_sheets(1, 2)}</div>')
 
-    # 11. källor och signatur
+    # 13. källor och signatur
     src = [("Internetstiftelsen, Svenskarna och internet 2026: AI", "svenskarnaochinternet.se/rapporter/svenskarna-och-internet-2026"),
            ("BrightLocal, Local Consumer Review Survey 2026", "brightlocal.com/research/local-consumer-review-survey"),
            ("StatCounter, Desktop vs Mobile vs Tablet, Sverige, september 2026", "gs.statcounter.com/platform-market-share/desktop-mobile-tablet/sweden"),
@@ -315,11 +358,14 @@ def info():
            ("Offerta, Vad kostar sökmotoroptimering (2025)", "offerta.se/guider/ovrigt/vad-kostar-sokmotoroptimering"),
            ("Offerta, Vad kostar det att installera en laddbox (2026)", "offerta.se"),
            ("Offerta, Byta el i ett gammalt hus (2026)", "offerta.se"),
-           ("Egna tester av blomsel.se och nya sajten, 28 oktober 2026", "Mätdata finns hos Elevate Studio")]
+           ("Google Lighthouse 13.5, samma motor som PageSpeed Insights", "developer.chrome.com/docs/lighthouse"),
+           ("validator.schema.org, validering av strukturerad data", "validator.schema.org"),
+           ("Skatteverket, skattereduktion för grön teknik", "skatteverket.se"),
+           ("Egna tester av blomsel.se och nya sajten, 28–29 oktober 2026", "Mätdata finns hos Elevate Studio")]
     li = "".join(f"<li>{a}<small>{b}</small></li>" for a, b in src)
     pages.append(sheet(head_block("Källor", "Varifrån siffrorna kommer") + f'<ol class="sources">{li}</ol>'
         + '<p class="small">Där källorna är amerikanska har vi angett det i underlaget. Svenska siffror är från Internetstiftelsen och StatCounter.</p>'
-        + '<div class="end"><p>Tack för att ni tar er tid. Hör av er om något är oklart, så går vi igenom förslaget tillsammans.</p>' + SIGN + '</div>', num=11))
+        + '<div class="end"><p>Tack för att ni tar er tid. Hör av er om något är oklart, så går vi igenom förslaget tillsammans.</p>' + SIGN + '</div>', num=13))
     return pages
 
 

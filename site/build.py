@@ -172,7 +172,7 @@ def smart_band():
     return ('<section class="band"><img src="img/team-bro-upscaled.jpg" alt="Tre montörer från Bloms El &amp; Data går med verktyg" loading="lazy" style="object-position:center 35%"><div class="wrap"><div class="prose">'
             f'{head("Smart Teknik", "Smarta lösningar för vardagen")}'
             + ps("Det finns massor av roliga, smarta lösningar som underlättar din vardag. Som gör ditt hem eller kontor säkrare, enklare och bekvämare. Som låter dig styra värmen i sommarstugan, musiken i hela huset utan att du lämnar soffan eller belysningen i verkstan fast du redan stämplat ut och åkt hem. Vi berättar mer om några smarta prylar på länken nedan.")
-            + '<div class="btns"><a class="btn btn-white arrow" href="smart-teknik.html">Läs mer </a></div></div></div></section>')
+            + '<div class="btns"><a class="btn btn-white arrow" href="smart-teknik.html">Läs mer om smart teknik </a></div></div></div></section>')
 
 
 FOOT_CERTS = ('<div class="foot-certs">'
@@ -255,8 +255,8 @@ def page(slug, title, desc, body, active=None, image="team-bro.jpg", name=None, 
 <meta name="claude:viewport-fit-sides" content="cover">
 <script>(function(){{var d=document.documentElement;function f(){{var w=innerWidth,h=innerHeight,z=w<1100?1:Math.max(1,Math.min(w/1440,h/900));d.style.zoom=z>1.001?z:'';d.style.setProperty('--vw',w/z/100+'px');d.style.setProperty('--vh',h/z/100+'px')}}f();addEventListener('resize',f)}})()</script>
 <link rel="icon" href="img/logo-symbol.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
+<link rel="preload" href="assets/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body data-page="{slug}">
@@ -273,10 +273,10 @@ def page(slug, title, desc, body, active=None, image="team-bro.jpg", name=None, 
 <div class="foot-grid">
 <div><a class="logo" href="index.html"><img src="img/logo-white.png" alt="">BLOMS EL &amp; DATA</a>
 <p>Certifierad elektriker i Göteborg sedan 2008. Kontor och lager i Göteborg, materialdepåer i hela regionen.</p></div>
-<div><h4>Kontakt</h4><ul><li><a href="{TEL}" class="copy">{PHONE}</a></li><li><a href="mailto:{MAIL}" class="copy">{MAIL}</a></li><li>Blomstergatan 5</li><li>411 04 Göteborg</li></ul></div>
-<div><h4>Sidor</h4><ul>{pages}</ul></div>
-<div><h4>Tjänster</h4><ul>{servs}</ul></div>
-<div><h4>Göteborg med omnejd</h4><ul>{areas}<li><a href="elektriker-boras.html">Borås</a></li></ul></div>
+<div><h2 class="foot-h">Kontakt</h2><ul><li><a href="{TEL}" class="copy">{PHONE}</a></li><li><a href="mailto:{MAIL}" class="copy">{MAIL}</a></li><li>Blomstergatan 5</li><li>411 04 Göteborg</li></ul></div>
+<div><h2 class="foot-h">Sidor</h2><ul>{pages}</ul></div>
+<div><h2 class="foot-h">Tjänster</h2><ul>{servs}</ul></div>
+<div><h2 class="foot-h">Göteborg med omnejd</h2><ul>{areas}<li><a href="elektriker-boras.html">Borås</a></li></ul></div>
 </div>
 {FOOT_CERTS}
 <div class="foot-bottom"><span>© 2026 Bloms El &amp; Data AB · Org.nr 556754-3656</span><a href="cookiepolicy.html">Cookiepolicy</a></div>
@@ -291,6 +291,59 @@ def page(slug, title, desc, body, active=None, image="team-bro.jpg", name=None, 
 PAGES = {}
 
 # ================================================================ HEM
+
+# ---------------------------------------------------------------- vanliga frågor och tjänste-schema (SEO/AIO)
+def faq_section(title, qa, bg=""):
+    return (f'<section class="sec {bg}"><div class="wrap split" style="align-items:start"><div class="prose">' + head("Vanliga frågor", title)
+            + ps("Hittar du inte svaret? Ring eller skicka en förfrågan, så återkommer vi normalt samma arbetsdag.") + btns(ghost=False)
+            + '</div><div class="faq">' + "".join(f'<details><summary>{e(q)}</summary><p>{e(a)}</p></details>' for q, a in qa) + '</div></div></section>')
+
+
+def faq_ld(qa):
+    return {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in qa]}
+
+
+def service_ld(name, kind, areas=("Göteborg",)):
+    return {"@type": "Service", "name": name, "serviceType": kind, "provider": {"@id": SITE + "#foretag"},
+            "areaServed": [{"@type": "Place", "name": x} for x in areas]}
+
+
+REGION = ("Göteborg", "Mölndal", "Partille", "Hisingen", "Västra Frölunda", "Kungsbacka", "Kungälv", "Borås")
+ROT_QA = ("Får jag ROT-avdrag?", "Elarbete i en privatbostad ger normalt ROT-avdrag på arbetskostnaden. För laddbox, batterilager och solceller gäller i stället skattereduktion för grön teknik. Vi sköter ansökan och drar av beloppet direkt på fakturan.")
+
+
+def area_qa(place, local):
+    return [(f"Har ni elektriker nära {place}?", local or f"Ja. Vi utgår från kontoret på Blomstergatan 5 i Göteborg och tar uppdrag i hela {place}."),
+            (f"Hur snabbt får jag svar på en förfrågan i {place}?", "Beskriv vad som ska göras och hur bostaden eller lokalen används, så återkommer vi normalt samma arbetsdag med bedömning och offert."),
+            ROT_QA,
+            ("Vilka kunder arbetar ni för?", "Villaägare, bostadsrättsföreningar, fastighetsägare, butiker, restauranger, kontor, industri och byggföretag. Vi är registrerade hos Elsäkerhetsverket och ansvarsförsäkrade.")]
+
+
+QA_LADDBOX = [("Får jag installera en laddbox själv?", "Nej. Installation av laddbox är elinstallationsarbete som ska utföras av ett registrerat elinstallationsföretag. Alla våra montörer har ABL- eller BB1-behörighet och vi är registrerade hos Elsäkerhetsverket."),
+              ("Vilket avdrag får jag för en laddbox?", "Skattereduktion för grön teknik: 50 % av kostnaden för arbete och material, upp till 50 000 kr per person och år. Vi drar av beloppet direkt på fakturan."),
+              ("Jag bor i bostadsrätt. Hur gör jag?", "Föreningen behöver oftast godkänna installationen. Vi bygger också gemensam laddning för bostadsrättsföreningar, där förbrukningen faktureras direkt till varje användare."),
+              ("Räcker min huvudsäkring?", "Det beror på hur mycket el som används samtidigt i huset. Vi kontrollerar huvudsäkringen och kan installera lastbalansering så att laddboxen anpassar effekten efter resten av huset.")]
+QA_SOL = [("Vilket avdrag får jag för solceller?", "Skattereduktion för grön teknik på arbete och material, högst 15 % för solceller enligt Skatteverket. För batterilager är avdraget 50 %. Taket är 50 000 kr per person och år, och vi drar av beloppet direkt på fakturan."),
+          ("Kan jag kombinera solceller med batterilager?", "Ja. Ett batterilager sparar egenproducerad el till kvällen eller till dyrare timmar. Vi installerar både solceller och batterilager och ser till att systemen fungerar ihop."),
+          ("Vem anmäler anläggningen till elnätsbolaget?", "Det gör vi. Som registrerat elinstallationsföretag sköter vi anmälan till nätägaren, dokumentationen och kontrollen av installationen."),
+          ("Varför välja kvalitetspaneler?", "En solcellsanläggning ska hålla i många år. Vi rekommenderar kvalitetsprodukter med lång garanti, eftersom de lönar sig över anläggningens livstid.")]
+QA_HOME = [("Är ni certifierade elektriker?", "Ja. Alla våra montörer har ABL- eller BB1-behörighet. Bloms El & Data är registrerat hos Elsäkerhetsverket, ansvarsförsäkrat och lämnar garanti på alla arbeten."),
+           ("Vilka områden arbetar ni i?", "Vi har kontor och lager på Blomstergatan 5 i Göteborg och materialdepåer i Mölndal, Partille, Hisingen, Västra Frölunda, Lindholmen, Kungsbacka, Kungälv och Borås. Vi tar uppdrag från Falkenberg i söder till Uddevalla i norr."),
+           ("Hur snabbt får jag svar?", "Ring 0705-15 02 11 eller skicka en förfrågan. Vi återkommer normalt samma arbetsdag med bedömning och offert."),
+           ROT_QA,
+           ("Vad kan ni hjälpa till med?", "Allt från elservice och felsökning till nyinstallation, byte av elcentral, belysning, datanät, kraft, golvvärme, laddbox, solceller och batterilager, för privatpersoner, bostadsrättsföreningar och företag.")]
+QA_SKATT = [("Hur mycket är ROT-avdraget för elarbete?", "ROT-avdraget är 30 % av arbetskostnaden för elarbete i din bostad. Materialet ger inget ROT-avdrag."),
+            ("Vad är skattereduktion för grön teknik?", "Ett avdrag på arbete och material för solceller, batterilager och laddbox. Enligt Skatteverket är det högst 15 % för solceller och 50 % för batterilager och laddbox, upp till 50 000 kr per person och år."),
+            ("Kan jag få både ROT och grön teknik?", "Inte för samma arbete. För solceller, batterilager och laddbox gäller grön teknik i stället för ROT."),
+            ("Måste jag ansöka själv?", "Nej. Vi drar av beloppet direkt på fakturan och ansöker hos Skatteverket. Du behöver bara äga och bo i bostaden och ha tillräckligt med skatt att få reduktion mot.")]
+QA_KONTAKT = [("Hur snabbt svarar ni?", "Vi återkommer normalt samma arbetsdag med bedömning och offert."),
+              ("Vad ska jag skriva i förfrågan?", "Beskriv vad som ska göras, var det ligger och hur bostaden eller lokalen används. Bilder på elcentralen eller platsen hjälper oss att ge en snabbare och säkrare bedömning."),
+              ("Var finns ni?", "Kontor och lager på Blomstergatan 5, 411 04 Göteborg, och materialdepåer i hela regionen från Kungälv till Kungsbacka och Borås.")]
+QA_SMART = [("Vad kan man styra med smart teknik?", "Till exempel belysning, värme i sommarstugan, ljud i flera rum och jordfelsbrytare som återställer sig själva. Det mesta styrs från mobilen, även när du inte är hemma."),
+            ("Går det att installera i ett befintligt hus?", "Ja, många smarta lösningar går att installera i befintliga hus och lokaler. Vi går igenom elanläggningen först och föreslår vad som passar."),
+            ("Gör ni smart teknik för företag och lantbruk?", "Ja. Vi installerar smarta lösningar i hem, kontor och jordbruk, till exempel styrning av belysning, värme och övervakning av elanläggningen.")]
+
+
 PAGES["index"] = page("index", "Elektriker Göteborg | Elfirma - Bloms El & Data",
     "Elservice i Göteborg. Nyinstallation, ombyggnation, service och rådgivning - kort sagt allt man förväntar sig av en elektriker och ofta lite till.",
     hero("team-bro.jpg", "Certifierad elektriker i Göteborg",
@@ -314,8 +367,9 @@ PAGES["index"] = page("index", "Elektriker Göteborg | Elfirma - Bloms El & Data
             + btns(call=False, ghost=False), alt="Montörer vid servicebilen nära Älvsborgsbron", media_cls="tall", badge=ROT_BADGE)
     + view_section("i Göteborg")
     + trygg_section()
+    + faq_section("Elektriker i Göteborg", QA_HOME, bg="gray")
     + smart_band(),
-    active="index.html")
+    active="index.html", ld=[service_ld("Elektriker i Göteborg", "Elinstallationer", REGION), faq_ld(QA_HOME)])
 
 
 TJANSTER_OVERVIEW = ('<section class="sec"><div class="wrap"><div class="sec-head"><div class="prose">'
@@ -400,8 +454,10 @@ body += split("brf-laddare.jpg", head("BRF", "Bostadsrättsförening")
               + ps("Många bostadsrättsföreningar har allt fler innehavare som skaffar elbilar och elhybrider och installerar elbilsladdare just nu. Dessutom ökar det oftast föreningens attraktionskraft och därmed lägenheternas värde.",
                    "Vår lösning är underhållsfri och enkel för föreningen. Förbrukningen faktureras direkt till användaren månadsvis. Kontakta oss om du vill veta mer om hur du kan få elbilsladdning till din förening.")
               + '<div class="btns"><a class="btn btn-red arrow" href="laddbox-brf.html">Laddboxar för BRF och företag </a></div>', alt="Laddstationer i ett garage")
-PAGES["elbilsladdare"] = page("elbilsladdare", "Elbilsladdare | Bloms El | Göteborg",
-    "Vi monterar elbilsladdare och laddboxar för villor, bostadsrättsföreningar och företag i Göteborg, Partille, Mölndal och kranskommunerna.", body, "elbilsladdare.html")
+body += faq_section("Laddbox och elbilsladdare", QA_LADDBOX, bg="gray")
+PAGES["elbilsladdare"] = page("elbilsladdare", "Elbilsladdare och laddbox i Göteborg | Bloms El & Data",
+    "Vi monterar elbilsladdare och laddboxar för villor, bostadsrättsföreningar och företag i Göteborg, Partille, Mölndal och kranskommunerna.", body, "elbilsladdare.html",
+    ld=[service_ld("Installation av elbilsladdare och laddbox", "Installation av laddbox", REGION), faq_ld(QA_LADDBOX)])
 
 # ================================================================ SMART TEKNIK
 body = hero("smart-hem.jpg", "Smart teknik",
@@ -436,8 +492,10 @@ body += split("hogtalare.png", head("Ljud", "Smart ljud")
                    "Vi installerar högtalare som levererar superb ljudkvalitet med knivskarp klarhet. Och du kan enkelt strömma ljud från din Wi-Fi-anslutna enhet till en zon, eller upp till 30 zoner samtidigt (med en eller två högtalare i varje zon). Appen sparar dina inställningar för individuella zoner eller Party Mode (alla högtalare samtidigt) nästa gång du öppnar appen."),
               rev=True, bg="gray", alt="Infälld takhögtalare", media_cls="contain").replace('<section class="sec', '<section id="ljud" class="sec', 1)
 body += contact_cta("Vill du veta mer?", "Det här är ett urval av smarta saker för hem och företag. Utvecklingen går rasande fort och det presenteras nya innovativa lösningar nästan dagligen. Vill du veta mer om hur vi kan hjälpa dig till ett smartare, bekvämare och enklare hem, kontor eller jordbruk? Vi har med all säkerhet några ess i rockärmen som gör vardagen enklare, och några som bara gör den roligare.")
-PAGES["smart-teknik"] = page("smart-teknik", "Smart Teknik | Bloms El & Data",
-    "Smarta lösningar för hem, kontor och jordbruk: självåterställande jordfelsbrytare, smart belysning och smart ljud från Bloms El & Data i Göteborg.", body, "smart-teknik.html")
+body += faq_section("Smart teknik", QA_SMART)
+PAGES["smart-teknik"] = page("smart-teknik", "Smart teknik och smarta hem i Göteborg | Bloms El & Data",
+    "Smarta lösningar för hem, kontor och jordbruk: självåterställande jordfelsbrytare, smart belysning och smart ljud från Bloms El & Data i Göteborg.", body, "smart-teknik.html",
+    ld=[service_ld("Smart teknik och smarta hem", "Smart hem-installation", REGION), faq_ld(QA_SMART)])
 
 # ================================================================ SOLCELLER
 body = hero("solceller-cover.jpg", "Vi installerar solceller",
@@ -475,13 +533,15 @@ body += split("sol-jordbruk.png", head("Efter installationen", "Underhåll och s
                    "Kontakta oss så lämnar vi en offert utifrån just dina förutsättningar."),
               alt="Solpaneler på ett jordbruk").replace('<section class="sec', '<section id="underhall" class="sec', 1)
 body += contact_cta("Premium kvalité", "Det finns många tillverkare av solceller i världen. En installation är en stor investering som skall hålla i många år och vi rekommenderar verkligen alla att välja kvalité med omsorg. Det lönar sig.")
-PAGES["solceller"] = page("solceller", "Solceller | Solpaneler | Göteborg | Bloms El & Data",
-    "Vi installerar solceller och solpaneler i och kring Göteborg. Sänk dina elkostnader med ett klimatsmart val, med grön teknik-avdrag direkt på fakturan.", body, "solceller.html")
+body += faq_section("Solceller och solpaneler", QA_SOL, bg="gray")
+PAGES["solceller"] = page("solceller", "Solceller och solpaneler i Göteborg | Bloms El & Data",
+    "Vi installerar solceller och solpaneler i och kring Göteborg. Sänk dina elkostnader med ett klimatsmart val, med grön teknik-avdrag direkt på fakturan.", body, "solceller.html",
+    ld=[service_ld("Installation av solceller", "Solcellsinstallation", REGION), faq_ld(QA_SOL)])
 
 # ================================================================ SKATTEREDUKTION
 body = hero("kabelrulle.jpg", "Rotavdrag och Grön Teknik",
             "Du som äger en fastighet eller bostadsrätt har ofta rätt till skattereduktion när du renoverar, bygger om eller installerar grön teknik. Vi tar hand om allt pappersarbete och avdraget syns direkt på fakturan.",
-            [stat_card("30 %", "Rotavdrag på arbetskostnad", "#rot"), stat_card("20 %", "Grön teknik: solpaneler", "#gron"),
+            [stat_card("30 %", "Rotavdrag på arbetskostnad", "#rot"), stat_card("15 %", "Grön teknik: solpaneler", "#gron"),
              stat_card("50 %", "Batterilager och laddbox", "#gron"), stat_card("50 000 kr", "Max per person och år", "#gron")],
             eyebrow="Skattereduktion")
 body += split("gata-servicebil.jpg", head("Rotavdrag", "Så fungerar rotavdraget")
@@ -491,10 +551,12 @@ body += split("gata-servicebil.jpg", head("Rotavdrag", "Så fungerar rotavdraget
               alt="Montörer vid servicebilen", badge=ROT_BADGE).replace('<section class="sec', '<section id="rot" class="sec', 1)
 body += split("solceller.jpg", head("Grön teknik", "Skattereduktion för grön teknik")
               + ps("På liknande sätt finns en skattereduktion för dig som installerar grön teknik. Sedan 2021 kan du som ägare till en fastighet eller bostadsrätt få bidrag till hela arbetet, det vill säga både arbetskostnad och material, vid installation av solceller, batterilager eller elbilsladdare.",
-                   "Skattereduktionen kallas just Grön teknik, och du kan få en reduktion om max 50 000 kr per person och år. Som kund får du 20 % för solpaneler och 50 % för batterilagring och elbilsladdare. Och precis som för rotavdraget tar vi hand om allt det där åt dig. Du behöver inte göra någon ansökan, vi tar hand om pappersarbetet och skattereduktionen redovisas direkt på fakturan.")
+                   "Skattereduktionen kallas just Grön teknik, och du kan få en reduktion om max 50 000 kr per person och år. Som kund får du 15 % för solpaneler och 50 % för batterilagring och elbilsladdare. Och precis som för rotavdraget tar vi hand om allt det där åt dig. Du behöver inte göra någon ansökan, vi tar hand om pappersarbetet och skattereduktionen redovisas direkt på fakturan.")
               + btns(ghost=False), rev=True, bg="gray", alt="Montör installerar solpaneler").replace('<section class="sec', '<section id="gron" class="sec', 1)
-PAGES["skattereduktion"] = page("skattereduktion", "Rot och Grön Teknik | Bloms El & Data",
-    "Rotavdrag och skattereduktion för grön teknik. Bloms El & Data sköter pappersarbetet och drar av beloppet direkt på fakturan.", body, "skattereduktion.html")
+body += faq_section("ROT och grön teknik", QA_SKATT)
+PAGES["skattereduktion"] = page("skattereduktion", "ROT-avdrag och grön teknik för elarbete | Bloms El & Data",
+    "Rotavdrag och skattereduktion för grön teknik. Bloms El & Data sköter pappersarbetet och drar av beloppet direkt på fakturan.", body, "skattereduktion.html",
+    ld=[faq_ld(QA_SKATT)])
 
 # ================================================================ KONTAKT
 body = hero("utebelysning.jpg", "Kontakta oss",
@@ -517,11 +579,20 @@ body += ('<section class="sec gray" id="karta"><div class="wrap split"><div clas
          + ps("Härifrån åtar vi oss uppdrag från Falkenberg i söder till Uddevalla i norr; Ulricehamn, Göteborg, Borås och allt där emellan.")
          + '<div class="btns"><a class="btn btn-line arrow" href="https://www.google.com/maps/search/?api=1&amp;query=Blomstergatan+5+411+04+G%C3%B6teborg" target="_blank" rel="noopener">Öppna i Google Maps </a></div></div>'
          '<div class="media"><img src="img/servicebil-liseberg.jpg" alt="Bloms El &amp; Datas servicebil" loading="lazy"></div></div></section>')
-PAGES["kontakt"] = page("kontakt", "Kontakta en elektriker i Göteborg | Bloms El & Data", "Kontakta Bloms El & Data, certifierad elektriker i Göteborg. Ring 0705-15 02 11 eller skicka en förfrågan, vi svarar normalt samma arbetsdag.", body, "kontakt.html")
+PAGES["kontakt"] = page("kontakt", "Kontakta en elektriker i Göteborg | Bloms El & Data", "Kontakta Bloms El & Data, certifierad elektriker i Göteborg. Ring 0705-15 02 11 eller skicka en förfrågan, vi svarar normalt samma arbetsdag.", body + faq_section("Kontakt", QA_KONTAKT, bg="gray"), "kontakt.html", ld=[faq_ld(QA_KONTAKT)])
 
 
 # ================================================================ ORTSSIDOR (stora: Hisingen, Kungsbacka, Kungälv)
-def big_area(slug, place, title, desc, h1, intro, sec2_title, sec2, sec3_title, sec3, near_title, near, cta_text, extra=""):
+BIG_LOCAL = {
+    "Hisingen": ("Vi har materialdepåer både på Hisingen och vid Lindholmen. Det gör att material finns nära när vi installerar, felsöker eller behöver komplettera under arbetets gång, och kortar tiden till ett färdigt jobb.",
+                 ("Lundby", "Lindholmen", "Eriksberg", "Kvillebäcken", "Backa", "Biskopsgården", "Torslanda", "Tuve", "Kärra")),
+    "Kungsbacka": ("Vi har en materialdepå i Kungsbacka. Det gör att material finns nära när vi installerar, felsöker eller behöver komplettera under arbetets gång, och kortar tiden till ett färdigt jobb.",
+                   ("Kungsbacka centrum", "Onsala", "Kullavik", "Åsa", "Särö", "Vallda", "Fjärås", "Frillesås", "Anneberg", "Gällinge")),
+    "Kungälv": ("Vi har en materialdepå i Kungälv. Det gör att material finns nära när vi installerar, felsöker eller behöver komplettera under arbetets gång, och kortar tiden till ett färdigt jobb.", ("Kungälv centrum", "Ytterby", "Kareby", "Kode", "Diseröd", "Marstrand")),
+}
+
+
+def big_area(slug, place, title, desc, h1, intro, sec2_title, sec2, sec3_title, sec3, near_title, near, cta_text, extra="", local="", parts=()):
     b = hero("team-bro.jpg", h1, intro[0], HOME_CARDS, eyebrow=f"Elektriker {place}")
     b += split("kraft-uttag.jpg", head("Bloms El & Data", f"Elektriker i {place} sedan 2008") + ps(*intro[1:]) + btns(ghost=False), alt="Röda kraftuttag")
     b += usp_section(f"Elfirma nära {place}")
@@ -533,9 +604,12 @@ def big_area(slug, place, title, desc, h1, intro, sec2_title, sec2, sec3_title, 
                bg="gray", rev=True, alt="Montörer vid servicebilen", media_cls="tall", badge=ROT_BADGE)
     b += view_section(f"{'på' if place == 'Hisingen' else 'i'} {place}")
     b += extra
+    local, parts = local or BIG_LOCAL.get(place, ("", ()))[0], parts or BIG_LOCAL.get(place, ("", ()))[1]
+    qa = area_qa(place, local)
+    b += faq_section(f"Elektriker {'på' if place == 'Hisingen' else 'i'} {place}", qa)
     b += contact_cta(f"Kontakta din elektriker {'på' if place == 'Hisingen' else 'i'} {place}", cta_text)
     b += smart_band()
-    return page(slug, title, desc, b)
+    return page(slug, title, desc, b, ld=[service_ld(f"Elektriker {'på' if place == 'Hisingen' else 'i'} {place}", "Elinstallationer", (place,) + tuple(parts)), faq_ld(qa)])
 
 
 def lis(items):
@@ -635,10 +709,7 @@ def small_area(slug, place, title, desc, hero_img, intro, services, doing, also,
           + ps(f"Klicka på en tjänst för att läsa mer om hur vi arbetar. Allt utförs av certifierade elektriker med ABL- eller BB1-behörighet, med garanti och ROT- eller grön teknik-avdrag direkt på fakturan där det gäller.")
           + '<div class="btns" style="margin-top:8px"><a class="btn btn-red arrow" href="kontakt.html">Kontakta oss </a></div></div>'
           + '<ul class="pills">' + "".join(f'<li><a href="{SERVICE_LINKS[x]}">{e(x)}</a></li>' if x in SERVICE_LINKS else f"<li>{e(x)}</li>" for x in services) + '</ul></div></section>')
-    qa = [(f"Har ni elektriker nära {place}?", local or f"Ja. Vi utgår från kontoret på Blomstergatan 5 i Göteborg och tar uppdrag i hela {place}."),
-          (f"Hur snabbt får jag svar på en förfrågan i {place}?", "Beskriv vad som ska göras och hur bostaden eller lokalen används, så återkommer vi normalt samma arbetsdag med bedömning och offert."),
-          ("Får jag ROT-avdrag?", "Elarbete i en privatbostad ger normalt ROT-avdrag på arbetskostnaden. För laddbox, batterilager och solceller gäller i stället skattereduktion för grön teknik. Vi sköter ansökan och drar av beloppet direkt på fakturan."),
-          ("Vilka kunder arbetar ni för?", "Villaägare, bostadsrättsföreningar, fastighetsägare, butiker, restauranger, kontor, industri och byggföretag. Vi är registrerade hos Elsäkerhetsverket och ansvarsförsäkrade.")]
+    qa = area_qa(place, local)
     near = (f'<p>Vi tar uppdrag i hela området, bland annat:</p><ul class="pills">' + "".join(f"<li>{e(x)}</li>" for x in parts) + '</ul>') if parts else ""
     faq_block = ('<section class="sec"><div class="wrap split" style="align-items:start"><div class="prose">' + head("Lokalt", f"Elektriker i {place} med närhet till material")
                  + (ps(local) if local else "") + near + '</div><div><h3 class="h3" style="margin-bottom:14px">Vanliga frågor</h3><div class="faq">'
@@ -652,7 +723,7 @@ def small_area(slug, place, title, desc, hero_img, intro, services, doing, also,
     b += faq_block
     ld = [{"@type": "Service", "name": f"Elektriker i {place}", "serviceType": "Elinstallationer", "provider": {"@id": SITE + "#foretag"},
            "areaServed": [{"@type": "Place", "name": x} for x in (place,) + tuple(parts)]},
-          {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in qa]}]
+          faq_ld(qa)]
     return page(slug, title, desc, b, ld=ld)
 
 
@@ -709,7 +780,7 @@ d = ""
 for kind, val in doc:
     d += {"p": lambda v: f"<p>{e(v)}</p>", "h": lambda v: f"<h2>{e(v)}</h2>",
           "ul": lambda v: "<ul>" + "".join(f"<li>{e(x)}</li>" for x in v) + "</ul>"}[kind](val)
-d += '<p>Har du frågor och kommentarer om vår cookiepolicy är du välkommen att kontakta oss. Du hittar kontaktuppgifter <a href="kontakt.html" style="color:var(--red);text-decoration:underline">här</a>.</p>'
+d += '<p>Har du frågor och kommentarer om vår cookiepolicy är du välkommen att kontakta oss. Du hittar alla kontaktuppgifter på <a href="kontakt.html" style="color:var(--red);text-decoration:underline">kontaktsidan</a>.</p>'
 PAGES["cookiepolicy"] = page("cookiepolicy", "Cookiepolicy | Bloms El & Data", "Sidan beskriver hur och varför Bloms El & Datas hemsida använder cookies.",
                              hero("team-bro.jpg", "Cookiepolicy", None, None, eyebrow="Bloms El & Data", buttons="")
                              + f'<section class="sec"><div class="wrap"><div class="prose doc">{d}</div></div></section>')
@@ -780,7 +851,8 @@ for d in EXTRA:
     PAGES[d["slug"]] = service_page(d)
 
 # Responsiva bilder: WebP i 800 och 1600 px bredd i img/w/. src lämnas orört (adminpanelens nycklar bygger på det).
-def webp_variants(name):
+def webp_variants(name, hero=False):
+    """hero=True: hårdare komprimering, bilden ligger bakom en mörk toning."""
     from PIL import Image
     src = OUT / "img" / name
     if not src.is_file():
@@ -791,15 +863,15 @@ def webp_variants(name):
     with Image.open(src) as im:
         w = im.width
         done = []
-        for target in (800, 1600):
+        for target in (480, 800, 1600):
             if target > w and target != 800:
                 break
-            dst = outdir / f"{stem}-{target}.webp"
+            dst = outdir / f"{stem}-{'h' if hero else ''}{target}.webp"
             tw = min(target, w)
             if not dst.is_file() or dst.stat().st_mtime < src.stat().st_mtime:
                 x = im.convert("RGBA" if im.mode in ("RGBA", "LA", "P") else "RGB")
                 x = x.resize((tw, round(im.height * tw / w)), Image.LANCZOS) if tw < w else x
-                x.save(dst, "WEBP", quality=74, method=6)
+                x.save(dst, "WEBP", quality=(48 if hero else 64) if target < 1600 else (58 if hero else 70), method=6)
             done.append((f"img/w/{dst.name}", tw))
         return done
 
@@ -811,13 +883,26 @@ def responsive(html):
         tag, name = m.group(0), m.group(1)
         if "srcset=" in tag:
             return tag
-        if name not in _variants:
-            _variants[name] = webp_variants(name)
-        v = _variants[name]
+        hero = 'fetchpriority="high"' in tag or "team-bro-upscaled" in name
+        if (name, hero) not in _variants:
+            _variants[(name, hero)] = webp_variants(name, hero)
+        v = _variants[(name, hero)]
         if not v:
             return tag
-        hero = 'fetchpriority="high"' in tag or "team-bro-upscaled" in name
-        sizes = "100vw" if hero else "(max-width: 760px) 100vw, 50vw"
+        # hero på mobil: 480-varianten räcker bakom den mörka toningen och ger snabbare första visning
+        # bildens bredd beror på vilket rutnät den ligger i (se style.css: 2 kolumner under 1020 px, g3 1 kolumn under 720 px)
+        before = html[:m.start()]
+        sec = before.rfind("<section")
+        grid = max(before.rfind('class="hero-cards"'), before.rfind('class="grid g4"'), before.rfind('class="grid g3"'))
+        kind = before[grid:grid + 22] if grid > sec else ""
+        if hero:
+            sizes = "(max-width: 760px) 60vw, 100vw"
+        elif "hero-cards" in kind or "g4" in kind:
+            sizes = "(max-width: 1020px) 50vw, 25vw"
+        elif "g3" in kind:
+            sizes = "(max-width: 720px) 100vw, (max-width: 1020px) 50vw, 33vw"
+        else:
+            sizes = "(max-width: 720px) 100vw, 50vw"
         srcset = ", ".join(f"{u} {w}w" for u, w in v)
         return tag[:-1] + f' srcset="{srcset}" sizes="{sizes}">'
     return _re.sub(r'<img [^>]*src="img/([\w\-]+\.(?:jpg|jpeg|png))"[^>]*>', rep, html)
@@ -825,6 +910,12 @@ def responsive(html):
 
 for slug, html in PAGES.items():
     (OUT / f"{slug}.html").write_text(responsive(html), encoding="utf-8")
+
+# ta bort varianter som ingen sida använder längre
+_used = {u.split("/")[-1] for v in _variants.values() for u, _ in v}
+for _f in (OUT / "img" / "w").glob("*.webp"):
+    if _f.name not in _used:
+        _f.unlink()
 
 # Manifest och tomt innehåll för adminpanelen
 import json, re

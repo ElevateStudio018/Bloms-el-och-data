@@ -138,3 +138,7 @@ ol.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:r
 ol.steps li{counter-increment:s;background:var(--cream-2);border-radius:10px;padding:4mm;font-size:8.6pt;color:var(--muted)}
 ol.steps li::before{content:counter(s);display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:9pt;margin-bottom:6px}
 ol.steps b{display:block;color:var(--ink);font-size:9.4pt;margin-bottom:2px}
+.box.mine{background:var(--mint)}
+.box ol.rank li{color:var(--muted)}
+.cols4{display:grid;grid-template-columns:repeat(4,1fr);gap:4mm}
+.cols4 h3{font-size:9.6pt}

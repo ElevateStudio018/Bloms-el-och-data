@@ -1,5 +1,5 @@
 {
- "measured": "2026-10-28T16:56:04.793Z",
+ "measured": "2026-10-29T09:56:40.263Z",
  "method": "Chromium, mobil 412x823, nätverk 150 ms RTT / 1,6 Mbit/s, CPU 4x långsammare, cache av, median av 3 körningar",
  "seo": {
   "old": [
@@ -225,7 +225,7 @@
   ],
   "new": [
    {
-    "url": "http://127.0.0.1:8793/batterilager.html",
+    "url": "http://127.0.0.1:8794/batterilager.html",
     "title": "Batterilager för solceller i Göteborg | Bloms El & Data",
     "desc": "Installation av batterilager för solcellsanläggningar i Göteborg. Lagra egen el, minska kostnaderna och få reservkraft vid strömavbrott.",
     "canonical": "https://www.blomsel.se/batterilager.html",
@@ -246,7 +246,7 @@
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/belysning.html",
+    "url": "http://127.0.0.1:8794/belysning.html",
     "title": "Belysning och ljusplanering i Göteborg | Bloms El & Data",
     "desc": "Belysning för hem, butik, kontor och utemiljö. Ljusplanering, ljusberäkning, LED och styrning. Bloms El & Data i Göteborg.",
     "canonical": "https://www.blomsel.se/belysning.html",
@@ -267,7 +267,7 @@
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/cookiepolicy.html",
+    "url": "http://127.0.0.1:8794/cookiepolicy.html",
     "title": "Cookiepolicy | Bloms El & Data",
     "desc": "Sidan beskriver hur och varför Bloms El & Datas hemsida använder cookies.",
     "canonical": "https://www.blomsel.se/cookiepolicy.html",
@@ -279,14 +279,14 @@
     ],
     "imgs": 1,
     "alt": 0,
-    "words": 563,
+    "words": 565,
     "lang": "sv",
     "og": true,
     "faq": false,
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/datanat.html",
+    "url": "http://127.0.0.1:8794/datanat.html",
     "title": "Datanät och nätverk i Göteborg | Bloms El & Data",
     "desc": "Installation av datanät för hem, kontor och fastigheter i Göteborg. Nätverksuttag, kablage, nätverksskåp och trådlöst nätverk.",
     "canonical": "https://www.blomsel.se/datanat.html",
@@ -307,7 +307,7 @@
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/dokumentation.html",
+    "url": "http://127.0.0.1:8794/dokumentation.html",
     "title": "Elritningar och elsäkerhetsintyg | Bloms El & Data",
     "desc": "Dokumentation av elinstallationer i Göteborg: elritningar, mätprotokoll, belysningsberäkningar och elsäkerhetsintyg.",
     "canonical": "https://www.blomsel.se/dokumentation.html",
@@ -328,26 +328,28 @@
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/elbilsladdare.html",
-    "title": "Elbilsladdare | Bloms El | Göteborg",
+    "url": "http://127.0.0.1:8794/elbilsladdare.html",
+    "title": "Elbilsladdare och laddbox i Göteborg | Bloms El & Data",
     "desc": "Vi monterar elbilsladdare och laddboxar för villor, bostadsrättsföreningar och företag i Göteborg, Partille, Mölndal och kranskommunerna.",
     "canonical": "https://www.blomsel.se/elbilsladdare.html",
     "h1": 1,
     "ld": [
      "Electrician",
      "WebPage",
-     "BreadcrumbList"
+     "BreadcrumbList",
+     "Service",
+     "FAQPage"
     ],
     "imgs": 10,
     "alt": 9,
-    "words": 687,
+    "words": 734,
     "lang": "sv",
     "og": true,
-    "faq": false,
+    "faq": true,
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/elcentral.html",
+    "url": "http://127.0.0.1:8794/elcentral.html",
     "title": "Byte av elcentral i Göteborg | Bloms El & Data",
     "desc": "Byte av proppskåp till modern elcentral med automatsäkringar och jordfelsbrytare. Byte av gamla elsystem i villor och lägenheter.",
     "canonical": "https://www.blomsel.se/elcentral.html",
@@ -368,7 +370,7 @@
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/elektriker-boras.html",
+    "url": "http://127.0.0.1:8794/elektriker-boras.html",
     "title": "Elektriker i Borås | Bloms El & Data",
     "desc": "Elektriker i Borås för privatpersoner, fastighetsägare och företag. Elservice, installation, laddboxar och solceller. Materialdepå i Borås.",
     "canonical": "https://www.blomsel.se/elektriker-boras.html",
@@ -388,7 +390,7 @@
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/elektriker-hisingen.html",
+    "url": "http://127.0.0.1:8794/elektriker-hisingen.html",
     "title": "Elektriker Hisingen | Elfirma - Bloms El & Data",
     "desc": "Elservice i Hisingen | Nyinstallation, ombyggnation, service och rådgivning - kort sagt allt man förväntar sig av en elektriker och ofta lite till.",
     "canonical": "https://www.blomsel.se/elektriker-hisingen.html",
@@ -396,18 +398,20 @@
     "ld": [
      "Electrician",
      "WebPage",
-     "BreadcrumbList"
+     "BreadcrumbList",
+     "Service",
+     "FAQPage"
     ],
     "imgs": 24,
     "alt": 23,
-    "words": 793,
+    "words": 843,
     "lang": "sv",
     "og": true,
-    "faq": false,
+    "faq": true,
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/elektriker-i-partille.html",
+    "url": "http://127.0.0.1:8794/elektriker-i-partille.html",
     "title": "Elektriker i Partille | Bloms El & Data",
     "desc": "Elektriker och elinstallatör i Partille med lång och gedigen erfarenhet.",
     "canonical": "https://www.blomsel.se/elektriker-i-partille.html",
@@ -415,18 +419,20 @@
     "ld": [
      "Electrician",
      "WebPage",
-     "BreadcrumbList"
+     "BreadcrumbList",
+     "Service",
+     "FAQPage"
     ],
     "imgs": 12,
     "alt": 11,
-    "words": 212,
+    "words": 324,
     "lang": "sv",
     "og": true,
-    "faq": false,
+    "faq": true,
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/elektriker-kungalv.html",
+    "url": "http://127.0.0.1:8794/elektriker-kungalv.html",
     "title": "Elektriker Kungälv | Elfirma - Bloms El & Data",
     "desc": "Elservice i Kungälv | Nyinstallation, ombyggnation, service och rådgivning - kort sagt allt man förväntar sig av en elektriker och ofta lite till.",
     "canonical": "https://www.blomsel.se/elektriker-kungalv.html",
@@ -434,18 +440,20 @@
     "ld": [
      "Electrician",
      "WebPage",
-     "BreadcrumbList"
+     "BreadcrumbList",
+     "Service",
+     "FAQPage"
     ],
     "imgs": 25,
     "alt": 24,
-    "words": 753,
+    "words": 803,
     "lang": "sv",
     "og": true,
-    "faq": false,
+    "faq": true,
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/elektriker-kungsbacka.html",
+    "url": "http://127.0.0.1:8794/elektriker-kungsbacka.html",
     "title": "Elektriker Kungsbacka | Elfirma - Bloms El & Data",
     "desc": "Elservice i Kungsbacka | Nyinstallation, ombyggnation, service och rådgivning - kort sagt allt man förväntar sig av en elektriker och ofta lite till.",
     "canonical": "https://www.blomsel.se/elektriker-kungsbacka.html",
@@ -453,18 +461,20 @@
     "ld": [
      "Electrician",
      "WebPage",
-     "BreadcrumbList"
+     "BreadcrumbList",
+     "Service",
+     "FAQPage"
     ],
     "imgs": 24,
     "alt": 23,
-    "words": 635,
+    "words": 685,
     "lang": "sv",
     "og": true,
-    "faq": false,
+    "faq": true,
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/elektriker-molndal.html",
+    "url": "http://127.0.0.1:8794/elektriker-molndal.html",
     "title": "Elektriker i Mölndal | Bloms El & Data",
     "desc": "Elektriker och elinstallatör i Mölndal med lång och gedigen erfarenhet.",
     "canonical": "https://www.blomsel.se/elektriker-molndal.html",
@@ -472,18 +482,20 @@
     "ld": [
      "Electrician",
      "WebPage",
-     "BreadcrumbList"
+     "BreadcrumbList",
+     "Service",
+     "FAQPage"
     ],
     "imgs": 12,
     "alt": 11,
-    "words": 245,
+    "words": 357,
     "lang": "sv",
     "og": true,
-    "faq": false,
+    "faq": true,
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/elektriker-vastra-frolunda.html",
+    "url": "http://127.0.0.1:8794/elektriker-vastra-frolunda.html",
     "title": "Elektriker i Västra Frölunda | Bloms El & Data",
     "desc": "Erfaren elektriker och elinstallatör i Västra Frölunda. Lång erfarenhet och mycket goda referenser.",
     "canonical": "https://www.blomsel.se/elektriker-vastra-frolunda.html",
@@ -491,18 +503,20 @@
     "ld": [
      "Electrician",
      "WebPage",
-     "BreadcrumbList"
+     "BreadcrumbList",
+     "Service",
+     "FAQPage"
     ],
     "imgs": 12,
     "alt": 11,
-    "words": 224,
+    "words": 341,
     "lang": "sv",
     "og": true,
-    "faq": false,
+    "faq": true,
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/elservice-felsokning.html",
+    "url": "http://127.0.0.1:8794/elservice-felsokning.html",
     "title": "Elservice och felsökning i Göteborg | Bloms El & Data",
     "desc": "Elservice, felsökning och reparationer i Göteborg. Säkringar som löser ut, jordfel, uttag och belysning som krånglar. Certifierade elektriker sedan 2008.",
     "canonical": "https://www.blomsel.se/elservice-felsokning.html",
@@ -523,7 +537,7 @@
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/golvvarme.html",
+    "url": "http://127.0.0.1:8794/golvvarme.html",
     "title": "Elektrisk golvvärme i Göteborg | Bloms El & Data",
     "desc": "Installation av elektrisk golvvärme i badrum, kök och bostäder. Behöriga elektriker i Göteborg med omnejd.",
     "canonical": "https://www.blomsel.se/golvvarme.html",
@@ -544,7 +558,7 @@
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/",
+    "url": "http://127.0.0.1:8794/",
     "title": "Elektriker Göteborg | Elfirma - Bloms El & Data",
     "desc": "Elservice i Göteborg. Nyinstallation, ombyggnation, service och rådgivning - kort sagt allt man förväntar sig av en elektriker och ofta lite till.",
     "canonical": "https://www.blomsel.se/",
@@ -552,18 +566,20 @@
     "ld": [
      "Electrician",
      "WebPage",
-     "BreadcrumbList"
+     "BreadcrumbList",
+     "Service",
+     "FAQPage"
     ],
     "imgs": 23,
     "alt": 22,
-    "words": 506,
+    "words": 556,
     "lang": "sv",
     "og": true,
-    "faq": false,
+    "faq": true,
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/industrielektriker.html",
+    "url": "http://127.0.0.1:8794/industrielektriker.html",
     "title": "Industrielektriker i Göteborg | Bloms El & Data",
     "desc": "Industrielektriker i Göteborg: el och automation kring maskinparken, kraft, styrsystem och felsökning för att minimera driftstopp.",
     "canonical": "https://www.blomsel.se/industrielektriker.html",
@@ -584,7 +600,7 @@
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/kok-och-badrum.html",
+    "url": "http://127.0.0.1:8794/kok-och-badrum.html",
     "title": "El i kök och badrum i Göteborg | Bloms El & Data",
     "desc": "El vid renovering av kök och badrum i Göteborg: uttag, belysning, golvvärme och vitvaror. Certifierade elektriker med ROT-avdrag.",
     "canonical": "https://www.blomsel.se/kok-och-badrum.html",
@@ -605,26 +621,27 @@
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/kontakt.html",
-    "title": "Kontakt | Göteborg | Bloms El Och Data",
+    "url": "http://127.0.0.1:8794/kontakt.html",
+    "title": "Kontakta en elektriker i Göteborg | Bloms El & Data",
     "desc": "Kontakta Bloms El & Data, certifierad elektriker i Göteborg. Ring 0705-15 02 11 eller skicka en förfrågan, vi svarar normalt samma arbetsdag.",
     "canonical": "https://www.blomsel.se/kontakt.html",
     "h1": 1,
     "ld": [
      "Electrician",
      "WebPage",
-     "BreadcrumbList"
+     "BreadcrumbList",
+     "FAQPage"
     ],
     "imgs": 2,
     "alt": 1,
-    "words": 122,
+    "words": 157,
     "lang": "sv",
     "og": true,
-    "faq": false,
+    "faq": true,
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/kraft.html",
+    "url": "http://127.0.0.1:8794/kraft.html",
     "title": "Kraftinstallationer i Göteborg | Bloms El & Data",
     "desc": "Kraftuttag, matning och kompletta elinstallationer för verkstad, industri, restaurang och hem i Göteborg.",
     "canonical": "https://www.blomsel.se/kraft.html",
@@ -645,7 +662,7 @@
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/laddbox-brf.html",
+    "url": "http://127.0.0.1:8794/laddbox-brf.html",
     "title": "Laddboxar för BRF och företag | Bloms El & Data",
     "desc": "Laddinfrastruktur för bostadsrättsföreningar, samfälligheter och företag i Göteborg. Lastbalansering, debitering per användare och underhållsfri drift.",
     "canonical": "https://www.blomsel.se/laddbox-brf.html",
@@ -666,7 +683,7 @@
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/nybyggnation-renovering.html",
+    "url": "http://127.0.0.1:8794/nybyggnation-renovering.html",
     "title": "El vid nybygge och renovering | Bloms El & Data",
     "desc": "Elinstallation vid nybyggnation, tillbyggnad och renovering av villor, lägenheter och lokaler i Göteborg. Från ritning till dokumentation.",
     "canonical": "https://www.blomsel.se/nybyggnation-renovering.html",
@@ -687,7 +704,7 @@
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/om-oss.html",
+    "url": "http://127.0.0.1:8794/om-oss.html",
     "title": "Om Bloms El & Data | Elektriker i Göteborg sedan 2008",
     "desc": "Bloms El & Data AB är en elfirma i Göteborg som sedan 2008 utfört elarbeten åt privatpersoner, fastighetsägare och företag. Läs om oss och hur vi arbetar.",
     "canonical": "https://www.blomsel.se/om-oss.html",
@@ -706,64 +723,69 @@
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/skattereduktion.html",
-    "title": "Rot och Grön Teknik | Bloms El & Data",
+    "url": "http://127.0.0.1:8794/skattereduktion.html",
+    "title": "ROT-avdrag och grön teknik för elarbete | Bloms El & Data",
     "desc": "Rotavdrag och skattereduktion för grön teknik. Bloms El & Data sköter pappersarbetet och drar av beloppet direkt på fakturan.",
     "canonical": "https://www.blomsel.se/skattereduktion.html",
     "h1": 1,
     "ld": [
      "Electrician",
      "WebPage",
-     "BreadcrumbList"
+     "BreadcrumbList",
+     "FAQPage"
     ],
     "imgs": 3,
     "alt": 2,
-    "words": 333,
+    "words": 382,
     "lang": "sv",
     "og": true,
-    "faq": false,
+    "faq": true,
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/smart-teknik.html",
-    "title": "Smart Teknik | Bloms El & Data",
+    "url": "http://127.0.0.1:8794/smart-teknik.html",
+    "title": "Smart teknik och smarta hem i Göteborg | Bloms El & Data",
     "desc": "Smarta lösningar för hem, kontor och jordbruk: självåterställande jordfelsbrytare, smart belysning och smart ljud från Bloms El & Data i Göteborg.",
     "canonical": "https://www.blomsel.se/smart-teknik.html",
     "h1": 1,
     "ld": [
      "Electrician",
      "WebPage",
-     "BreadcrumbList"
+     "BreadcrumbList",
+     "Service",
+     "FAQPage"
     ],
     "imgs": 10,
     "alt": 9,
-    "words": 708,
+    "words": 754,
     "lang": "sv",
     "og": true,
-    "faq": false,
+    "faq": true,
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/solceller.html",
-    "title": "Solceller | Solpaneler | Göteborg | Bloms El & Data",
+    "url": "http://127.0.0.1:8794/solceller.html",
+    "title": "Solceller och solpaneler i Göteborg | Bloms El & Data",
     "desc": "Vi installerar solceller och solpaneler i och kring Göteborg. Sänk dina elkostnader med ett klimatsmart val, med grön teknik-avdrag direkt på fakturan.",
     "canonical": "https://www.blomsel.se/solceller.html",
     "h1": 1,
     "ld": [
      "Electrician",
      "WebPage",
-     "BreadcrumbList"
+     "BreadcrumbList",
+     "Service",
+     "FAQPage"
     ],
     "imgs": 9,
     "alt": 8,
-    "words": 626,
+    "words": 670,
     "lang": "sv",
     "og": true,
-    "faq": false,
+    "faq": true,
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/tjanster.html",
+    "url": "http://127.0.0.1:8794/tjanster.html",
     "title": "Elektriker Göteborg | Tjänster | Bloms El & Data",
     "desc": "Elektriker Göteborg, Installation, Service, Belysning, Kraft, Solceller, Elbilsladdning, Datanät, Nybyggnation",
     "canonical": "https://www.blomsel.se/tjanster.html",
@@ -782,7 +804,7 @@
     "tel": true
    },
    {
-    "url": "http://127.0.0.1:8793/vanliga-fragor.html",
+    "url": "http://127.0.0.1:8794/vanliga-fragor.html",
     "title": "Vanliga frågor om el och elektriker | Bloms El & Data",
     "desc": "Svar på vanliga frågor om ROT-avdrag, grön teknik, elsäkerhet, laddboxar, solceller och vad du får göra själv. Bloms El & Data i Göteborg.",
     "canonical": "https://www.blomsel.se/vanliga-fragor.html",
@@ -807,94 +829,94 @@
   {
    "page": "start",
    "old": {
-    "load": 12361,
-    "lcp": 8548,
-    "fcp": 872,
+    "load": 12558,
+    "lcp": 7768,
+    "fcp": 768,
     "cls": 0.112,
-    "tbt": 2048,
+    "tbt": 1496,
     "reqs": 161,
-    "kb": 1922,
-    "jsKb": 1182
+    "kb": 1925,
+    "jsKb": 1185
    },
    "new": {
-    "load": 4209,
-    "lcp": 1072,
-    "fcp": 1012,
-    "cls": 0.002,
-    "tbt": 202,
-    "reqs": 23,
-    "kb": 747,
-    "jsKb": 17
+    "load": 927,
+    "lcp": 764,
+    "fcp": 712,
+    "cls": 0,
+    "tbt": 72,
+    "reqs": 22,
+    "kb": 318,
+    "jsKb": 6
    },
    "runs": {
     "old": [
      {
       "url": "https://www.blomsel.se/",
-      "load": 10375,
-      "lcp": 6964,
-      "fcp": 780,
+      "load": 12558,
+      "lcp": 8680,
+      "fcp": 976,
+      "cls": 0.112,
+      "tbt": 1496,
+      "reqs": 161,
+      "kb": 1925,
+      "jsKb": 1185
+     },
+     {
+      "url": "https://www.blomsel.se/",
+      "load": 12668,
+      "lcp": 7768,
+      "fcp": 716,
       "cls": 0.127,
-      "tbt": 1979,
-      "reqs": 157,
-      "kb": 1920,
-      "jsKb": 1183
+      "tbt": 1507,
+      "reqs": 161,
+      "kb": 1925,
+      "jsKb": 1184
      },
      {
       "url": "https://www.blomsel.se/",
-      "load": 12361,
-      "lcp": 8712,
-      "fcp": 872,
+      "load": 12388,
+      "lcp": 7648,
+      "fcp": 768,
       "cls": 0.112,
-      "tbt": 2348,
+      "tbt": 1490,
       "reqs": 161,
-      "kb": 1922,
-      "jsKb": 1182
-     },
-     {
-      "url": "https://www.blomsel.se/",
-      "load": 12459,
-      "lcp": 8548,
-      "fcp": 896,
-      "cls": 0.112,
-      "tbt": 2048,
-      "reqs": 161,
-      "kb": 1922,
-      "jsKb": 1182
+      "kb": 1925,
+      "jsKb": 1185
      }
     ],
     "new": [
      {
-      "url": "http://127.0.0.1:8793/",
-      "load": 4184,
-      "lcp": 1048,
-      "fcp": 988,
-      "cls": 0.002,
-      "tbt": 202,
-      "reqs": 23,
-      "kb": 747,
-      "jsKb": 17
+      "url": "http://127.0.0.1:8794/",
+      "load": 2049,
+      "lcp": 740,
+      "fcp": 720,
+      "cls": 0,
+      "tbt": 78,
+      "reqs": 22,
+      "kb": 318,
+      "jsKb": 6
      },
      {
-      "url": "http://127.0.0.1:8793/",
-      "load": 4253,
-      "lcp": 1072,
-      "fcp": 1012,
-      "cls": 0.001,
-      "tbt": 194,
-      "reqs": 23,
-      "kb": 747,
-      "jsKb": 17
+      "url": "http://127.0.0.1:8794/",
+      "load": 898,
+      "lcp": 764,
+      "fcp": 712,
+      "cls": 0,
+      "tbt": 72,
+      "reqs": 22,
+      "kb": 318,
+      "jsKb": 6
      },
      {
-      "url": "http://127.0.0.1:8793/",
-      "load": 4209,
-      "lcp": 1116,
-      "fcp": 1052,
-      "cls": 0.002,
-      "tbt": 222,
-      "reqs": 23,
-      "kb": 747,
-      "jsKb": 17
+      "url": "http://127.0.0.1:8794/",
+      "load": 927,
+      "lcp": 764,
+      "fcp": 700,
+      "cls": 0,
+      "tbt": 61,
+      "reqs": 22,
+      "kb": 318,
+      "jsKb": 6
      }
     ]
    }
@@ -902,94 +924,94 @@
   {
    "page": "elbilsladdare",
    "old": {
-    "load": 10866,
-    "lcp": 728,
-    "fcp": 728,
-    "cls": 0.057,
-    "tbt": 1805,
-    "reqs": 132,
-    "kb": 1549,
-    "jsKb": 1008
+    "load": 11188,
+    "lcp": 928,
+    "fcp": 928,
+    "cls": 0.076,
+    "tbt": 1060,
+    "reqs": 131,
+    "kb": 1551,
+    "jsKb": 1011
    },
    "new": {
-    "load": 1457,
-    "lcp": 1048,
-    "fcp": 988,
-    "cls": 0.002,
-    "tbt": 176,
-    "reqs": 18,
-    "kb": 186,
-    "jsKb": 17
+    "load": 906,
+    "lcp": 756,
+    "fcp": 736,
+    "cls": 0,
+    "tbt": 80,
+    "reqs": 17,
+    "kb": 120,
+    "jsKb": 6
    },
    "runs": {
     "old": [
      {
       "url": "https://www.blomsel.se/elbilsladdare",
-      "load": 10707,
-      "lcp": 772,
-      "fcp": 772,
-      "cls": 0.057,
-      "tbt": 1612,
-      "reqs": 132,
-      "kb": 1550,
-      "jsKb": 1008
-     },
-     {
-      "url": "https://www.blomsel.se/elbilsladdare",
-      "load": 10866,
-      "lcp": 716,
-      "fcp": 716,
-      "cls": 0.057,
-      "tbt": 1805,
+      "load": 10713,
+      "lcp": 740,
+      "fcp": 740,
+      "cls": 0.076,
+      "tbt": 1504,
       "reqs": 131,
-      "kb": 1549,
-      "jsKb": 1009
+      "kb": 1551,
+      "jsKb": 1011
      },
      {
       "url": "https://www.blomsel.se/elbilsladdare",
-      "load": 11094,
-      "lcp": 728,
-      "fcp": 728,
+      "load": 11818,
+      "lcp": 1628,
+      "fcp": 1520,
+      "cls": 0.076,
+      "tbt": 877,
+      "reqs": 129,
+      "kb": 1550,
+      "jsKb": 1011
+     },
+     {
+      "url": "https://www.blomsel.se/elbilsladdare",
+      "load": 11188,
+      "lcp": 928,
+      "fcp": 928,
       "cls": 0.057,
-      "tbt": 2007,
-      "reqs": 132,
-      "kb": 1549,
-      "jsKb": 1008
+      "tbt": 1060,
+      "reqs": 131,
+      "kb": 1551,
+      "jsKb": 1011
      }
     ],
     "new": [
      {
-      "url": "http://127.0.0.1:8793/elbilsladdare.html",
-      "load": 1449,
-      "lcp": 1048,
-      "fcp": 988,
-      "cls": 0.002,
-      "tbt": 176,
-      "reqs": 18,
-      "kb": 186,
-      "jsKb": 17
+      "url": "http://127.0.0.1:8794/elbilsladdare.html",
+      "load": 899,
+      "lcp": 744,
+      "fcp": 696,
+      "cls": 0,
+      "tbt": 57,
+      "reqs": 17,
+      "kb": 120,
+      "jsKb": 6
      },
      {
-      "url": "http://127.0.0.1:8793/elbilsladdare.html",
-      "load": 1507,
-      "lcp": 1176,
-      "fcp": 1060,
-      "cls": 0.001,
-      "tbt": 256,
-      "reqs": 18,
-      "kb": 186,
-      "jsKb": 17
+      "url": "http://127.0.0.1:8794/elbilsladdare.html",
+      "load": 954,
+      "lcp": 756,
+      "fcp": 756,
+      "cls": 0,
+      "tbt": 80,
+      "reqs": 17,
+      "kb": 120,
+      "jsKb": 6
      },
      {
-      "url": "http://127.0.0.1:8793/elbilsladdare.html",
-      "load": 1457,
-      "lcp": 1044,
-      "fcp": 980,
-      "cls": 0.002,
-      "tbt": 167,
-      "reqs": 18,
-      "kb": 186,
-      "jsKb": 17
+      "url": "http://127.0.0.1:8794/elbilsladdare.html",
+      "load": 906,
+      "lcp": 808,
+      "fcp": 736,
+      "cls": 0,
+      "tbt": 93,
+      "reqs": 17,
+      "kb": 120,
+      "jsKb": 6
      }
     ]
    }
@@ -997,97 +1019,436 @@
   {
    "page": "kontakt",
    "old": {
-    "load": 10433,
-    "lcp": 748,
-    "fcp": 748,
-    "cls": 0.047,
-    "tbt": 2180,
-    "reqs": 134,
-    "kb": 1502,
-    "jsKb": 1046
+    "load": 8222,
+    "lcp": 692,
+    "fcp": 692,
+    "cls": 0.046,
+    "tbt": 1112,
+    "reqs": 130,
+    "kb": 1503,
+    "jsKb": 1048
    },
    "new": {
-    "load": 1153,
-    "lcp": 1044,
-    "fcp": 972,
-    "cls": 0.001,
-    "tbt": 177,
-    "reqs": 14,
-    "kb": 126,
-    "jsKb": 17
+    "load": 871,
+    "lcp": 740,
+    "fcp": 696,
+    "cls": 0,
+    "tbt": 49,
+    "reqs": 13,
+    "kb": 78,
+    "jsKb": 6
    },
    "runs": {
     "old": [
      {
       "url": "https://www.blomsel.se/kontakt",
-      "load": 11298,
-      "lcp": 708,
-      "fcp": 708,
-      "cls": 0.065,
-      "tbt": 3033,
-      "reqs": 134,
-      "kb": 1503,
-      "jsKb": 1047
-     },
-     {
-      "url": "https://www.blomsel.se/kontakt",
-      "load": 7849,
-      "lcp": 748,
-      "fcp": 748,
+      "load": 8222,
+      "lcp": 840,
+      "fcp": 840,
       "cls": 0.046,
-      "tbt": 1690,
+      "tbt": 1112,
       "reqs": 129,
-      "kb": 1500,
-      "jsKb": 1046
+      "kb": 1502,
+      "jsKb": 1048
      },
      {
       "url": "https://www.blomsel.se/kontakt",
-      "load": 10433,
-      "lcp": 792,
-      "fcp": 792,
-      "cls": 0.047,
-      "tbt": 2180,
-      "reqs": 134,
-      "kb": 1502,
-      "jsKb": 1046
+      "load": 10715,
+      "lcp": 648,
+      "fcp": 648,
+      "cls": 0.046,
+      "tbt": 1059,
+      "reqs": 136,
+      "kb": 1507,
+      "jsKb": 1048
+     },
+     {
+      "url": "https://www.blomsel.se/kontakt",
+      "load": 8018,
+      "lcp": 692,
+      "fcp": 692,
+      "cls": 0.046,
+      "tbt": 1291,
+      "reqs": 130,
+      "kb": 1503,
+      "jsKb": 1048
      }
     ],
     "new": [
      {
-      "url": "http://127.0.0.1:8793/kontakt.html",
-      "load": 1149,
-      "lcp": 1020,
-      "fcp": 960,
-      "cls": 0.001,
-      "tbt": 147,
-      "reqs": 14,
-      "kb": 126,
-      "jsKb": 17
+      "url": "http://127.0.0.1:8794/kontakt.html",
+      "load": 853,
+      "lcp": 732,
+      "fcp": 684,
+      "cls": 0,
+      "tbt": 49,
+      "reqs": 13,
+      "kb": 78,
+      "jsKb": 6
      },
      {
-      "url": "http://127.0.0.1:8793/kontakt.html",
-      "load": 1153,
-      "lcp": 1044,
-      "fcp": 972,
-      "cls": 0.001,
-      "tbt": 177,
-      "reqs": 14,
-      "kb": 126,
-      "jsKb": 17
+      "url": "http://127.0.0.1:8794/kontakt.html",
+      "load": 873,
+      "lcp": 740,
+      "fcp": 696,
+      "cls": 0,
+      "tbt": 46,
+      "reqs": 13,
+      "kb": 78,
+      "jsKb": 6
      },
      {
-      "url": "http://127.0.0.1:8793/kontakt.html",
-      "load": 1233,
-      "lcp": 1096,
-      "fcp": 996,
-      "cls": 0.001,
-      "tbt": 183,
-      "reqs": 14,
-      "kb": 126,
-      "jsKb": 17
+      "url": "http://127.0.0.1:8794/kontakt.html",
+      "load": 871,
+      "lcp": 856,
+      "fcp": 744,
+      "cls": 0,
+      "tbt": 110,
+      "reqs": 13,
+      "kb": 78,
+      "jsKb": 6
      }
     ]
    }
   }
+ ],
+ "lighthouse": {
+  "old": [
+   {
+    "page": "old-elbilsladdare",
+    "perf": 73,
+    "a11y": 89,
+    "bp": 100,
+    "seo": 69,
+    "lcp": 1964.4260000000002,
+    "tbt": 900.5000000000009
+   },
+   {
+    "page": "old-elektriker-hisingen",
+    "perf": 47,
+    "a11y": 88,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 11575.121750000006,
+    "tbt": 902.9999999999998
+   },
+   {
+    "page": "old-elektriker-molndal",
+    "perf": 75,
+    "a11y": 89,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 2078.1505,
+    "tbt": 875.5000000000009
+   },
+   {
+    "page": "old-index",
+    "perf": 39,
+    "a11y": 87,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 9979.186499999996,
+    "tbt": 1524.9999999999964
+   },
+   {
+    "page": "old-kontakt",
+    "perf": 71,
+    "a11y": 87,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 2195.809,
+    "tbt": 1198.1129999999994
+   },
+   {
+    "page": "old-solceller",
+    "perf": 44,
+    "a11y": 90,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 10270.410500000002,
+    "tbt": 1320
+   },
+   {
+    "page": "old-tjanster",
+    "perf": 42,
+    "a11y": 90,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 8789.139,
+    "tbt": 1017.5
+   }
+  ],
+  "new": [
+   {
+    "page": "new-batterilager",
+    "perf": 98,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 2402.5254999999997,
+    "tbt": 7
+   },
+   {
+    "page": "new-belysning",
+    "perf": 99,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 1956.0736000000002,
+    "tbt": 0
+   },
+   {
+    "page": "new-cookiepolicy",
+    "perf": 100,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 1620,
+    "tbt": 0
+   },
+   {
+    "page": "new-datanat",
+    "perf": 99,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 1951.9687,
+    "tbt": 0
+   },
+   {
+    "page": "new-dokumentation",
+    "perf": 100,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 1809.7113000000002,
+    "tbt": 0
+   },
+   {
+    "page": "new-elbilsladdare",
+    "perf": 100,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 1502.63,
+    "tbt": 0
+   },
+   {
+    "page": "new-elcentral",
+    "perf": 100,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 1881.3195750000002,
+    "tbt": 0
+   },
+   {
+    "page": "new-elektriker-boras",
+    "perf": 97,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 2629.6918499999997,
+    "tbt": 0
+   },
+   {
+    "page": "new-elektriker-hisingen",
+    "perf": 96,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 2778.1633500000003,
+    "tbt": 0
+   },
+   {
+    "page": "new-elektriker-i-partille",
+    "perf": 96,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 2778.5163,
+    "tbt": 3
+   },
+   {
+    "page": "new-elektriker-kungalv",
+    "perf": 100,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 1758.66805,
+    "tbt": 3
+   },
+   {
+    "page": "new-elektriker-kungsbacka",
+    "perf": 96,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 2782.3314,
+    "tbt": 0
+   },
+   {
+    "page": "new-elektriker-molndal",
+    "perf": 100,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 1603.561175,
+    "tbt": 4
+   },
+   {
+    "page": "new-elektriker-vastra-frolunda",
+    "perf": 98,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 2332.9258,
+    "tbt": 0
+   },
+   {
+    "page": "new-elservice-felsokning",
+    "perf": 100,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 1804.41105,
+    "tbt": 8
+   },
+   {
+    "page": "new-golvvarme",
+    "perf": 100,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 1737.5,
+    "tbt": 5
+   },
+   {
+    "page": "new-index",
+    "perf": 100,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 1404.2557,
+    "tbt": 0
+   },
+   {
+    "page": "new-industrielektriker",
+    "perf": 99,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 2019.5,
+    "tbt": 29
+   },
+   {
+    "page": "new-kok-och-badrum",
+    "perf": 100,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 1878.9962,
+    "tbt": 0
+   },
+   {
+    "page": "new-kontakt",
+    "perf": 100,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 1504.9098000000001,
+    "tbt": 0
+   },
+   {
+    "page": "new-kraft",
+    "perf": 100,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 1802.0982500000002,
+    "tbt": 0
+   },
+   {
+    "page": "new-laddbox-brf",
+    "perf": 100,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 1657.1797500000002,
+    "tbt": 0
+   },
+   {
+    "page": "new-nybyggnation-renovering",
+    "perf": 100,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 1655.2681499999999,
+    "tbt": 0
+   },
+   {
+    "page": "new-om-oss",
+    "perf": 99,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 2177.1547499999997,
+    "tbt": 0
+   },
+   {
+    "page": "new-skattereduktion",
+    "perf": 100,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 1509.5536000000002,
+    "tbt": 3
+   },
+   {
+    "page": "new-smart-teknik",
+    "perf": 100,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 1509.4008000000001,
+    "tbt": 0
+   },
+   {
+    "page": "new-solceller",
+    "perf": 100,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 1803.8975,
+    "tbt": 14
+   },
+   {
+    "page": "new-tjanster",
+    "perf": 99,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 1952.5267999999996,
+    "tbt": 0
+   },
+   {
+    "page": "new-vanliga-fragor",
+    "perf": 98,
+    "a11y": 100,
+    "bp": 100,
+    "seo": 100,
+    "lcp": 2415,
+    "tbt": 0
+   }
+  ]
+ },
+ "schema": {
+  "service": 22,
+  "faq": 26,
+  "errors": 0
+ },
+ "noindex_old": [
+  "elbilsladdare",
+  "smart-teknik"
  ]
 }
