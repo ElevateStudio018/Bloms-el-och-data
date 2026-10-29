@@ -517,7 +517,7 @@ body += ('<section class="sec gray" id="karta"><div class="wrap split"><div clas
          + ps("Härifrån åtar vi oss uppdrag från Falkenberg i söder till Uddevalla i norr; Ulricehamn, Göteborg, Borås och allt där emellan.")
          + '<div class="btns"><a class="btn btn-line arrow" href="https://www.google.com/maps/search/?api=1&amp;query=Blomstergatan+5+411+04+G%C3%B6teborg" target="_blank" rel="noopener">Öppna i Google Maps </a></div></div>'
          '<div class="media"><img src="img/servicebil-liseberg.jpg" alt="Bloms El &amp; Datas servicebil" loading="lazy"></div></div></section>')
-PAGES["kontakt"] = page("kontakt", "Kontakt | Göteborg | Bloms El Och Data", "Kontakta Bloms El & Data, certifierad elektriker i Göteborg. Ring 0705-15 02 11 eller skicka en förfrågan, vi svarar normalt samma arbetsdag.", body, "kontakt.html")
+PAGES["kontakt"] = page("kontakt", "Kontakta en elektriker i Göteborg | Bloms El & Data", "Kontakta Bloms El & Data, certifierad elektriker i Göteborg. Ring 0705-15 02 11 eller skicka en förfrågan, vi svarar normalt samma arbetsdag.", body, "kontakt.html")
 
 
 # ================================================================ ORTSSIDOR (stora: Hisingen, Kungsbacka, Kungälv)
@@ -623,18 +623,37 @@ SMALL_CARDS = [("varme.jpg", "Värme", "golvvarme.html"), ("servicebil-liseberg.
                ("dokumentation.jpg", "Dokumentation", "dokumentation.html"), ("solceller.jpg", "Solceller", "solceller.html")]
 
 
-def small_area(slug, place, title, desc, hero_img, intro, services, doing, also, pos="center"):
+SERVICE_LINKS = {"Belysning": "belysning.html", "Datanät": "datanat.html", "Solceller": "solceller.html", "Elsäkerhetsintyg": "dokumentation.html",
+                 "Värme": "golvvarme.html", "Ritning": "dokumentation.html", "Styrsystem": "smart-teknik.html", "Laddboxar": "elbilsladdare.html",
+                 "Industri": "industrielektriker.html", "Nybyggnation": "nybyggnation-renovering.html"}
+
+
+def small_area(slug, place, title, desc, hero_img, intro, services, doing, also, pos="center", parts=(), local=""):
+    """Ortssida. parts = stadsdelar/orter i området, local = stycke om lokal närvaro (t.ex. materialdepån)."""
     b = hero(hero_img, f"Elektriker i {place}", intro, HOME_CARDS, eyebrow="Bloms El & Data", pos=pos)
     b += ('<section class="sec"><div class="wrap split"><div class="prose">' + head("Våra tjänster", f"Det här gör vi i {place}")
+          + ps(f"Klicka på en tjänst för att läsa mer om hur vi arbetar. Allt utförs av certifierade elektriker med ABL- eller BB1-behörighet, med garanti och ROT- eller grön teknik-avdrag direkt på fakturan där det gäller.")
           + '<div class="btns" style="margin-top:8px"><a class="btn btn-red arrow" href="kontakt.html">Kontakta oss </a></div></div>'
-          + '<ul class="pills">' + "".join(f"<li>{e(s)}</li>" for s in services) + '</ul></div></section>')
+          + '<ul class="pills">' + "".join(f'<li><a href="{SERVICE_LINKS[x]}">{e(x)}</a></li>' if x in SERVICE_LINKS else f"<li>{e(x)}</li>" for x in services) + '</ul></div></section>')
+    qa = [(f"Har ni elektriker nära {place}?", local or f"Ja. Vi utgår från kontoret på Blomstergatan 5 i Göteborg och tar uppdrag i hela {place}."),
+          (f"Hur snabbt får jag svar på en förfrågan i {place}?", "Beskriv vad som ska göras och hur bostaden eller lokalen används, så återkommer vi normalt samma arbetsdag med bedömning och offert."),
+          ("Får jag ROT-avdrag?", "Elarbete i en privatbostad ger normalt ROT-avdrag på arbetskostnaden. För laddbox, batterilager och solceller gäller i stället skattereduktion för grön teknik. Vi sköter ansökan och drar av beloppet direkt på fakturan."),
+          ("Vilka kunder arbetar ni för?", "Villaägare, bostadsrättsföreningar, fastighetsägare, butiker, restauranger, kontor, industri och byggföretag. Vi är registrerade hos Elsäkerhetsverket och ansvarsförsäkrade.")]
+    near = (f'<p>Vi tar uppdrag i hela området, bland annat:</p><ul class="pills">' + "".join(f"<li>{e(x)}</li>" for x in parts) + '</ul>') if parts else ""
+    faq_block = ('<section class="sec"><div class="wrap split" style="align-items:start"><div class="prose">' + head("Lokalt", f"Elektriker i {place} med närhet till material")
+                 + (ps(local) if local else "") + near + '</div><div><h3 class="h3" style="margin-bottom:14px">Vanliga frågor</h3><div class="faq">'
+                 + "".join(f'<details><summary>{e(q)}</summary><p>{e(a)}</p></details>' for q, a in qa) + '</div></div></div></section>')
     b += ('<section class="sec gray"><div class="wrap"><div class="sec-head"><div class="prose">' + head("En del av det vi gör", "Erfarenhet från villa till industri") + ps(doing) + '</div></div>'
           + '<div class="grid g3">' + "".join(img_card(i, t, h) for i, t, h in SMALL_CARDS) + '</div></div></section>')
     b += split("servicebil-alvsborg.jpg", head("Lokal närvaro", f"Vi finns i {place}")
                + ps(also, "Vi åtar oss uppdrag från Falkenberg i söder till Uddevalla i norr; Ulricehamn, Göteborg, Borås och allt där emellan.",
                     "Kontakta oss gärna så pratar vi mer om hur vi kan hjälpa er med smarta ellösningar. Och om hur du kan få trygg, säker el av erfarna elyrkesmän på hemmaplan.")
                + btns(ghost=False), alt="Montörer vid servicebilen", media_cls="tall", badge=ROT_BADGE)
-    return page(slug, title, desc, b)
+    b += faq_block
+    ld = [{"@type": "Service", "name": f"Elektriker i {place}", "serviceType": "Elinstallationer", "provider": {"@id": SITE + "#foretag"},
+           "areaServed": [{"@type": "Place", "name": x} for x in (place,) + tuple(parts)]},
+          {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in qa]}]
+    return page(slug, title, desc, b, ld=ld)
 
 
 PAGES["elektriker-i-partille"] = small_area(
@@ -643,21 +662,27 @@ PAGES["elektriker-i-partille"] = small_area(
     "Vi erbjuder de allra flesta tjänster inom el och data, och är förmodligen en av de mest erfarna elfirmorna i Partille med omnejd. Med servicekänsla och helhetskänsla tar vi ansvar för ditt projekt och månar om att du som kund blir nöjd. Vi underhåller era fastigheter; industri, butik, restaurang eller hemmiljö.",
     ["Belysning", "Datanät", "Solceller", "Elsäkerhetsintyg", "Värme", "Ritning", "Styrsystem", "Laddboxar", "Industri"],
     "Vi gör och har gjort det mesta elektriker gör; nybyggnation, renovering och solceller. Vi gör villael, byter gamla system, dokumenterar och monterar elbilsladdare. Vi gör jobb för privata villaägare, bostadsrättsföreningar, småföretagare och stora byggbolag. Och allt där emellan.",
-    "Men vi finns också i Göteborg och Borås.")
+    "Men vi finns också i Göteborg och Borås.",
+    parts=("Partille centrum", "Sävedalen", "Öjersjö", "Jonsered", "Furulund", "Kåhög", "Mellby"),
+    local="Vi har en materialdepå i Partille. Det gör att material finns nära när vi installerar, felsöker eller behöver komplettera under arbetets gång, och kortar tiden till ett färdigt jobb.")
 PAGES["elektriker-molndal"] = small_area(
     "elektriker-molndal", "Mölndal", "Elektriker i Mölndal | Bloms El & Data", "Elektriker och elinstallatör i Mölndal med lång och gedigen erfarenhet.",
     "molndal.jpg",
     "Vi är en komplett partner inom el och data i Mölndal och närliggande områden, med många års erfarenhet som grund. Vårt mål är att alltid leverera högsta kvalitet och att säkerställa att du som kund blir mer än nöjd, oavsett om det gäller fastigheter inom industri, butik, restaurang eller hemmamiljö.",
     ["Belysning", "Datanät", "Nybyggnation", "Elsäkerhetsintyg", "Värme", "Ritning", "Styrsystem", "Solceller", "Industri"],
     "Vi har lång erfarenhet av allt som hör en elektrikers arbete till, från installation i nyproduktion och renoveringsprojekt till datanät, solcellsanläggningar och smart hemel. Vi utför elarbeten i hus, butikslokaler och fabriker, byter ut äldre elsystem, dokumenterar installationer och installerar laddstationer för elbilar. Våra kunder är allt från privata villaägare och bostadsrättsföreningar till småföretag och stora byggentreprenörer. Med oss får du en elektriker som kombinerar professionalism med personligt engagemang för varje projekt.",
-    "Men vi finns också i Göteborg och Borås.")
+    "Men vi finns också i Göteborg och Borås.",
+    parts=("Mölndals centrum", "Kvarnbyn", "Krokslätt", "Fässberg", "Balltorp", "Kållered", "Lindome"),
+    local="Vi har en materialdepå i Mölndal. Det gör att material finns nära när vi installerar, felsöker eller behöver komplettera under arbetets gång, och kortar tiden till ett färdigt jobb.")
 PAGES["elektriker-vastra-frolunda"] = small_area(
     "elektriker-vastra-frolunda", "Västra Frölunda", "Elektriker i Västra Frölunda | Bloms El & Data", "Erfaren elektriker och elinstallatör i Västra Frölunda. Lång erfarenhet och mycket goda referenser.",
     "butik-servicebil.jpg",
     "Bloms El är din elpartner i Västra Frölunda och omkringliggande områden, med lång erfarenhet och gedigen kompetens i bagaget. Oavsett om det handlar om industrifastigheter, butiker, restauranger eller privata bostäder ser vi till att hitta lösningar som passar dina behov.",
     ["Belysning", "Datanät", "Nybyggnation", "Elsäkerhetsintyg", "Värme", "Ritning", "Styrsystem", "Solceller", "Industri"],
     "Med många års erfarenhet som elektriker hjälper vi dig med allt från nyinstallationer och renoveringsprojekt till moderna lösningar som datanät, solcellsanläggningar och smarta hem. Vi arbetar med elinstallationer i bostäder, butiker och industrilokaler. Vi uppgraderar äldre elsystem, dokumenterar installationer och sätter upp laddstationer för elbilar. Våra kunder är privatpersoner och bostadsrättsföreningar, småföretag, lantbrukare, kommuner och stora byggföretag.",
-    "Men vi finns naturligtvis också i Göteborg och Kungsbacka.")
+    "Men vi finns naturligtvis också i Göteborg och Kungsbacka.",
+    parts=("Frölunda torg", "Tynnered", "Järnbrott", "Grimmered", "Långedrag", "Askim", "Hovås", "Önnered"),
+    local="Vi har en materialdepå i Västra Frölunda. Det gör att material finns nära när vi installerar, felsöker eller behöver komplettera under arbetets gång, och kortar tiden till ett färdigt jobb.")
 
 # ================================================================ COOKIEPOLICY
 doc = [
